@@ -1,0 +1,63 @@
+#details{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#details .container{
+    margin: 0 auto;
+    margin-top: 25%;
+    padding: 20px;
+    width: 100%;    
+}
+
+#details .senha{
+    padding-top: 10px;
+}
+
+#details label{
+    display: inline-block;
+    width: 100%;
+    padding-top: 10px;
+}
+
+#details input{
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 8px;
+    margin-top: 5px;
+}
+
+#details button{
+    width: 100%;
+    margin-top: 20px;
+    background-color: #088178;
+    color: #ccc;
+    border: 1px solid transparent;
+    border-radius: 30px;
+    padding: 10px;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 15px;
+    display: inline-block;
+}
+
+#details p{
+    margin-left: calc(50% - 100px);
+}
+
+#details a{
+    text-decoration: none;
+    color: #088178;
+}
+
+#details  .error-unique,
+#details  .error-unique{
+    border: 1px solid red;
+}
+
+#details .error-unique::placeholder,
+#details .error-unique::placeholder{
+    color: red;
+}

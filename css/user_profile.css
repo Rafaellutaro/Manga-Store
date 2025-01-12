@@ -1,0 +1,170 @@
+@keyframes slideIn {
+    0% {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+#user .result_container{
+    display: none;
+    animation: slideIn 0.3s ease-in-out;
+}
+
+#user {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; 
+}
+
+#contadetails {
+    /* Existing styles */
+    display: none;
+    transition: height 0.3s ease; /* Add a transition for the display property */
+}
+
+#user .result{
+    display: flex;
+    flex-direction: column;
+    background-color: #ccc;
+    border-radius: 10px;
+    width: 100%;
+    height: 70vh;
+    align-items: center;
+}
+
+#user .result_container{
+    display: flex;
+    background-color: white;
+    border: 1px solid transparent;
+    border-radius: 15px;
+    margin-left: 20px;
+    margin-top: 20px;
+    width: calc(100% - 40px);
+    height: 55vh;
+
+}
+
+#user .text{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    width: 90%;
+    height: 55vh;
+}
+
+#user h5{
+    margin-top: 5%;
+    padding-bottom: 10px;
+    width: 26%;
+    font-size: 15px;
+}
+
+#user h4{
+    width: 20%;
+    font-size: 25px;
+    margin-top: 11px;
+}
+
+#user h1{
+    width: 30%;
+    line-height: 10px;
+    padding: 10px 0px 10px 0px;
+    font-size: 15px;
+    margin: 0;
+}
+
+#user h2{
+    font-size: 15px;
+    margin: 5px 0;
+}
+
+#user .icon_y{
+    font-size: 25px;
+     padding: 10px;/* Add padding for spacing */
+}
+
+#user .user_box {
+    margin: 100px 50px;
+    background-color: #ccc;
+    border-radius: 10px;
+    max-width: 450px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: 10px; /* Add padding for spacing */
+}
+
+#user .user_label {
+    margin: 10px 0 10px 0;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    background-color: white;
+    border: 5px solid transparent;
+    border-radius: 15px;
+    width: 100%;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 6px 10px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+}
+
+#user .user_label:hover{
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2), 0 6px 10px rgba(0, 0, 0, 0.2);
+}
+
+#user .icon_u {
+    font-size: 15px;
+    padding: 10px; /* Add padding for spacing */
+}
+
+#user .text_container {
+    flex-grow: 1; /* Allow the text container to expand and take remaining space */
+    padding: 10px; /* Add padding for spacing */
+}
+
+#user span{
+    margin: 0;
+    font-size: 13px;
+    text-align: center;
+    width: 100%;
+    padding-bottom: 20px;
+}
+
+#user h3 {
+    font-size: 15px;
+    margin: 0; /* Reset margin to avoid default spacing */
+}
+
+#user p {
+    font-size: 11px;
+    margin: 0; /* Reset margin to avoid default spacing */
+}
+
+#user button{
+    background-color: white;
+    color: black;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 10px;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 15px;
+    width: 28%;
+    
+}
+
+.bt1 {
+    margin-top: 10px;
+}
+
+.bt2 {
+    margin-top: 7px;
+        
+}
+
+.item{
+    width: 35%;
+}

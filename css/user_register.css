@@ -1,0 +1,143 @@
+#details {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    height: 500px; /* Adjust the height as needed */
+    margin-top: 100px;
+}
+
+#details .container{
+    margin: 0 auto;
+    margin-top: 25%;
+    padding: 20px;
+    width: 50%;
+    
+}
+
+#details h4{
+    font-size: 18px;
+    padding-top: 130px;
+    padding-bottom: 30px;
+}
+
+#details h3{
+    font-size: 18px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+#details label{
+    display: inline-block;
+    width: 100%; /* Adjust the width to your preference */
+    margin-bottom: 5px;
+
+}
+
+#details .conta label {
+    width: calc(50% - 55px);
+}
+
+#details .conta input{
+    width: calc(50% - 55px); /* Make inputs take up 50% of the width with spacing */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 8px;
+    margin-top: 5px;
+}
+
+#details .conta .cpf + .cel{
+    padding-top: 20px;
+}
+
+#details .conta .data{
+    padding-top: 20px;
+    width: 100%;
+}
+
+#details .conta .rua{
+    padding-top: 20px;
+    width: 100%;
+}
+
+#details .conta .rua_input{
+    width: 82%;
+}
+
+#details .conta .bairro_cidade{
+    padding-top: 20px;
+}
+
+#details .conta .estado{
+    padding-top: 20px;
+}
+
+#details .conta .no_click,
+.rua_input{
+    pointer-events: none;
+    user-select: none;
+    cursor: default;
+    background-color: #ccc;
+}
+
+#details .conta .cep {
+    width: 100%;
+}
+
+#details .conta .n_casa{
+    padding-top: 20px;
+    width: 100%;
+}
+
+#details .acesso input {
+    width: calc(100% - 110px); /* Adjust the width to account for label width and spacing */
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+
+
+ #details .acesso .error-input,
+ #details .conta .error-input{
+    border: 1px solid red;
+}
+
+#details .conta .error-unique,
+#details .acesso .error-unique{
+    border: 1px solid red;
+}
+
+#details .conta .error-unique::placeholder,
+#details .acesso .error-unique::placeholder{
+    color: red;
+}
+
+#details button {
+    width: calc(100% - 110px);
+    margin-top: 20px;
+    background-color: #088178;
+    color: #ccc;
+    border: 1px solid transparent;
+    border-radius: 30px;
+    padding: 10px;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 15px;
+    display: inline-block;
+}
+
+#details p{
+    margin-left: 20%;
+}
+
+#details a{
+    text-decoration: none;
+    color: #088178;
+}
+
+
+
+
+
+

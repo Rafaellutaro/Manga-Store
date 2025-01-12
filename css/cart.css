@@ -1,0 +1,140 @@
+#carrinho{
+    position: relative;
+
+}
+
+#carrinho .details{
+    position: fixed;
+    display: flex;
+    flex-wrap: wrap;
+    top: 40%;
+    right: 5%;
+    border-radius: 8px;
+    width: 15%;
+    height: 20%;
+    text-align: center;
+    background-color: #ccc;
+}
+
+#carrinho .details span{
+    margin: 10% 0 0 10%;
+    height: min-content;
+    width: 100%;
+    
+    
+}
+
+.details button{
+    cursor: pointer;
+    border: 1px solid #ccc;
+    height: 40px;
+    border-radius: 10px;
+    margin: 0px 20px 0px 20px;
+    width: 100%;
+    background-color: lightgreen;
+}
+
+
+#carrinho .cart-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 90%;
+
+}
+
+#carrinho .nome_manga,
+.volume_manga,
+.volume {
+    display: inline;
+    margin-right: 10px; /* Adjust the margin as needed */
+}
+
+#carrinho .cart-item {
+    display: flex;
+    flex-direction: row;
+    padding-top: 35px;
+    max-width: 70%;
+    width: 60%;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+#carrinho .product-image {
+    width: 100px; /* Adjust the width as needed */
+    height: 100px; /* Adjust the height as needed */
+    object-fit: contain;
+    margin-right: 20px;
+}
+
+#carrinho .product-details {
+    flex: 1;
+}
+
+#carrinho .cart-actions {
+    display: flex;
+    align-items: center;
+}
+
+#carrinho .quantidade-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.quantidade {
+    display: flex;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    width: 75%;
+    height: 50px;
+}
+
+
+.quantidade .quantidade-input {
+    flex: 1;
+    width: 20px;
+    text-align: center;
+    border: none;
+    outline: none;
+    -webkit-appearance: none;
+    -moz-appearance: textfield;
+}
+
+.quantidade .quantidade-input::-webkit-outer-spin-button,
+.quantidade .quantidade-input::-webkit-inner-spin-button {
+    display: none;
+}
+
+.quantidade span{
+    cursor: pointer;
+}
+
+.quantidade .mais,
+.menos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    padding: 3px 5px;
+    margin: 0 5px;
+}
+
+.quantidade .mais i,
+.menos i {
+    pointer-events: none;
+}
+
+.deletar_botao {
+    margin-top: 12px;
+}
+
+.deletar_botao .remove-button{
+    color: red;
+    text-decoration: none;
+}
+
+
+

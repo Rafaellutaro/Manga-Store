@@ -1,0 +1,33 @@
+#registro {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-height: 50%;
+}
+
+#registro .registro_box{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10%;
+    
+}
+
+#registro .registro_box img{
+    width: 50%;
+    height: 100%;
+    border-radius: 50%;
+    background-color: lightblue;
+    
+}
+
+h1{
+    font-size: 30px;
+    color: #222;
+}
+
+p{
+    font-size: 16px;
+    color: #222;
+}

@@ -1,0 +1,88 @@
+:root {
+    --product-width: 23%;
+    --product-min-width: 250px;
+}
+
+#manga {
+    text-align: center;
+}
+
+#manga .manga_box{
+    display: flex;
+    justify-content: space-between;
+    padding-top: 20px;
+    flex-wrap: wrap;
+}
+
+#manga .manga_img{
+    width: var(--product-width);
+    min-width: 2var(--product-min-width);
+    padding: 10px 12px;
+    border: 1px solid #cce7d0;
+    border-radius: 25px;
+    cursor: pointer;
+    box-shadow: 20px 20px 30px rgba(0,0,0,0.02);
+    margin: 15px 0;
+    transition: 0.2s ease;
+    position: relative;
+    
+}
+
+#manga .manga_img:hover{
+    box-shadow: 20px 20px 30px rgba(0,0,0,0.06);
+}
+
+#manga .manga_img img{
+    width: 100%;
+    border-radius: 20px;
+}
+
+#manga .manga_img .manga_descrisao{
+    text-align: start;
+    padding: 10px 0;
+}
+
+#manga .manga_img span{
+    color: #606063;
+    font-size: 12px;
+}
+
+#manga .manga_img .manga_descrisao h5{
+    padding-top: 7px;
+    color: #1a1a1a;
+    font-size: 14px;
+}
+
+#manga .manga_img .manga_descrisao i{
+    font-size: 12px;
+    color: rgb(243, 181, 25);
+}
+
+#manga .manga_img .manga_descrisao h4{
+    padding-top: 7px;
+    font-size: 15px;
+    font-weight: 700;
+    color: #088278;
+}
+
+#manga .manga_img .addToCart{
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 50px;
+    background-color: #e8f6ea;
+    color: #088278;
+    position: absolute;
+    bottom: 20px;
+    right: 10px;
+} 
+
+.addToCart.clicked i{
+    background-color: lightgreen;
+    line-height: 40px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50px;
+    bottom: 20px;
+    right: 10px;
+}
