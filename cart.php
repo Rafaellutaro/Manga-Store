@@ -28,7 +28,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'add' && isset($_GET['id'])) {
     JOIN llx_ecm_files ON llx_product.rowid = llx_ecm_files.src_object_id WHERE llx_product.rowid = ?");
 
     // The bind_param method binds the parameters to the prepared statement. 
-    //  In this case, the "i" in the method call indicates that the parameter is an integer. 
+
     $productQuery->bind_param("i", $productID);
     $productQuery->execute();
     $productResult = $productQuery->get_result();
@@ -148,7 +148,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'remove' && isset($_GET['id']))
         <div class="details">
             
             <span></span>
-            <a href="#">
+            <a href="api_mercado_pago.php">
             <button>Finalizar compra</button>
             </a>
             

@@ -1,5 +1,5 @@
 <?php
-$dbhost = '192.168.0.102';  
+$dbhost = '192.168.1.7';  
 $dbuser = 'dolibarruser1';     
 $dbpass = 'dolibarr';     
 $dbname = 'dolibarr';     
