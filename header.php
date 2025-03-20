@@ -5,9 +5,18 @@ session_start();
 if (isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] === true) {
     // User is logged in, set the profile link
     $profileLink = 'profile.php';
+
+    if(isset($_SESSION['cart']) && $_SESSION['cart'] != null) {
+        $cartLink = 'api_mercado_pago.php';
+    }else{
+        // criar um pop up para informar que o carrinho está vazio
+    }
+        
 } else {
     // User is not logged in, set the login link
     $profileLink = 'user.php';
+    $cartLink = 'user.php';
+    
 }
 ?>
 

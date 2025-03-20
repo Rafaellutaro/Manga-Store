@@ -98,7 +98,7 @@ function calcularTotalGeral() {
         var productTotal = parseFloat(cartItem.querySelector('#total_' + productId).innerText);
         totalGeral += productTotal;
     });
-    document.querySelector('.details span').textContent = 'Total: R$' + totalGeral.toFixed(2);
+    document.querySelector('.details span').textContent = 'Valor dos Produtos: R$' + totalGeral.toFixed(2);
 }
 
 

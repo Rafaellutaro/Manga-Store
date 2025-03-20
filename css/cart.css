@@ -1,37 +1,100 @@
 #carrinho{
-    position: relative;
-
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
 }
 
-#carrinho .details{
-    position: fixed;
+/* delivery section*/
+
+#side-panel .details-delivery{
+    position: absolute;
     display: flex;
+    flex-direction: row;
     flex-wrap: wrap;
-    top: 40%;
     right: 5%;
+    top: 42%;
     border-radius: 8px;
     width: 15%;
-    height: 20%;
-    text-align: center;
-    background-color: #ccc;
+    height: 35%;
+    padding: 1.2%;
+    background-color: whitesmoke;
 }
 
-#carrinho .details span{
-    margin: 10% 0 0 10%;
-    height: min-content;
+#side-panel .details-delivery hr{
     width: 100%;
-    
-    
+    background-color: black;
+    height: 1px;
 }
 
-.details button{
+#side-panel .details-delivery p{
+    width: 100%;
+    font-size: small;
+    color: black;
+}
+
+#side-panel .details-delivery select {
     cursor: pointer;
     border: 1px solid #ccc;
     height: 40px;
-    border-radius: 10px;
-    margin: 0px 20px 0px 20px;
+    border-radius: 12px;
     width: 100%;
+    display: flex;
+    justify-content: center; /* Centers text horizontally */
+    align-items: center; /* Centers text vertically */
+}
+
+#side-panel .details-delivery a {
+    display: block; /* Makes the link take full width */
+    width: 100%; /* Ensures it stretches fully */
+    text-decoration: none;
+}
+
+#side-panel .details-delivery button {
+    cursor: pointer;
+    border: 1px solid #ccc;
+    height: 40px;
+    border-radius: 12px;
+    width: 100%;
+    display: flex;
+    justify-content: center; /* Centers text horizontally */
+    align-items: center; /* Centers text vertically */
     background-color: lightgreen;
+}
+
+#side-panel .details{
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    right: 5%;
+    border-radius: 8px;
+    width: 15%;
+    height: 25%;
+    padding: 1.2%;
+    background-color: whitesmoke;
+    
+}
+
+#side-panel .details hr{
+    width: 100%;
+    background-color: black;
+    height: 1px;
+}
+
+#side-panel .details p{
+    width: 100%;
+    font-size: small;
+    color: black;
+}
+
+#side-panel .details span{
+    font-size: small;
+    height: min-content;
+    width: 100%;    
+    
 }
 
 
