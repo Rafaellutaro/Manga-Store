@@ -8,8 +8,6 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] === true) {
 
     if(isset($_SESSION['cart']) && $_SESSION['cart'] != null) {
         $cartLink = 'api_mercado_pago.php';
-    }else{
-        // criar um pop up para informar que o carrinho está vazio
     }
         
 } else {
@@ -28,7 +26,10 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] === true) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="css/header.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <script src="https://kit.fontawesome.com/2502834e47.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script type="text/javascript" src="js/toast.js"></script>
 </head>
 
 <body>

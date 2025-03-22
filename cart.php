@@ -55,6 +55,9 @@ if (isset($_GET['action']) && $_GET['action'] == 'add' && isset($_GET['id'])) {
             if ($cartItem['id'] == $productIDInt) {
                 $alreadyInCart = true;
                 $updatedQuantity = $_SESSION['cart'][$key]['quantity'] + $productQuantity_int;
+                if ($updatedQuantity > $product['stock']) {
+                    $updatedQuantity = $product['stock'];
+                }
                 $_SESSION['cart'][$key]['quantity'] = $updatedQuantity;
                 break;
             }
@@ -111,9 +114,12 @@ if (isset($_GET['action']) && $_GET['action'] == 'remove' && isset($_GET['id']))
                     $img = "http://$dbhost/img/" . $cartItem["filepath"] . "/" . $cartItem["filename"];
                     // Usar identificadores unicos para cada produto
                     $productId = $cartItem['id'];
+                    $productUrl = $cartItem['url'];
                     $productTotal = $cartItem['price'] * $cartItem['quantity'];
                     echo "<div class='cart-item'>";
+                    echo "<a href='sproduct.php?url=" . $productUrl . "'>";
                     echo "<img src='" . $img . "' alt='Product Image' class='product-image'>";
+                    echo "</a>";
                     echo "<div class='product-details'>";
                     echo "<h3 class='nome_manga'>" . $cartItem['label'] . "</h3>";
                     echo "<p>Preço: R$<span id='preco_produto_" . $productId . "'>" . $cartItem['price'] . "</span></p>";
@@ -122,7 +128,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'remove' && isset($_GET['id']))
                     echo "<div id='quantidade_" . $productId . "' id_produto='" . $productId . "' estoque_qtd='" . $cartItem['stock'] . "' class='quantidade'>";
                     // mais, numero, menos
                     echo "<span class='menos' onclick='diminui_valor(" . $productId . ")'><i class='fas fa-minus'></i></span>";
-                    echo "<input type='number' class='quantidade-input' id='quantidade_box_" . $productId . "' value='" . $cartItem['quantity'] . "' min='1' oninput='validar_box(this)'>";
+                    echo "<input type='number' class='quantidade-input' id='quantidade_box_" . $productId . "' value='" . $cartItem['quantity'] . "' min='1' oninput='validar_box(this)' readonly>";
                     echo "<span class='mais' onclick='aumenta_valor(" . $productId . ")'><i class='fas fa-plus'></i></span>";
                     echo "</div>";
                     // botão deletar
@@ -144,10 +150,10 @@ if (isset($_GET['action']) && $_GET['action'] == 'remove' && isset($_GET['id']))
     <section id="side-panel" class="section-p1">
         <div class="details">
             <h4>Resumo</h4>
-            <span></span>
+            <span>Valor dos Produtos: R$0</span>
             <hr>
             <p>Frete: R$0</p>
-            
+
         </div>
 
         <div class="details-delivery">
@@ -179,7 +185,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'remove' && isset($_GET['id']))
                     echo "<option selected disabled value=''>Nenhum endereço cadastrado</option>";
                 }
 
-                while ($row_main = $result_main->fetch_assoc())  {
+                while ($row_main = $result_main->fetch_assoc()) {
                     echo "<option value='" . $row_main['address'] . "'>" . $row_main['address'] . " - " . $row_main['zip'] . "</option>";
                 }
 
@@ -191,14 +197,22 @@ if (isset($_GET['action']) && $_GET['action'] == 'remove' && isset($_GET['id']))
             <p>Vendido e Entregue Por Manga Store</p>
             <hr>
             <p>Frete padrão: R$0</p>
-            
+
             <a href="<?php echo $cartLink ?>">
-                <button>Finalizar compra</button>
+                <button id="checkoutButton" name="checkoutButton">Finalizar compra</button>
             </a>
         </div>
     </section>
 
     <script src="js/carrinho_func.js"></script>
+    <script>
+        document.getElementById("checkoutButton").addEventListener("click", function(event) {
+            <?php if (empty($_SESSION['cart'])) : ?>
+
+                showToast("Seu carrinho está vazio", "error");
+            <?php endif; ?>
+        });
+    </script>
 
 </body>
 

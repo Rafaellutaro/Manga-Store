@@ -6,22 +6,7 @@ function addtocart_singlepage() {
 
     if (quantityInt > maxQuantity) {
         // notificação
-        var notification = document.createElement('div');
-            notification.textContent = 'Não há no estoque';
-            notification.style.position = 'fixed';
-            notification.style.top = '18%';
-            notification.style.left = '50%';
-            notification.style.transform = 'translateX(-50%)';
-            notification.style.padding = '10px';
-            notification.style.backgroundColor = '#ccc';
-            notification.style.color = 'red';
-            notification.style.borderRadius = '5px';
-            document.body.appendChild(notification);
-
-             //timer da notificação
-            setTimeout(function () {
-                notification.remove();
-            }, 3000);
+        showToast('Quantidade solicitada maior que o estoque', 'error');
         return;
     }
 
@@ -37,25 +22,11 @@ function addtocart_singlepage() {
             console.log(data);
             
             // notificação
-            var notification = document.createElement('div');
-            notification.textContent = 'Produto adicionado ao seu carrinho com sucesso';
-            notification.style.position = 'fixed';
-            notification.style.top = '18%';
-            notification.style.left = '50%';
-            notification.style.transform = 'translateX(-50%)';
-            notification.style.padding = '10px';
-            notification.style.backgroundColor = '#ccc';
-            notification.style.color = 'green';
-            notification.style.borderRadius = '5px';
-            document.body.appendChild(notification);
-
-             //timer da notificação
-            setTimeout(function () {
-                notification.remove();
-            }, 3000);
+            showToast('Produto adicionado ao seu carrinho com sucesso', 'success');
 
         })
         .catch(error => {
             console.error('Error:', error);
+            showToast('Erro ao adicionar o produto ao carrinho', 'error');
         });
 }

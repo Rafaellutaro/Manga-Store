@@ -62,7 +62,7 @@ document.querySelectorAll('.quantidade').forEach(container => {
             let newQuantity = parseInt(quantidade.value);
             updateQuantity(productId, newQuantity);
         } else {
-            alert("excedeu o limite do estoque");
+            showToast('excedeu o estoque', 'error');
             var price = parseFloat(document.getElementById('preco_produto_' + productId).innerText);
             document.getElementById('quantidade_box_' + productId).value = qtd;
             document.getElementById('total_' + productId).innerText = price * qtd;

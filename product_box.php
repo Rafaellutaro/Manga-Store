@@ -18,7 +18,7 @@ function displayProduct($productUrl, $img, $row) {
             </div>
             <h4>R$<?php echo number_format($row["price"], 2, ',', '.'); ?></h4>
         </div>
-        <a class="addToCart" data-product-id="<?php echo $row['rowid']; ?>">
+        <a class="addToCart" data-product-id="<?php echo $row['rowid'];?>" data-product-stock="<?php echo $row['stock'];?>">
             <i class="fa-solid fa-cart-shopping manga_carrinho"></i>
         </a>
     </div>
