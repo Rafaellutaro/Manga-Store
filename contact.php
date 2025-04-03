@@ -13,8 +13,9 @@
     <?php
     include_once 'header.php';
     ?>
-        <div class="contact_container">
-            <form action="https://api.web3forms.com/submit" method="POST" id="contact">
+    <div class="contact_container">
+        <form action="https://api.web3forms.com/submit" method="POST" id="contact">
+            <div class="contact_form">
                 <div class="contact_title">
                     <h2>Entre em Contato</h2>
                     <hr>
@@ -22,10 +23,10 @@
                 <div class="all_inputs">
                     <input type="hidden" name="access_key" value="80938d9c-9b6c-47f2-bc36-bd6ea0decfcb">
 
-                    <input type="text"  name="name" id="name" placeholder="Nome:" required class="input">
+                    <input type="text" name="name" id="name" placeholder="Nome:" required class="input">
 
                     <input type="text" name="email" placeholder="Email:" required class="input">
-                    
+
                     <input type="text" class="input" placeholder="Assunto:" name="subject" />
 
                     <input type="hidden" name="from_name" id="from_name" value="Mission Control">
@@ -38,8 +39,9 @@
 
                     <button type="submit">Enviar</button>
                 </div>
-            </form>
-        </div>
+            </div>
+        </form>
+    </div>
 
     <script src="/js/piscar.js"></script>
     <script src="https://web3forms.com/client/script.js" async defer></script>
