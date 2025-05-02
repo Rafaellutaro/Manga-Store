@@ -17,21 +17,25 @@
         <form action="https://api.web3forms.com/submit" method="POST" id="contact">
             <div class="contact_form">
                 <div class="contact_title">
-                    <h2>Entre em Contato</h2>
-                    <hr>
+                    <h2>Contate-nos</h2>
+                    <!-- <hr> -->
                 </div>
                 <div class="all_inputs">
                     <input type="hidden" name="access_key" value="80938d9c-9b6c-47f2-bc36-bd6ea0decfcb">
+                    
+                    <span class="label">Nome</span>
+                    <input type="text" name="name" id="name" placeholder="Digite seu nome:" required class="input">
 
-                    <input type="text" name="name" id="name" placeholder="Nome:" required class="input">
+                    <span class="label">E-mail</span>
+                    <input type="text" name="email" placeholder="Digite seu e-mail:" required class="input">
 
-                    <input type="text" name="email" placeholder="Email:" required class="input">
-
+                    <span class="label">Assunto</span>
                     <input type="text" class="input" placeholder="Assunto:" name="subject" />
 
                     <input type="hidden" name="from_name" id="from_name" value="Mission Control">
 
-                    <textarea name="message" placeholder="Mensagem" required class="input"></textarea>
+                    <span class="label">Mensagem</span>
+                    <textarea name="message" placeholder="Digite sua Mensagem:" required class="input"></textarea>
 
                     <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
 
@@ -43,6 +47,15 @@
         </form>
     </div>
 
+    <?php
+    include_once "bottom.php";
+
+    if (isset($_SESSION['error_message'])) {
+        echo "<script>alert('" . $_SESSION['error_message'] . "');</script>";
+        unset($_SESSION['error_message']);
+    }
+    ?>
+    
     <script src="/js/piscar.js"></script>
     <script src="https://web3forms.com/client/script.js" async defer></script>
 </body>

@@ -1,6 +1,6 @@
 /* cria a pagina inicial*/
 #lua {
-    background:#E3E6F3;
+    background:rgba(235, 238, 252, 0.4);
     background-image: url("../img/hisoka.png");
     background-size: cover;
     height: 90vh;
@@ -20,6 +20,7 @@
 
 #lua h1{
     color: #088178;
+    text-shadow: 2px 2px 8px #e2e2e2;
 }
 
 #lua button {
@@ -32,6 +33,11 @@
     background-repeat: no-repeat;
     font-weight: 700;
     font-size: 15px;
+    transition: all .2s ease-in-out;
+}
+
+#lua button:hover{
+    transform: scale(1.1);
 }
 
 #shop_lua {
