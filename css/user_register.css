@@ -20,6 +20,13 @@
     padding-bottom: 30px;
 }
 
+#details h2{
+    font-size: 30px;
+    margin-left: 17%;
+    width: 100%;
+    
+}
+
 #details h3{
     font-size: 18px;
     padding-top: 30px;
@@ -61,6 +68,18 @@
 
 #details .conta .rua_input{
     width: 82%;
+}
+
+#details .conta .rua_input_new{
+    width: 85.5%;
+}
+
+#details .conta .no_click,
+.rua_input_new{
+    pointer-events: none;
+    user-select: none;
+    cursor: default;
+    background-color: #ccc;
 }
 
 #details .conta .bairro_cidade{
@@ -135,6 +154,15 @@
     text-decoration: none;
     color: #088178;
 }
+
+#details .main-box{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; 
+    align-items: center; 
+    margin-top: -50vh;
+}
+
 
 
 

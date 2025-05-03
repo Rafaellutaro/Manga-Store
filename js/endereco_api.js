@@ -19,7 +19,7 @@ function lookupAddress() {
             .then(response => response.json())
             .then(data => {
                 if (data.erro) {
-                    alert('Cep não encontrado.');
+                    document.getElementById('cep').value = '';
                     return;
                 } else {
                     // Update the UI with the address information
