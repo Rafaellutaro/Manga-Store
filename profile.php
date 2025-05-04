@@ -108,19 +108,19 @@
                     <a class="item"><?php echo $user_data["email"] ?></a>
 
                     <h1>Data de nascimento</h5>
-                    <a class="item"><?php echo $user_data["idprof5"] ?></a>
+                        <a class="item"><?php echo $user_data["idprof5"] ?></a>
 
-                    <button type="submit" class="bt1">Alterar Dados</button>
+                        <button type="submit" class="bt1">Alterar Dados</button>
 
-                    <form action="email.php" method="post">
-                        <button type="submit" class="bt2">Alterar Senha</button>
-                    </form>
+                        <form action="email.php" method="post">
+                            <button type="submit" class="bt2">Alterar Senha</button>
+                        </form>
                 </div>
             </div>
 
         </div>
 
-        
+
         <div class="result" id="enderecodetails">
             <div class="result_container">
 
@@ -137,11 +137,15 @@
                     <a class="item"><?php echo $user_data["fax"] ?></a>
 
                     <h1>Cep</h5>
-                    <a class="item"><?php echo $user_data["zip"] ?></a>
+                        <a class="item"><?php echo $user_data["zip"] ?></a>
 
-                    <form action="profileFunction/change_address.php" method="post">
-                        <button type="submit" class="bt1">Alterar Endereço</button>
-                    </form>
+                        <a href="change_address.php">
+                            <button type="submit" class="bt1">Alterar Endereço</button>
+                        </a>
+
+                        <a href="add_new_address.php">
+                            <button type="submit" class="bt1">Adicionar Endereço</button>
+                        </a>
                 </div>
             </div>
 

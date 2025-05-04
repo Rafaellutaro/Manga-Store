@@ -42,11 +42,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $estado === $current_estado &&
             $local === $current_local
         ) {
-            $errors['cep'] = 'Endereço igual ao atual';
+            $errors['cep'] = 'Endereço igual ao principal';
         } else {
-            $address_query = ("UPDATE llx_societe SET address = ?, zip = ?, town = ?, siren = ?, fax = ? tms = NOW() WHERE rowid = ?");
+            $modif = 1;
+            $address_query = ("INSERT INTO llx_socpeople(address, zip, town, lastname, fax, fk_soc, fk_user_creat, fk_user_modif, tms, datec) VALUES (?, ?, ?, ?, ?, ?, ?, ?, NOW(), NOW())");
             $stmt_endereco = $conn->prepare($address_query);
-            $stmt_endereco->bind_param("sssssi", $endereco_completo, $cep, $cidade, $estado, $local, $user_id);
+            $stmt_endereco->bind_param("sssssiii", $endereco_completo, $cep, $cidade, $estado, $local, $user_id, $modif, $modif);
 
             if ($stmt_endereco->execute()) {
                 header("location: success_register.php");
@@ -84,7 +85,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <form method="POST">
             <div class="main-box">
                 <div class="container">
-                    <h2>Insira o seu Novo Endereço</h2>
+                    <h2>Insira Seu endereço adicional</h2>
                     <div class="conta">
                         <div id="address-container">
 
