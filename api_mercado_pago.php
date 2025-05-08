@@ -33,11 +33,11 @@ $client = new PreferenceClient();
 
 $preference = $client->create([
 "back_urls"=>array(
-    "success" => "http://localhost:3000/success_payment.php",
+    "success" => "https://" . $_SERVER['HTTP_HOST'] . "/manga/success_payment.php",
     "failure" => "https://test.com/failure",
     "pending" => "https://test.com/pending"
 ),
-"notification_url" => "https://yourdomain.com/webhook.php", // ✅ Webhook goes here
+"notification_url" => "https://" . $_SERVER['HTTP_HOST'] . "/manga/weebhook.php", // ✅ Webhook goes here
 "differential_pricing" => array(
     "id" => 1,
 ),
