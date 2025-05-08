@@ -111,7 +111,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'remove' && isset($_GET['id']))
             // mostra os itens no carrinho
             if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
                 foreach ($_SESSION['cart'] as $index => $cartItem) {
-                    $img = "https://" . $_SERVER['HTTP_HOST'] . "/img/" . $row["filepath"] . "/" . $row["filename"];
+                    $img = "https://" . $_SERVER['HTTP_HOST'] . "/img/" . $cartItem["filepath"] . "/" . $cartItem["filename"];
                     // Usar identificadores unicos para cada produto
                     $productId = $cartItem['id'];
                     $productUrl = $cartItem['url'];

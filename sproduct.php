@@ -94,7 +94,7 @@ $row = mysqli_fetch_assoc($result);
 
             while ($relatedRow = mysqli_fetch_assoc($relatedResult)) {
                 $relatedUrl = $relatedRow["url"];
-                $relatedimg = "https://" . $_SERVER['HTTP_HOST'] . "/img/" . $relatedrow["filepath"] . "/" . $relatedrow["filename"];
+                $relatedimg = "https://" . $_SERVER['HTTP_HOST'] . "/img/" . $relatedRow["filepath"] . "/" . $relatedRow["filename"];
                 // Mostra produtos relacionados
 
             ?>
