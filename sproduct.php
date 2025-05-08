@@ -55,7 +55,7 @@ $row = mysqli_fetch_assoc($result);
 
     <?php
     include_once "header.php";
-    $img = "http://$dbhost/img/" . $row["filepath"] . "/" . $row["filename"];
+    $img = "https://" . $_SERVER['HTTP_HOST'] . "/img/" . $row["filepath"] . "/" . $row["filename"];
     ?>
 
     <section id="single_details" class="section-p1">
@@ -94,7 +94,7 @@ $row = mysqli_fetch_assoc($result);
 
             while ($relatedRow = mysqli_fetch_assoc($relatedResult)) {
                 $relatedUrl = $relatedRow["url"];
-                $relatedimg = "http://$dbhost/img/" . $relatedRow["filepath"] . "/" . $relatedRow["filename"];
+                $relatedimg = "https://" . $_SERVER['HTTP_HOST'] . "/img/" . $relatedrow["filepath"] . "/" . $relatedrow["filename"];
                 // Mostra produtos relacionados
 
             ?>
