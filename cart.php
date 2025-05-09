@@ -113,6 +113,8 @@ if (isset($_GET['action']) && $_GET['action'] == 'remove' && isset($_GET['id']))
                 if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
                     foreach ($_SESSION['cart'] as $index => $cartItem) {
                         $img = "http://$dbhost/img/" . $cartItem["filepath"] . "/" . $cartItem["filename"];
+                        // $img = "https://" . $_SERVER['HTTP_HOST'] . "/img/" . $cartItem["filepath"] . "/" . $cartItem["filename"];
+
                         // Usar identificadores unicos para cada produto
                         $productId = $cartItem['id'];
                         $productUrl = $cartItem['url'];
