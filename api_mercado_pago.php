@@ -25,6 +25,7 @@ foreach ($cart as $item) {
         "unit_price" => $item['price']
     ];
     $items[] = $item;
+    $_SESSION['boughtCard'] = $items;
 }
 
 
@@ -32,10 +33,11 @@ $client = new PreferenceClient();
 
 $preference = $client->create([
 "back_urls"=>array(
-    "success" => "https://test.com/success",
+    "success" => "https://" . $_SERVER['HTTP_HOST'] . "/manga/success_payment.php",
     "failure" => "https://test.com/failure",
     "pending" => "https://test.com/pending"
 ),
+"notification_url" => "https://" . $_SERVER['HTTP_HOST'] . "/manga/weebhook.php", // ✅ Webhook goes here
 "differential_pricing" => array(
     "id" => 1,
 ),
