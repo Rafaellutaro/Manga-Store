@@ -32,8 +32,8 @@ $productMinWidth = '150px';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="css/product_box.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/product_box.css">
     <script src="https://kit.fontawesome.com/2502834e47.js"></script>
     <style>
         /* Override the CSS variables with PHP values */

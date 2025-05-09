@@ -39,12 +39,14 @@ $selectedMangas = $conn->query($sql);
 
 
     <section id="lua">
-        <h4>Killua Adverte</h4>
-        <h1>Melhores Preços Nos</h1>
-        <h1>Seus Mangás Favoritos</h1>
-        <p>Venha comprar com a gente</p>
-        <a href="shop.php">
-            <button>Compre</button>
+        <a href="shop.php" class="banner-to-shop">
+            <h4>Killua Adverte</h4>
+            <h1>Melhores Preços Nos</h1>
+            <h1>Seus Mangás Favoritos</h1>
+            <p>Venha comprar com a gente</p>
+            <a href="shop.php" class="btn-shop">
+                <button>Compre</button>
+            </a>
         </a>
     </section>
 
@@ -71,7 +73,6 @@ $selectedMangas = $conn->query($sql);
             <img src="img/destaques/f5.png" alt="">
             <h6>Suporte 24h</h6>
         </div>
-
     </section>
 
     <section id="manga" class="section-p1">
@@ -95,6 +96,7 @@ $selectedMangas = $conn->query($sql);
             }
             ?>
         </div>
+
     </section>
 
     <script src="js/add_carrinho.js"></script>

@@ -1,129 +1,176 @@
 /* cria a pagina inicial*/
 #lua {
-    background:rgba(235, 238, 252, 0.4);
-    background-image: url("../img/hisoka.png");
-    background-size: cover;
-    height: 90vh;
-    width: 100%;
-    padding: 0 80px;
-    background-repeat: no-repeat;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
+  background: rgba(235, 238, 252, 0.4);
+  background-image: url("../img/hisoka.png");
+  background-size: cover;
+  height: 60vh;
+  width: 100%;
+  padding: 0 80px;
+  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  background-position: center left;
 }
 
-
-#lua h4{
-    padding-bottom: 15px;
+#lua h4 {
+  padding-bottom: 15px;
 }
 
-#lua h1{
-    color: #088178;
-    text-shadow: 2px 2px 8px #e2e2e2;
+#lua h1 {
+  color: #088178;
+  text-shadow: 2px 2px 8px #e2e2e2;
 }
 
 #lua button {
-    background-image: url("../img/button.png");
-    background-color: transparent;
-    color: #088178;
-    border: 0;
-    padding: 14px 80px 14px 65px;
-    cursor: pointer;
-    background-repeat: no-repeat;
-    font-weight: 700;
-    font-size: 15px;
-    transition: all .2s ease-in-out;
+  background-image: url("../img/button.png");
+  background-color: transparent;
+  color: #088178;
+  border: 0;
+  padding: 14px 80px 14px 65px;
+  cursor: pointer;
+  background-repeat: no-repeat;
+  font-weight: 700;
+  font-size: 15px;
+  transition: all 0.2s ease-in-out;
 }
 
-#lua button:hover{
-    transform: scale(1.1);
+#lua button:hover {
+  transform: scale(1.1);
 }
 
 #shop_lua {
-    background-image: url("../img/toradora_1.jpg");
-    width: 100%;
-    height: 50vh;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center 48%;
-    display: flex;
-    justify-content: center;
-    text-align: center;
-    flex-direction: column;
-    padding: 14px;
+  background-image: url("../img/toradora_1.jpg");
+  width: 100%;
+  height: 50vh;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center 48%;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  flex-direction: column;
+  padding: 14px;
 }
 
 #shop_lua h1,
-#shop_lua p{
-    color: orange;
-    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+#shop_lua p {
+  color: orange;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
+    1px 1px 0 #000;
 }
 
 #pagination {
-    text-align: center;
+  text-align: center;
 }
 
-#pagination a{
-    text-decoration: none;
-    background-color: #088178;
-    padding: 15px 20px;
-    border-radius: 4px;
-    color: #fff;
-    font-weight: 600;
+#pagination a {
+  text-decoration: none;
+  background-color: #088178;
+  padding: 15px 20px;
+  border-radius: 4px;
+  color: #fff;
+  font-weight: 600;
 }
 
-#pagination a i{
-    font-size: 16px;
-    font-weight: 600;
+#pagination a i {
+  font-size: 16px;
+  font-weight: 600;
 }
 
-#pagination span{
-    text-decoration: none;
-    background-color: #0a948b;
-    padding: 15px 20px;
-    border-radius: 4px;
-    color: #fff;
-    font-weight: 600;
+#pagination span {
+  text-decoration: none;
+  background-color: #0a948b;
+  padding: 15px 20px;
+  border-radius: 4px;
+  color: #fff;
+  font-weight: 600;
 }
 
 #destaques {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  /* flex-wrap: wrap; */
 }
 
-#destaques .box{
-    width: 180px;
-    text-align: center;
-    padding: 25px 15px;
-    box-shadow: 20px 20px 34px rgba(0, 0, 0, 0.03);
-    border: 1px solid #cce7d0;
-    border-radius: 4px;
-    margin: 15px 0;
+#destaques .box {
+  width: 180px;
+  text-align: center;
+  padding: 25px 15px;
+  box-shadow: 20px 20px 34px rgba(0, 0, 0, 0.03);
+  border: 1px solid #cce7d0;
+  border-radius: 4px;
+  margin: 15px 0;
 }
 
-#destaques .box:hover{
-     box-shadow: 10px 10px 54px rgba(70, 62, 221, 0.01);
+#destaques .box:hover {
+  box-shadow: 10px 10px 54px rgba(70, 62, 221, 0.1);
 }
 
-#destaques .box img{
+#destaques .box img {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+#destaques .box h6 {
+  padding: 9px 8px 6px 8px;
+  line-height: 1;
+  border-radius: 4px;
+  color: #088178;
+  background-color: #fddde4;
+  display: inline-block;
+}
+
+@media (max-width: 1100px) {
+  #destaques {
+    padding: 40px 15px;
+  }
+
+  #destaques .box {
+    transform: scale(80%);
+  }
+}
+
+@media (max-width: 768px) {
+  .banner-to-shop {
+    padding-top: 50px;
     width: 100%;
-    margin-bottom: 10px;
+    height: 100%;
+  }
+
+  #lua {
+    padding: 15px;
+    height: 24vh;
+  }
+
+  #lua h1 {
+    font-size: 0.95rem;
+    line-height: normal;
+  }
+
+  #lua h4 {
+    font-size: 0.9rem;
+    line-height: normal;
+  }
+
+  #lua p {
+    font-size: 0.75rem;
+    line-height: normal;
+  }
+
+  #lua .btn-shop {
+    display: none;
+  }
+
+  #shop_lua {
+    padding: 15px;
+    padding-top: 26%;
+    height: 24vh;
+  }
+
+  #destaques {
+    display: none;
+  }
 }
-
-#destaques .box h6{
-    padding: 9px 8px 6px 8px;
-    line-height: 1;
-    border-radius: 4px;
-    color: #088178;
-    background-color: #fddde4;
-    display: inline-block;
-        
-}
-
-
-
-
-

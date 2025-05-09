@@ -95,7 +95,6 @@ if (isset($_GET['action']) && $_GET['action'] == 'remove' && isset($_GET['id']))
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="css/cart.css">
@@ -104,105 +103,108 @@ if (isset($_GET['action']) && $_GET['action'] == 'remove' && isset($_GET['id']))
 
 <body>
 
-    <section id="carrinho" class="section-p1">
-        <h1>Carrinho de Compras</h1>
-        <div class="cart-container">
-            <?php
-            // mostra os itens no carrinho
-            if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
-                foreach ($_SESSION['cart'] as $index => $cartItem) {
-                    $img = "http://$dbhost/img/" . $cartItem["filepath"] . "/" . $cartItem["filename"];
-                    // Usar identificadores unicos para cada produto
-                    $productId = $cartItem['id'];
-                    $productUrl = $cartItem['url'];
-                    $productTotal = $cartItem['price'] * $cartItem['quantity'];
-                    echo "<div class='cart-item'>";
-                    echo "<a href='sproduct.php?url=" . $productUrl . "'>";
-                    echo "<img src='" . $img . "' alt='Product Image' class='product-image'>";
-                    echo "</a>";
-                    echo "<div class='product-details'>";
-                    echo "<h3 class='nome_manga'>" . $cartItem['label'] . "</h3>";
-                    echo "<p>Preço: R$<span id='preco_produto_" . $productId . "'>" . $cartItem['price'] . "</span></p>";
-                    echo "</div>";
-                    echo "<div class='quantidade-container' >";
-                    echo "<div id='quantidade_" . $productId . "' id_produto='" . $productId . "' estoque_qtd='" . $cartItem['stock'] . "' class='quantidade'>";
-                    // mais, numero, menos
-                    echo "<span class='menos' onclick='diminui_valor(" . $productId . ")'><i class='fas fa-minus'></i></span>";
-                    echo "<input type='number' class='quantidade-input' id='quantidade_box_" . $productId . "' value='" . $cartItem['quantity'] . "' min='1' oninput='validar_box(this)' readonly>";
-                    echo "<span class='mais' onclick='aumenta_valor(" . $productId . ")'><i class='fas fa-plus'></i></span>";
-                    echo "</div>";
-                    // botão deletar
-                    echo "<form class='deletar_botao' id='deletar_botao_" . $productId . "' action='cart.php?action=remove&id=" . $productId . "' method='post'>";
-                    echo "<a href='#' onclick='deletar_produto(" . $productId . ")' class='remove-button'>Remover produto</a>";
-                    echo "</form>";
-                    echo "</div>";
-                    // Calculo total
-                    echo "<p>Total: R$<span id='total_" . $productId . "'>" . $productTotal . "</span></p>";
-                    echo "</div>";
-                }
-            } else {
-                echo "<p>Seu carrinho está vazio.</p>";
-            }
-            ?>
-        </div>
-    </section>
+    <div class="cart-grid-container section-p1">
+        <h1 class="cart-title">Carrinho de Compras</h1>
+        <section id="carrinho">
 
-    <section id="side-panel" class="section-p1">
-        <div class="details">
-            <h4>Resumo</h4>
-            <span>Valor dos Produtos: R$0</span>
-            <hr>
-            <p>Frete: R$0</p>
-
-        </div>
-
-        <div class="details-delivery">
-            <h4>Entrega</h4>
-            <p>Endereço de entrega</p>
-            <?php
-            if (isset($_SESSION['user_id'])) {
-                $user_id = $_SESSION['user_id'];
-            }
-
-            // main query to get the address and zip code
-            $query_main = "SELECT address, zip FROM llx_societe WHERE rowid = ?";
-            $stmt_main = $conn->prepare($query_main);
-            $stmt_main->bind_param("i", $user_id);
-            $stmt_main->execute();
-            $result_main = $stmt_main->get_result();
-
-            // secondary query to get the address and zip code
-            $query = "SELECT address, zip FROM llx_socpeople WHERE fk_soc = ?";
-            $stmt = $conn->prepare($query);
-            $stmt->bind_param("i", $user_id);
-            $stmt->execute();
-            $result = $stmt->get_result();
-            ?>
-
-            <select>
+            <div class="cart-container">
                 <?php
-                if ($result->num_rows === 0 && $result_main->num_rows === 0) {
-                    echo "<option selected disabled value=''>Nenhum endereço cadastrado</option>";
-                }
-
-                while ($row_main = $result_main->fetch_assoc()) {
-                    echo "<option value='" . $row_main['address'] . "'>" . $row_main['address'] . " - " . $row_main['zip'] . "</option>";
-                }
-
-                while ($row = $result->fetch_assoc()) {
-                    echo "<option value='" . $row['address'] . "'>" . $row['address'] . " - " . $row['zip'] . "</option>";
+                // mostra os itens no carrinho
+                if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
+                    foreach ($_SESSION['cart'] as $index => $cartItem) {
+                        $img = "http://$dbhost/img/" . $cartItem["filepath"] . "/" . $cartItem["filename"];
+                        // Usar identificadores unicos para cada produto
+                        $productId = $cartItem['id'];
+                        $productUrl = $cartItem['url'];
+                        $productTotal = $cartItem['price'] * $cartItem['quantity'];
+                        echo "<div class='cart-item'>";
+                        echo "<a href='sproduct.php?url=" . $productUrl . "'>";
+                        echo "<img src='" . $img . "' alt='Product Image' class='product-image'>";
+                        echo "</a>";
+                        echo "<div class='product-details'>";
+                        echo "<h3 class='nome_manga'>" . $cartItem['label'] . "</h3>";
+                        echo "<div class='preco-produto'><span class='label'>Preço</span><span id='preco_produto_" . $productId . "' class='valor'>" . $cartItem['price'] . "</span></div>";
+                        echo "</div>";
+                        echo "<div class='quantidade-container' >";
+                        echo "<div id='quantidade_" . $productId . "' id_produto='" . $productId . "' estoque_qtd='" . $cartItem['stock'] . "' class='quantidade'>";
+                        // mais, numero, menos
+                        echo "<span class='menos' onclick='diminui_valor(" . $productId . ")'><i class='fas fa-minus'></i></span>";
+                        echo "<input type='number' class='quantidade-input' id='quantidade_box_" . $productId . "' value='" . $cartItem['quantity'] . "' min='1' oninput='validar_box(this)' readonly>";
+                        echo "<span class='mais' onclick='aumenta_valor(" . $productId . ")'><i class='fas fa-plus'></i></span>";
+                        echo "</div>";
+                        // botão deletar
+                        echo "<form class='deletar_botao' id='deletar_botao_" . $productId . "' action='cart.php?action=remove&id=" . $productId . "' method='post'>";
+                        echo "<a href='#' onclick='deletar_produto(" . $productId . ")' class='remove-button'>Remover produto</a>";
+                        echo "</form>";
+                        echo "</div>";
+                        // Calculo total
+                        echo "<div class='total-preco'><span class='label'>Total</span><span id='total_" . $productId . "' class='valor'>" . $productTotal . "</span></div>";
+                        echo "</div>";
+                    }
+                } else {
+                    echo "<p>Seu carrinho está vazio.</p>";
                 }
                 ?>
-            </select>
-            <p>Vendido e Entregue Por Manga Store</p>
-            <hr>
-            <p>Frete padrão: R$0</p>
+            </div>
+        </section>
 
-            <a href="<?php echo $cartLink ?>">
-                <button id="checkoutButton" name="checkoutButton">Finalizar compra</button>
-            </a>
-        </div>
-    </section>
+        <section id="side-panel">
+            <div class="details">
+                <h4>Resumo</h4>
+                <span>Valor dos Produtos: R$ 0,00</span>
+                <hr>
+                <!-- <p>Frete: R$ 0,00</p> -->
+
+            </div>
+
+            <div class="details-delivery">
+                <!-- <h4>Entrega</h4> -->
+                <h4>Endereço de entrega</h4>
+                <?php
+                if (isset($_SESSION['user_id'])) {
+                    $user_id = $_SESSION['user_id'];
+                }
+
+                // main query to get the address and zip code
+                $query_main = "SELECT address, zip FROM llx_societe WHERE rowid = ?";
+                $stmt_main = $conn->prepare($query_main);
+                $stmt_main->bind_param("i", $user_id);
+                $stmt_main->execute();
+                $result_main = $stmt_main->get_result();
+
+                // secondary query to get the address and zip code
+                $query = "SELECT address, zip FROM llx_socpeople WHERE fk_soc = ?";
+                $stmt = $conn->prepare($query);
+                $stmt->bind_param("i", $user_id);
+                $stmt->execute();
+                $result = $stmt->get_result();
+                ?>
+
+                <select>
+                    <?php
+                    if ($result->num_rows === 0 && $result_main->num_rows === 0) {
+                        echo "<option selected disabled value=''>Nenhum endereço cadastrado</option>";
+                    }
+
+                    while ($row_main = $result_main->fetch_assoc()) {
+                        echo "<option value='" . $row_main['address'] . "'>" . $row_main['address'] . " - " . $row_main['zip'] . "</option>";
+                    }
+
+                    while ($row = $result->fetch_assoc()) {
+                        echo "<option value='" . $row['address'] . "'>" . $row['address'] . " - " . $row['zip'] . "</option>";
+                    }
+                    ?>
+                </select>
+                <p class="vendido-entrege">Vendido e entregue por Manga Store</p>
+                <hr>
+                <p>Frete: R$ 0,00</p>
+
+                <a href="<?php echo $cartLink ?>">
+                    <button id="checkoutButton" name="checkoutButton">Finalizar compra</button>
+                </a>
+            </div>
+        </section>
+    </div>
 
     <script src="js/carrinho_func.js"></script>
     <script>
