@@ -1,171 +1,172 @@
 #details {
-    display: flex;
-    justify-content: center; /* Center horizontally */
-    align-items: center; /* Center vertically */
-    height: 500px; /* Adjust the height as needed */
-    margin-top: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-#details .container{
-    margin: 0 auto;
-    margin-top: 25%;
-    padding: 20px;
-    width: 50%;
-    
+#details .container {
+  margin: 0 auto;
+  margin-bottom: 30px;
+  padding: 20px;
+  width: 50%;
+  /* background-color: #30e2d6; */
 }
 
-#details h4{
-    font-size: 18px;
-    padding-top: 130px;
-    padding-bottom: 30px;
+#details h4 {
+  font-size: 18px;
+  padding-top: 40px;
+  padding-bottom: 30px;
 }
 
-#details h2{
-    font-size: 30px;
-    margin-left: 17%;
-    width: 100%;
-    
+#details h2 {
+  font-size: 30px;
+  margin-left: 17%;
+  width: 100%;
 }
 
-#details h3{
-    font-size: 18px;
-    padding-top: 30px;
-    padding-bottom: 30px;
+#details h3 {
+  font-size: 18px;
+  padding-top: 30px;
+  padding-bottom: 30px;
 }
 
-#details label{
-    display: inline-block;
-    width: 100%; /* Adjust the width to your preference */
-    margin-bottom: 5px;
-
+#details label {
+  display: inline-block;
+  width: 100%;
+  margin-bottom: 5px;
 }
 
 #details .conta label {
-    width: calc(50% - 55px);
+  /* width: calc(50% - 55px); */
+  width: 49%;
 }
 
-#details .conta input{
-    width: calc(50% - 55px); /* Make inputs take up 50% of the width with spacing */
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    padding: 8px;
-    margin-top: 5px;
+#details .conta input {
+  /* width: calc(
+    50% - 55px
+  ); */
+  width: 49%;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 8px;
+  margin-top: 5px;
 }
 
-#details .conta .cpf + .cel{
-    padding-top: 20px;
+#details .conta .cpf + .cel {
+  padding-top: 20px;
 }
 
-#details .conta .data{
-    padding-top: 20px;
-    width: 100%;
+#details .conta .data {
+  padding-top: 20px;
+  width: 100%;
 }
 
-#details .conta .rua{
-    padding-top: 20px;
-    width: 100%;
+#details .conta .rua {
+  padding-top: 20px;
+  width: 100%;
 }
 
-#details .conta .rua_input{
-    width: 82%;
+#details .conta .rua_input {
+  width: 100%;
 }
 
-#details .conta .rua_input_new{
-    width: 85.5%;
-}
-
-#details .conta .no_click,
-.rua_input_new{
-    pointer-events: none;
-    user-select: none;
-    cursor: default;
-    background-color: #ccc;
-}
-
-#details .conta .bairro_cidade{
-    padding-top: 20px;
-}
-
-#details .conta .estado{
-    padding-top: 20px;
+#details .conta .rua_input_new {
+  width: 85.5%;
 }
 
 #details .conta .no_click,
-.rua_input{
-    pointer-events: none;
-    user-select: none;
-    cursor: default;
-    background-color: #ccc;
+.rua_input_new {
+  pointer-events: none;
+  user-select: none;
+  cursor: default;
+  background-color: #ccc;
+}
+
+#details .conta .bairro_cidade {
+  padding-top: 20px;
+}
+
+#details .conta .estado {
+  padding-top: 20px;
+}
+
+#details .conta .no_click,
+.rua_input {
+  pointer-events: none;
+  user-select: none;
+  cursor: default;
+  background-color: #ccc;
 }
 
 #details .conta .cep {
-    width: 100%;
+  width: 100%;
 }
 
-#details .conta .n_casa{
-    padding-top: 20px;
-    width: 100%;
+#details .conta .n_casa {
+  padding-top: 20px;
+  width: 100%;
 }
 
 #details .acesso input {
-    width: calc(100% - 110px); /* Adjust the width to account for label width and spacing */
-    padding: 8px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+  /* width: calc(
+    100% - 110px
+  ); */
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
 
-
-
- #details .acesso .error-input,
- #details .conta .error-input{
-    border: 1px solid red;
+#details .acesso .error-input,
+#details .conta .error-input {
+  border: 1px solid red;
 }
 
 #details .conta .error-unique,
-#details .acesso .error-unique{
-    border: 1px solid red;
+#details .acesso .error-unique {
+  border: 1px solid red;
 }
 
 #details .conta .error-unique::placeholder,
-#details .acesso .error-unique::placeholder{
-    color: red;
+#details .acesso .error-unique::placeholder {
+  color: red;
 }
 
 #details button {
-    width: calc(100% - 110px);
-    margin-top: 20px;
-    background-color: #088178;
-    color: #ccc;
-    border: 1px solid transparent;
-    border-radius: 30px;
-    padding: 10px;
-    cursor: pointer;
-    font-weight: 700;
-    font-size: 15px;
-    display: inline-block;
+  /* width: calc(100% - 110px); */
+  width: 100%;
+  margin-top: 20px;
+  background-color: #088178;
+  color: #ccc;
+  border: 1px solid transparent;
+  border-radius: 30px;
+  padding: 10px;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 15px;
+  display: inline-block;
 }
 
-#details p{
-    margin-left: 20%;
+#details p {
+  margin-left: 20%;
 }
 
-#details a{
-    text-decoration: none;
-    color: #088178;
+#details a {
+  text-decoration: none;
+  color: #088178;
 }
 
-#details .main-box{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center; 
-    align-items: center; 
-    margin-top: -50vh;
+#details .main-box {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin-top: -50vh;
 }
 
-
-
-
-
-
-
+@media (max-width: 768px) {
+  #details .container {
+    width: 100%;
+  }
+}
