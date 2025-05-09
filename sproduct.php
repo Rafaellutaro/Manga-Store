@@ -2,7 +2,7 @@
 include_once "connection.php";
 include_once "product_box.php";
 
-$productWidth = '18%'; 
+$productWidth = '18%';
 $productMinWidth = '150px';
 
 // Extrai and limpa o produto ID do URL
@@ -19,7 +19,7 @@ if (isset($_GET['url'])) {
 $sql = "SELECT llx_product.*, llx_ecm_files.filepath, llx_ecm_files.filename
         FROM llx_product
         JOIN llx_ecm_files ON llx_product.rowid = llx_ecm_files.src_object_id
-        WHERE llx_product.url = '$url'"; 
+        WHERE llx_product.url = '$url'";
 
 
 $result = $conn->query($sql);
@@ -55,7 +55,8 @@ $row = mysqli_fetch_assoc($result);
 
     <?php
     include_once "header.php";
-    $img = "https://" . $_SERVER['HTTP_HOST'] . "/img/" . $row["filepath"] . "/" . $row["filename"];
+    $img = "http://$dbhost/img/" . $row["filepath"] . "/" . $row["filename"];
+    // $img = "https://" . $_SERVER['HTTP_HOST'] . "/img/" . $row["filepath"] . "/" . $row["filename"];
     ?>
 
     <section id="single_details" class="section-p1">
@@ -65,7 +66,7 @@ $row = mysqli_fetch_assoc($result);
 
         <div class="details">
             <h2><?php echo $row["label"] ?></h2>
-            <p id="stockQuantity" estoque=<?php echo $row["stock"]?>>Quantidade em estoque: <?php echo $row["stock"] ?></p>
+            <p id="stockQuantity" estoque=<?php echo $row["stock"] ?>>Quantidade em estoque: <?php echo $row["stock"] ?></p>
             <h2>R$<?php echo number_format($row["price"], 2, ',', '.'); ?></h2>
             <input id="productQuantity" type="number" value="1" min="1" oninput="validar_box(this)">
             <button id="addToCartButton" data-product-id="<?php echo $row['rowid']; ?>" onclick="addtocart_singlepage()">Comprar</button>
@@ -94,13 +95,14 @@ $row = mysqli_fetch_assoc($result);
 
             while ($relatedRow = mysqli_fetch_assoc($relatedResult)) {
                 $relatedUrl = $relatedRow["url"];
-                $relatedimg = "https://" . $_SERVER['HTTP_HOST'] . "/img/" . $relatedRow["filepath"] . "/" . $relatedRow["filename"];
+                $relatedimg = "http://$dbhost/img/" . $relatedRow["filepath"] . "/" . $relatedRow["filename"];
+                // $relatedimg = "https://" . $_SERVER['HTTP_HOST'] . "/img/" . $relatedRow["filepath"] . "/" . $relatedRow["filename"];
                 // Mostra produtos relacionados
 
             ?>
 
                 <?php
-                    echo displayProduct($relatedUrl, $relatedimg, $relatedRow);
+                echo displayProduct($relatedUrl, $relatedimg, $relatedRow);
                 ?>
 
             <?php

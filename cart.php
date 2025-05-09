@@ -123,10 +123,12 @@ if (isset($_GET['action']) && $_GET['action'] == 'remove' && isset($_GET['id']))
                         echo "<a href='sproduct.php?url=" . $productUrl . "'>";
                         echo "<img src='" . $img . "' alt='Product Image' class='product-image'>";
                         echo "</a>";
+
                         echo "<div class='product-details'>";
                         echo "<h3 class='nome_manga'>" . $cartItem['label'] . "</h3>";
                         echo "<div class='preco-produto'><span class='label'>Preço</span><span id='preco_produto_" . $productId . "' class='valor'>" . $cartItem['price'] . "</span></div>";
                         echo "</div>";
+
                         echo "<div class='quantidade-container' >";
                         echo "<div id='quantidade_" . $productId . "' id_produto='" . $productId . "' estoque_qtd='" . $cartItem['stock'] . "' class='quantidade'>";
                         // mais, numero, menos
@@ -139,6 +141,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'remove' && isset($_GET['id']))
                         echo "<a href='#' onclick='deletar_produto(" . $productId . ")' class='remove-button'>Remover produto</a>";
                         echo "</form>";
                         echo "</div>";
+                        // echo "</div>";
                         // Calculo total
                         echo "<div class='total-preco'><span class='label'>Total</span><span id='total_" . $productId . "' class='valor'>" . $productTotal . "</span></div>";
                         echo "</div>";
