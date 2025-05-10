@@ -38,16 +38,24 @@ if (isset($data['type']) && $data['type'] === 'payment' && isset($data['data']['
 
             $sqlDetails = "SELECT fk_product, qty FROM llx_commandedet WHERE fk_commande = ?";
             $stmtDetails = $conn->prepare($sqlDetails);
-            $stmtDetails->execute([$orderId]);
+            $stmtDetails->bind_param("i", $orderId);
+            $stmtDetails->execute();
+            $result = $stmtDetails->get_result();
 
-            while ($row = $stmtDetails->fetch(PDO::FETCH_ASSOC)) {
+            while ($row = $result->fetch_assoc()) {
                 $productId = $row['fk_product'];
                 $quantityOrdered = $row['qty'];
 
-                // Update stock
-                $sqlUpdateStock = "UPDATE llx_product SET stock = stock - ? WHERE rowid = ?";
-                $stmtUpdate = $conn->prepare($sqlUpdateStock);
-                $stmtUpdate->execute([$quantityOrdered, $productId]);
+                if ($productId) {
+                    // Log for debug
+                    file_put_contents('mp_webhook_log.txt', "Updating stock for product $productId - qty $quantityOrdered" . PHP_EOL, FILE_APPEND);
+
+                    $sqlUpdateStock = "UPDATE llx_product SET stock = stock - ? WHERE rowid = ?";
+                    $stmtUpdate = $conn->prepare($sqlUpdateStock);
+                    $stmtUpdate->bind_param("ii", $quantityOrdered, $productId);
+                    $stmtUpdate->execute();
+                    $stmtUpdate->close();
+                }
             }
 
             $stmtDetails->close();
