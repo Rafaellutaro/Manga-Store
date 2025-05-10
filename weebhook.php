@@ -26,17 +26,34 @@ if (isset($data['type']) && $data['type'] === 'payment' && isset($data['data']['
 
     if ($paymentData['status'] === 'approved') {
         $externalReference = $paymentData['external_reference'] ?? null;
-        
-        if($externalReference) {
+
+        if ($externalReference) {
             $orderId = $externalReference;
             $sql = "UPDATE llx_commande SET fk_statut = 1 WHERE rowid = ?";
             $stmt = $conn->prepare($sql);
             $stmt->execute([$orderId]);
             $stmt->close();
+
+            // decrease stock
+
+            $sqlDetails = "SELECT fk_product, qty FROM llx_commandedet WHERE fk_commande = ?";
+            $stmtDetails = $conn->prepare($sqlDetails);
+            $stmtDetails->execute([$orderId]);
+
+            while ($row = $stmtDetails->fetch(PDO::FETCH_ASSOC)) {
+                $productId = $row['fk_product'];
+                $quantityOrdered = $row['qty'];
+
+                // Update stock
+                $sqlUpdateStock = "UPDATE llx_product SET stock = stock - ? WHERE rowid = ?";
+                $stmtUpdate = $conn->prepare($sqlUpdateStock);
+                $stmtUpdate->execute([$quantityOrdered, $productId]);
+            }
+
+            $stmtDetails->close();
         }
     }
 }
 
 http_response_code(200);
 echo "OK";
-?>
