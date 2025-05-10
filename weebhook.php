@@ -26,14 +26,17 @@ if (isset($data['type']) && $data['type'] === 'payment' && isset($data['data']['
 
     if ($paymentData['status'] === 'approved') {
         $externalReference = $paymentData['external_reference'] ?? null;
+        
+        if($externalReference) {
+            $orderId = $externalReference;
+            $sql = "UPDATE llx_commande SET fk_statut = 1 WHERE rowid = ?";
+            $stmt = $conn->prepare($sql);
+            $stmt->execute([$orderId]);
+            $stmt->close();
 
-        session_start();
-        $userid = $_SESSION['user_id'] ?? null;
-        $cart = $_SESSION['boughtCard'] ?? [];
-
-        if ($userid && !empty($cart)) {
-            saveOrder($conn, $userid, $cart);
             unset($_SESSION['cart'], $_SESSION['boughtCard'], $_SESSION['totalProd']);
+
+            header("Location: success_register.php");
         }
     }
 }
