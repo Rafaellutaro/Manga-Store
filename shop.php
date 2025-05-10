@@ -21,8 +21,7 @@ $totalProductsResult = $conn->query($totalProductsQuery);
 $totalProductsData = $totalProductsResult->fetch_assoc();
 $totalProducts = $totalProductsData['total'];
 
-$productWidth = '18%'; // Set the desired width
-$productMinWidth = '150px';
+$productWidth = '250px'; // Set the desired width
 
 ?>
 
@@ -39,7 +38,6 @@ $productMinWidth = '150px';
         /* Override the CSS variables with PHP values */
         :root {
             --product-width: <?php echo $productWidth; ?>;
-            --product-min-width: <?php echo $productMinWidth; ?>;
         }
     </style>
     <title>Loja de mangas</title>

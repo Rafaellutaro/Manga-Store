@@ -8,14 +8,15 @@ if (isset($_SESSION['error_message'])) {
     unset($_SESSION['error_message']);
 }
 
-$selectedMangaIDs = [3, 4, 5, 6, 7, 8];
+$selectedMangaIDs = [3, 4, 5, 6, 7, 8, 9, 10, 11, 12]; // Example manga IDs
 $selectedMangaIDsString = implode(', ', $selectedMangaIDs);
 
 
 $sql = "SELECT llx_product.*, llx_ecm_files.filepath, llx_ecm_files.filename
         FROM llx_product
         JOIN llx_ecm_files ON llx_product.rowid = llx_ecm_files.src_object_id
-        WHERE llx_product.rowid IN ($selectedMangaIDsString)";
+        WHERE llx_product.rowid IN ($selectedMangaIDsString)
+        LIMIT 10";
 
 
 $selectedMangas = $conn->query($sql);

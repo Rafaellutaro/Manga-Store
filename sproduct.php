@@ -2,8 +2,7 @@
 include_once "connection.php";
 include_once "product_box.php";
 
-$productWidth = '18%';
-$productMinWidth = '150px';
+$productWidth = '250px';
 
 // Extrai and limpa o produto ID do URL
 if (isset($_GET['url'])) {
@@ -45,7 +44,6 @@ $row = mysqli_fetch_assoc($result);
     <style>
         :root {
             --product-width: <?php echo $productWidth; ?>;
-            --product-min-width: <?php echo $productMinWidth; ?>;
         }
     </style>
     <title>Produto</title>
@@ -89,14 +87,14 @@ $row = mysqli_fetch_assoc($result);
             FROM llx_product
             JOIN llx_ecm_files ON llx_product.rowid = llx_ecm_files.src_object_id
             WHERE llx_product.rowid != {$row['rowid']}
-            LIMIT 10";
+            LIMIT 12";
 
             $relatedResult = $conn->query($relatedSql);
 
             while ($relatedRow = mysqli_fetch_assoc($relatedResult)) {
                 $relatedUrl = $relatedRow["url"];
-                $relatedimg = "http://$dbhost/img/" . $relatedRow["filepath"] . "/" . $relatedRow["filename"];
-                // $relatedimg = "https://" . $_SERVER['HTTP_HOST'] . "/img/" . $relatedRow["filepath"] . "/" . $relatedRow["filename"];
+                //$relatedimg = "http://$dbhost/img/" . $relatedRow["filepath"] . "/" . $relatedRow["filename"];
+                $relatedimg = "https://" . $_SERVER['HTTP_HOST'] . "/img/" . $relatedRow["filepath"] . "/" . $relatedRow["filename"];
                 // Mostra produtos relacionados
 
             ?>
