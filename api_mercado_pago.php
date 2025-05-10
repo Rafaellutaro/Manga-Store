@@ -18,8 +18,7 @@ foreach ($cart as $item) {
         "id" => $item['id'],
         "title" => $item['label'],
         "description" => 'Manga top',
-        "picture_url" => "http://$dbhost/img/" . $item["filepath"] . "/" . $item["filename"],
-        "category_id" => "Manga",
+        "picture_url" => "https://" . $_SERVER['HTTP_HOST'] . "/img/" . $cartItem["filepath"] . "/" . $cartItem["filename"],
         "quantity" => $item['quantity'],
         "currency_id" => "BRL",
         "unit_price" => $item['price']

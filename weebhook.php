@@ -3,9 +3,10 @@ include_once 'connection.php';
 include_once 'order_utils.php';
 
 $rawInput = file_get_contents('php://input');
-file_put_contents('mp_webhook_log.txt', date('Y-m-d H:i:s') . " - RAW: " . $rawInput . PHP_EOL, FILE_APPEND);
 
 $data = json_decode($rawInput, true);
+
+file_put_contents('mp_webhook_log.txt', date('Y-m-d H:i:s') . " - RAW: " . $data . PHP_EOL, FILE_APPEND);
 
 if (isset($data['type']) && $data['type'] === 'payment' && isset($data['data']['id'])) {
     $paymentId = $data['data']['id'];
@@ -19,9 +20,9 @@ if (isset($data['type']) && $data['type'] === 'payment' && isset($data['data']['
     $response = curl_exec($ch);
     curl_close($ch);
 
-    file_put_contents('mp_webhook_log.txt', date('Y-m-d H:i:s') . " - PAYMENT INFO: " . $response . PHP_EOL, FILE_APPEND);
-
     $paymentData = json_decode($response, true);
+
+    file_put_contents('mp_webhook_log.txt', date('Y-m-d H:i:s') . " - PAYMENT INFO: " . $paymentData . PHP_EOL, FILE_APPEND);
 
     if ($paymentData['status'] === 'approved') {
         $externalReference = $paymentData['external_reference'] ?? null;

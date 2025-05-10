@@ -55,8 +55,8 @@ $row = mysqli_fetch_assoc($result);
 
     <?php
     include_once "header.php";
-    $img = "http://$dbhost/img/" . $row["filepath"] . "/" . $row["filename"];
-    // $img = "https://" . $_SERVER['HTTP_HOST'] . "/img/" . $row["filepath"] . "/" . $row["filename"];
+    //$img = "http://$dbhost/img/" . $row["filepath"] . "/" . $row["filename"];
+    $img = "https://" . $_SERVER['HTTP_HOST'] . "/img/" . $row["filepath"] . "/" . $row["filename"];
     ?>
 
     <section id="single_details" class="section-p1">
