@@ -35,7 +35,6 @@ foreach ($cart as $item) {
     $item = [
         "id" => $item['id'],
         "title" => $item['label'],
-        "description" => 'Manga top',
         "picture_url" => "https://" . $_SERVER['HTTP_HOST'] . "/img/" . $item["filepath"] . "/" . $item["filename"],
         "quantity" => $item['quantity'],
         "currency_id" => "BRL",
@@ -47,7 +46,7 @@ foreach ($cart as $item) {
 $_SESSION['boughtCard'] = $items;
 $boughtCard = $_SESSION['boughtCard'];
 
-$sqlLine = "INSERT INTO llx_commandedet (fk_commande, fk_product, qty, subprice, total_ht, product_type)
+$sqlLine = "INSERT INTO llx_commandedet (fk_commande, label, fk_product, qty, subprice, total_ht, product_type)
                 VALUES (?, ?, ?, ?, ?, ?)";
     $stmtLine = $conn->prepare($sqlLine);
 
@@ -58,6 +57,7 @@ $sqlLine = "INSERT INTO llx_commandedet (fk_commande, fk_product, qty, subprice,
 
         $stmtLine->execute([
             $orderId,
+            $item['title'],
             $item['id'],
             $qty,
             $unit_price,
@@ -67,12 +67,12 @@ $sqlLine = "INSERT INTO llx_commandedet (fk_commande, fk_product, qty, subprice,
     }
 
     $stmtLine->close();
-    
+
 $client = new PreferenceClient();
 
 $preference = $client->create([
 "back_urls"=>array(
-    "success" => "https://" . $_SERVER['HTTP_HOST'] . "/manga/success_payment.php",
+    "success" => "https://" . $_SERVER['HTTP_HOST'] . "/manga/success_register.php",
     "failure" => "https://test.com/failure",
     "pending" => "https://test.com/pending"
 ),

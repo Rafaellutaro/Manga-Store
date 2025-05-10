@@ -35,8 +35,6 @@ if (isset($data['type']) && $data['type'] === 'payment' && isset($data['data']['
             $stmt->close();
 
             unset($_SESSION['cart'], $_SESSION['boughtCard'], $_SESSION['totalProd']);
-
-            header("Location: success_register.php");
         }
     }
 }
