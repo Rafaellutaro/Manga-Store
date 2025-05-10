@@ -47,7 +47,7 @@ $_SESSION['boughtCard'] = $items;
 $boughtCard = $_SESSION['boughtCard'];
 
 $sqlLine = "INSERT INTO llx_commandedet (fk_commande, label, fk_product, qty, subprice, total_ht, product_type)
-                VALUES (?, ?, ?, ?, ?, ?)";
+                VALUES (?, ?, ?, ?, ?, ?, ?)";
     $stmtLine = $conn->prepare($sqlLine);
 
     foreach ($boughtCard as $item) {
@@ -90,4 +90,5 @@ $preference = $client->create([
 $initPoint = $preference->init_point;
 
 header("Location: {$initPoint}");
+unset($_SESSION['cart'], $_SESSION['boughtCard']);
 ?>

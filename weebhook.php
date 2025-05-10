@@ -33,8 +33,6 @@ if (isset($data['type']) && $data['type'] === 'payment' && isset($data['data']['
             $stmt = $conn->prepare($sql);
             $stmt->execute([$orderId]);
             $stmt->close();
-
-            unset($_SESSION['cart'], $_SESSION['boughtCard'], $_SESSION['totalProd']);
         }
     }
 }
