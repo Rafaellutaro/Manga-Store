@@ -6,7 +6,7 @@ $rawInput = file_get_contents('php://input');
 
 $data = json_decode($rawInput, true);
 
-file_put_contents('mp_webhook_log.txt', date('Y-m-d H:i:s') . " - RAW: " . $data . PHP_EOL, FILE_APPEND);
+file_put_contents('mp_webhook_log.txt', date('Y-m-d H:i:s') . " - RAW: " . $rawInput . PHP_EOL, FILE_APPEND);
 
 if (isset($data['type']) && $data['type'] === 'payment' && isset($data['data']['id'])) {
     $paymentId = $data['data']['id'];
@@ -22,7 +22,7 @@ if (isset($data['type']) && $data['type'] === 'payment' && isset($data['data']['
 
     $paymentData = json_decode($response, true);
 
-    file_put_contents('mp_webhook_log.txt', date('Y-m-d H:i:s') . " - PAYMENT INFO: " . $paymentData . PHP_EOL, FILE_APPEND);
+    file_put_contents('mp_webhook_log.txt', date('Y-m-d H:i:s') . " - PAYMENT INFO: " . $response . PHP_EOL, FILE_APPEND);
 
     if ($paymentData['status'] === 'approved') {
         $externalReference = $paymentData['external_reference'] ?? null;
