@@ -184,29 +184,31 @@ if (isset($_GET['action']) && $_GET['action'] == 'remove' && isset($_GET['id']))
                 $stmt->execute();
                 $result = $stmt->get_result();
                 ?>
+                <form action="<?= $cartLink ?>" method="post">
+                    <select name="selected_address" id="selected_address" required>
+                        <?php
+                        if ($result->num_rows === 0 && $result_main->num_rows === 0) {
+                            echo "<option selected disabled value=''>Nenhum endereço cadastrado</option>";
+                        }
 
-                <select>
-                    <?php
-                    if ($result->num_rows === 0 && $result_main->num_rows === 0) {
-                        echo "<option selected disabled value=''>Nenhum endereço cadastrado</option>";
-                    }
+                        while ($row_main = $result_main->fetch_assoc()) {
+                            echo "<option value='" . $row_main['address'] . "'>" . $row_main['address'] . " - " . $row_main['zip'] . "</option>";
+                        }
 
-                    while ($row_main = $result_main->fetch_assoc()) {
-                        echo "<option value='" . $row_main['address'] . "'>" . $row_main['address'] . " - " . $row_main['zip'] . "</option>";
-                    }
+                        while ($row = $result->fetch_assoc()) {
+                            echo "<option value='" . $row['address'] . "'>" . $row['address'] . " - " . $row['zip'] . "</option>";
+                        }
+                        ?>
+                    </select>
+                    <p class="vendido-entrege">Vendido e entregue por Manga Store</p>
+                    <hr>
+                    <p>Frete: R$ 0,00</p>
 
-                    while ($row = $result->fetch_assoc()) {
-                        echo "<option value='" . $row['address'] . "'>" . $row['address'] . " - " . $row['zip'] . "</option>";
-                    }
-                    ?>
-                </select>
-                <p class="vendido-entrege">Vendido e entregue por Manga Store</p>
-                <hr>
-                <p>Frete: R$ 0,00</p>
 
-                <a href="<?php echo $cartLink ?>">
-                    <button id="checkoutButton" name="checkoutButton">Finalizar compra</button>
-                </a>
+                    <button type="submit">Finalizar compra</button>
+
+                </form>
+
             </div>
         </section>
     </div>

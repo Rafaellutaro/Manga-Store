@@ -28,10 +28,14 @@ if (isset($data['type']) && $data['type'] === 'payment' && isset($data['data']['
         $externalReference = $paymentData['external_reference'] ?? null;
 
         if ($externalReference) {
+            // Update order status in the database
+            $selectedAddress = $data['payer']['address']['street_name'] ?? null;
+
             $orderId = $externalReference;
-            $sql = "UPDATE llx_commande SET fk_statut = 1 WHERE rowid = ?";
+            $sql = "UPDATE llx_commande SET fk_statut = 1, delivery_address = ? WHERE rowid = ?";
             $stmt = $conn->prepare($sql);
-            $stmt->execute([$orderId]);
+            $stmt->bind_param("si", $selectedAddress, $orderId);
+            $stmt->execute();
             $stmt->close();
 
             // decrease stock

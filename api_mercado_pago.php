@@ -10,9 +10,26 @@ use MercadoPago\Client\Preference\PreferenceClient;
 
 MercadoPagoConfig::setAccessToken("TEST-7044352387989428-022013-88e564687f1086f98eef38226c079b2a-1201195997");
 
+// Get the selected address from the POST request
+$selected_address = $_POST['selected_address'] ?? null;
+
+if (!$selectedAddress) {
+    error_log("Endereço não selecionado.");
+}
+
 $order_ref = 'WEBORDER-' . date('Ymd-His') . '-' . uniqid();
 $userid = $_SESSION['user_id'] ?? null;
 
+// SQL query to get the user data
+$sqlUser = "SELECT * FROM llx_societe WHERE rowid = ?";
+$stmtUser = $conn->prepare($sqlUser);
+$stmtUser->bind_param("i", $userid);
+$stmtUser->execute();
+$resultUser = $stmtUser->get_result();
+$userData = $resultUser->fetch_assoc();
+$stmtUser->close();
+
+// SQL query to insert the order
 $sqlOrder = "INSERT INTO llx_commande (ref, fk_soc, date_creation, date_commande, fk_user_author, fk_statut, total_ht, entity)
                  VALUES (?, ?, NOW(), NOW(), ?, ?, ?, ?)";
     $stmt = $conn->prepare($sqlOrder);
@@ -83,6 +100,20 @@ $preference = $client->create([
 ),
 "expires" => false,
 "items" => $items,
+"payer" => array(
+    "name" => $userData['nom'],
+    "email" => $userData['email'],
+    "phone" => array(
+        "number" => $userData['phone'],
+    ),
+    "identification" => array(
+        "type" => "CPF",
+        "number" => $userData['idprof4'],
+    ),
+    "address" => array(
+        "street_name" => $selected_address,
+    )
+),
     ]);
 
 //echo json_encode($preference, JSON_PRETTY_PRINT);
