@@ -29,19 +29,9 @@ if (isset($data['type']) && $data['type'] === 'payment' && isset($data['data']['
         file_put_contents('mp_webhook_log.txt', date('Y-m-d H:i:s') . " - PAYMENT ID $paymentId: " . json_encode($payment) . PHP_EOL, FILE_APPEND);
 
         if ($payment->status === 'approved') {
-            $realPayer = null;
-
-            foreach ($payment->payer as $payer) {
-                if (isset($payer->address->street_name) && !empty($payer->address->street_name)) {
-                    $realPayer = $payer;
-                    break;
-                }
-            }
-            if ($realPayer) {
-                $selectedAddress = $realPayer->address->street_name;
-            }
             
             $externalReference = $payment->external_reference ?? null;
+            $selectedAddress = $payment->additional_info->payer->address->street_name ?? null;
 
             if ($externalReference && $selectedAddress) {
                 // Update order status and delivery address
