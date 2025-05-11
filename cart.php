@@ -185,7 +185,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'remove' && isset($_GET['id']))
                 $result = $stmt->get_result();
                 ?>
                 <form action="<?= $cartLink ?>" method="post">
-                    <select name="selected_address" id="selected_address" required>
+                    <select name="selected_address" id="selected_address">
                         <?php
                         if ($result->num_rows === 0 && $result_main->num_rows === 0) {
                             echo "<option selected disabled value=''>Nenhum endereço cadastrado</option>";

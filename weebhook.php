@@ -2,68 +2,74 @@
 include_once 'connection.php';
 include_once 'order_utils.php';
 
-$rawInput = file_get_contents('php://input');
+use MercadoPago\MercadoPagoConfig;
+use MercadoPago\Client\Payment\PaymentClient;
 
+require_once 'vendor/autoload.php';
+
+$rawInput = file_get_contents('php://input');
 $data = json_decode($rawInput, true);
 
+// Log the raw webhook for debugging
 file_put_contents('mp_webhook_log.txt', date('Y-m-d H:i:s') . " - RAW: " . $rawInput . PHP_EOL, FILE_APPEND);
 
 if (isset($data['type']) && $data['type'] === 'payment' && isset($data['data']['id'])) {
     $paymentId = $data['data']['id'];
 
-    $accessToken = 'TEST-7044352387989428-022013-88e564687f1086f98eef38226c079b2a-1201195997'; // Replace with real token
-    $ch = curl_init("https://api.mercadopago.com/v1/payments/$paymentId");
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch, CURLOPT_HTTPHEADER, [
-        "Authorization: Bearer $accessToken"
-    ]);
-    $response = curl_exec($ch);
-    curl_close($ch);
+    // Set your Mercado Pago access token
+    MercadoPagoConfig::setAccessToken("YOUR_ACCESS_TOKEN_HERE");
 
-    $paymentData = json_decode($response, true);
+    $paymentClient = new PaymentClient();
 
-    file_put_contents('mp_webhook_log.txt', date('Y-m-d H:i:s') . " - PAYMENT INFO: " . $response . PHP_EOL, FILE_APPEND);
+    try {
+        // Get full payment info from Mercado Pago
+        $payment = $paymentClient->get($paymentId);
 
-    if ($paymentData['status'] === 'approved') {
-        $externalReference = $paymentData['external_reference'] ?? null;
+        // Log the payment info
+        file_put_contents('mp_webhook_log.txt', date('Y-m-d H:i:s') . " - PAYMENT ID $paymentId: " . json_encode($payment) . PHP_EOL, FILE_APPEND);
 
-        if ($externalReference) {
-            // Update order status in the database
-            $selectedAddress = $data['payer']['address']['street_name'] ?? null;
+        if ($payment->status === 'approved') {
+            $externalReference = $payment->external_reference ?? null;
+            $selectedAddress = $payment->payer->address->street_name ?? null;
 
-            $orderId = $externalReference;
-            $sql = "UPDATE llx_commande SET fk_statut = 1, delivery_address = ? WHERE rowid = ?";
-            $stmt = $conn->prepare($sql);
-            $stmt->bind_param("si", $selectedAddress, $orderId);
-            $stmt->execute();
-            $stmt->close();
+            if ($externalReference && $selectedAddress) {
+                // Update order status and delivery address
+                $sql = "UPDATE llx_commande SET fk_statut = 1, delivery_address = ? WHERE rowid = ?";
+                $stmt = $conn->prepare($sql);
+                $stmt->bind_param("si", $selectedAddress, $externalReference);
+                $stmt->execute();
+                $stmt->close();
 
-            // decrease stock
+                // Fetch order details to update stock
+                $sqlDetails = "SELECT fk_product, qty FROM llx_commandedet WHERE fk_commande = ?";
+                $stmtDetails = $conn->prepare($sqlDetails);
+                $stmtDetails->bind_param("i", $externalReference);
+                $stmtDetails->execute();
+                $result = $stmtDetails->get_result();
 
-            $sqlDetails = "SELECT fk_product, qty FROM llx_commandedet WHERE fk_commande = ?";
-            $stmtDetails = $conn->prepare($sqlDetails);
-            $stmtDetails->bind_param("i", $orderId);
-            $stmtDetails->execute();
-            $result = $stmtDetails->get_result();
+                while ($row = $result->fetch_assoc()) {
+                    $productId = $row['fk_product'];
+                    $quantityOrdered = $row['qty'];
 
-            while ($row = $result->fetch_assoc()) {
-                $productId = $row['fk_product'];
-                $quantityOrdered = $row['qty'];
+                    if ($productId) {
+                        // Update product stock
+                        file_put_contents('mp_webhook_log.txt', "Updating stock for product $productId - qty $quantityOrdered" . PHP_EOL, FILE_APPEND);
 
-                if ($productId) {
-                    // Log for debug
-                    file_put_contents('mp_webhook_log.txt', "Updating stock for product $productId - qty $quantityOrdered" . PHP_EOL, FILE_APPEND);
-
-                    $sqlUpdateStock = "UPDATE llx_product SET stock = stock - ? WHERE rowid = ?";
-                    $stmtUpdate = $conn->prepare($sqlUpdateStock);
-                    $stmtUpdate->bind_param("ii", $quantityOrdered, $productId);
-                    $stmtUpdate->execute();
-                    $stmtUpdate->close();
+                        $sqlUpdateStock = "UPDATE llx_product SET stock = stock - ? WHERE rowid = ?";
+                        $stmtUpdate = $conn->prepare($sqlUpdateStock);
+                        $stmtUpdate->bind_param("ii", $quantityOrdered, $productId);
+                        $stmtUpdate->execute();
+                        $stmtUpdate->close();
+                    }
                 }
-            }
 
-            $stmtDetails->close();
+                $stmtDetails->close();
+            } else {
+                file_put_contents('mp_webhook_log.txt', "Missing externalReference or address." . PHP_EOL, FILE_APPEND);
+            }
         }
+    } catch (Exception $e) {
+        file_put_contents('mp_webhook_log.txt', "Exception: " . $e->getMessage() . PHP_EOL, FILE_APPEND);
     }
 }
 
