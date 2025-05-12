@@ -72,9 +72,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <title>Mudar endereço</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <link rel="stylesheet" type="text/css" href="css/user_register.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/cleave.js/1.6.0/cleave.min.js"></script>
+    <style>
+        /* Override the CSS variables with PHP values */
+        :root {
+            --margin: 30% auto;
+            html,
+            body {
+                overflow: hidden;
+            }
+        }
+    </style>
 </head>
 
 <body>

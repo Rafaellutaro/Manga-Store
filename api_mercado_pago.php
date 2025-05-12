@@ -30,8 +30,8 @@ $userData = $resultUser->fetch_assoc();
 $stmtUser->close();
 
 // SQL query to insert the order
-$sqlOrder = "INSERT INTO llx_commande (ref, fk_soc, date_creation, date_commande, fk_user_author, fk_statut, total_ht, entity)
-                 VALUES (?, ?, NOW(), NOW(), ?, ?, ?, ?)";
+$sqlOrder = "INSERT INTO llx_commande (ref, fk_soc, date_creation, date_commande, fk_user_author, fk_statut, total_ht, entity, delivery_address)
+                 VALUES (?, ?, NOW(), NOW(), ?, ?, ?, ?, ?)";
     $stmt = $conn->prepare($sqlOrder);
     $stmt->execute([
         $order_ref,
@@ -39,7 +39,8 @@ $sqlOrder = "INSERT INTO llx_commande (ref, fk_soc, date_creation, date_commande
         1,
         0,
         0,
-        1
+        1,
+        $selected_address
     ]);
 
 $orderId = $stmt->insert_id;

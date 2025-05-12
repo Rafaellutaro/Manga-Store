@@ -64,7 +64,7 @@
 }
 
 #user h4{
-    width: 20%;
+    width: 50%;
     font-size: 25px;
     margin-top: 11px;
 }
@@ -168,3 +168,51 @@
 .item{
     width: 35%;
 }
+
+#user .sub_container{
+    max-height: 1000vh; /* or however tall you want it */
+    width: 100%;
+    overflow-y: auto;
+    padding-right: 10px; /* prevents scrollbar from overlapping content */
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* spacing between product entries */
+}
+
+.product-entry {
+    display: flex;
+    width: 100%;
+    gap: 20px;
+    background-color: #ccc;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+#user .sub_container .text_bought {
+    display: flex;
+    flex-direction: column; /* stack items vertically */
+    gap: 10px;
+    width: 100%;
+    margin-top: 3%;
+    margin-left: 1.5%;
+    overflow-y: auto;
+}
+
+#user .sub_container .text_bought a {
+    display: block;
+    width: 10%; /* or whatever width you want for the image block */
+    margin-right: 20px;
+}
+
+#user .sub_container .text_bought .product-image {
+    width: 100%;
+    border-radius: 10px;
+    display: block;
+    border: #ccc solid 3px;
+}
+
+.product-details {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}   

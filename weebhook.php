@@ -31,13 +31,12 @@ if (isset($data['type']) && $data['type'] === 'payment' && isset($data['data']['
         if ($payment->status === 'approved') {
             
             $externalReference = $payment->external_reference ?? null;
-            $selectedAddress = $payment->additional_info->payer->address->street_name ?? null;
 
-            if ($externalReference && $selectedAddress) {
+            if ($externalReference) {
                 // Update order status and delivery address
-                $sql = "UPDATE llx_commande SET fk_statut = 1, delivery_address = ? WHERE rowid = ?";
+                $sql = "UPDATE llx_commande SET fk_statut = 1 WHERE rowid = ?";
                 $stmt = $conn->prepare($sql);
-                $stmt->bind_param("si", $selectedAddress, $externalReference);
+                $stmt->bind_param("i", $externalReference);
                 $stmt->execute();
                 $stmt->close();
 

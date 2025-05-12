@@ -12,9 +12,34 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
+    function switchOff(details) {
+        switch (details) {
+            case 'contadetails':
+                enderecoDetails.style.display = 'none';
+                boughtDetails.style.display = 'none';
+                break;
+            case 'enderecodetails':
+                contaDetails.style.display = 'none';
+                boughtDetails.style.display = 'none';
+                break;
+            case 'boughtProductsDetails':
+                contaDetails.style.display = 'none';
+                enderecoDetails.style.display = 'none';
+                break;
+            default:
+                contaDetails.style.display = 'none';
+                enderecoDetails.style.display = 'none';
+                boughtDetails.style.display = 'none';
+        }
+
+    }
+
     // Get references to the labels and details containers
     const contaLabel = document.getElementById('contalabel');
     const contaDetails = document.getElementById('contadetails');
+
+    const boughtLabel = document.getElementById('boughtProductsLabel');
+    const boughtDetails = document.getElementById('boughtProductsDetails');
 
     const enderecoLabel = document.getElementById('enderecolabel');
     const enderecoDetails = document.getElementById('enderecodetails');
@@ -22,18 +47,25 @@ document.addEventListener('DOMContentLoaded', function () {
     // Initially hide the details containers
     contaDetails.style.display = 'none';
     enderecoDetails.style.display = 'none';
+    boughtDetails.style.display = 'true';
 
     // Add click event listeners to the labels
     contaLabel.addEventListener('click', () => {
         toggleSection(contaLabel, contaDetails);
         // Hide other sections
-        enderecoDetails.style.display = 'none';
+        switchOff('contadetails');
     });
 
     enderecoLabel.addEventListener('click', () => {
         toggleSection(enderecoLabel, enderecoDetails);
         // Hide other sections
-        contaDetails.style.display = 'none';
+        switchOff('enderecodetails');
+    });
+
+    boughtLabel.addEventListener('click', () => {
+        toggleSection(boughtLabel, boughtDetails);
+        // Hide other sections
+        switchOff('boughtProductsDetails');
     });
 
 });
