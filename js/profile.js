@@ -45,9 +45,9 @@ document.addEventListener('DOMContentLoaded', function () {
     const enderecoDetails = document.getElementById('enderecodetails');
 
     // Initially hide the details containers
-    contaDetails.style.display = 'none';
+    contaDetails.style.display = 'true';
     enderecoDetails.style.display = 'none';
-    boughtDetails.style.display = 'true';
+    boughtDetails.style.display = 'none';
 
     // Add click event listeners to the labels
     contaLabel.addEventListener('click', () => {

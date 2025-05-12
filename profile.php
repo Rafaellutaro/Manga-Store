@@ -155,7 +155,6 @@
                     <div class="text">
                         <h4>Produtos Comprados</h4>
                         <div class="text_bought">
-
                             <?php
                             if ($boughtMangas->num_rows <= 0) {
                                 echo "<h1>Você ainda não comprou nada</h1>";
@@ -189,18 +188,19 @@
                                         $img = "https://" . $_SERVER['HTTP_HOST'] . "/img/" . $row_product_final["filepath"] . "/" . $row_product_final["filename"];
                                         $url = $row_product_final["url"];
 
-
-                                        echo "<div class='product-entry'>";
-                                        echo "<a href='sproduct.php?url=$url'>";
-                                        echo "<img src='" . $img . "' alt='Product Image' class='product-image'>";
-                                        echo "</a>";
-                                        echo "<div class='product-details'>";
-                                        echo "<div>ID: $ref</div>";
-                                        echo "<div>Status do pedido: " . setStatus($fk_statut) . "</div>";
-                                        echo "<div>Dia da compra: $date_commande</div>";
-                                        echo "<div>Endereço de entrega: $delivery_address</div>";
+                                        echo "<div class='product-entry-container' onclick=\"window.location.href='#?id=$commandeId'\">";
+                                        echo "  <div class='product-entry'>";
+                                        echo "    <a href='sproduct.php?url=$url' onclick=\"event.stopPropagation();\">";
+                                        echo "      <img src='" . $img . "' alt='Product Image' class='product-image'>";
+                                        echo "    </a>";
+                                        echo "    <div class='product-details'>";
+                                        echo "      <div>ID: $ref</div>";
+                                        echo "      <div>Status do pedido: " . setStatus($fk_statut) . "</div>";
+                                        echo "      <div>Dia da compra: $date_commande</div>";
+                                        echo "      <div>Endereço de entrega: $delivery_address</div>";
+                                        echo "    </div>";
+                                        echo "  </div>";
                                         echo "</div>";
-                                        echo "</div>"; // close product-entry
                                     }
                                 }
                             }

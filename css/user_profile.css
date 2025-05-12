@@ -188,6 +188,11 @@
     border-radius: 10px;
 }
 
+.product-entry:hover {
+  background-color: #e0e0e0; /* Change background color on hover */
+  cursor: pointer;
+}
+
 #user .sub_container .text_bought {
     display: flex;
     flex-direction: column; /* stack items vertically */
