@@ -58,11 +58,12 @@ function sendPasswordResetEmail($userEmail, $resetCode)
 
         // Email content
         $mail->isHTML(true);
+        $mail->CharSet = 'UTF-8';
         $mail->Subject = 'Pedido de troca de senha';
         $mail->Body    = '
                         <p>Olá,</p>
                         <p>Você solicitou uma troca de senha para a sua conta. Clique no link abaixo para iniciar o processo. Lembre-se, você tem 30 minutos até que o código expire.</p>
-                        <p><a href="https://' . $_SERVER['HTTP_HOST'] . '/reset_password.php?code=' . $resetCode . '">Trocar senha</a></p>
+                        <p><a href="https://' . $_SERVER['HTTP_HOST'] . '/manga/reset_password.php?code=' . $resetCode . '">Trocar senha</a></p>
                         <p>Caso você não tenha feito essa solicitação, você pode ignorá-la. Caso ache que a sua conta esteja em perigo, entre em contato com o <a href="https://' . $_SERVER['HTTP_HOST'] . '/manga/contact.php">Suporte ao Cliente</a>.</p>
                         <p>Atenciosamente,</p>
                         <p>本屋くん</p>
