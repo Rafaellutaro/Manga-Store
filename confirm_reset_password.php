@@ -54,20 +54,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <body>
     <?php
-    if (isset($SESSIONS['confirm'])) {
+    if (isset($_SESSION['confirm'])) {
         $confirm = $_SESSION['confirm'];
         unset($_SESSION['confirm']);
     }
 
     if ($confirm == "correct") {
-        echo "<script>showToast('" . "Sua senha foi alterada com sucesso", "success" . "');</script>";
+        echo "<script>showToast('A sua senha foi atualizada com sucesso', 'success');</script>";
         echo "A sua senha foi alterada com sucesso. Você será redirecionado para a página inicial em 5 segundos.";
         echo "<script>setTimeout(function(){ window.location.href = 'index.php'; }, 5000);</script>";
     }else if ($confirm == "error") {
-        echo "<script>showToast('" . "Houve um erro ao alterar a sua senha", "error" . "');</script>";
+        echo "<script>showToast('Problemas de atualização', 'error');</script>";
         echo "Houve um erro ao alterar a sua senha. Tente novamente mais tarde.";
     }else {
-        echo "<script>showToast('" . "Houve um erro ao alterar a sua senha", "error" . "');</script>";
+        echo "<script>showToast('Houve um erro em alterar a sua senha', 'error');</script>";
         echo "Houve um erro ao alterar a sua senha. Tente novamente mais tarde.";
     }
     ?>

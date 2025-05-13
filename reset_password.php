@@ -86,13 +86,13 @@ if (isset($_GET["code"])) {
         </section>
     <?php
     } else if ($verify == "expired"){
-         echo "<script>showToast('" . "Seu codigo expirou", "error" . "');</script>";
+         echo "<script>showToast('Seu código expirou', 'error');</script>";
          echo "Demorou demais, o código expirou. Você pode solicitar um novo código de troca de senha.";
-         echo "<script>setTimeout(function(){ window.location.href = 'index.php'; }, 3000);</script>";
+         echo "<script>setTimeout(function(){ window.location.href = 'index.php'; }, 10000);</script>";
     } else{
-        echo "<script>showToast('" . "Seu código é invalido", "error" . "');</script>";
+        echo "<script>showToast('Seu código é inválido', 'error');</script>";
         echo "Seu código é invalido. Você pode solicitar um novo código de troca de senha.";
-        echo "<script>setTimeout(function(){ window.location.href = 'index.php'; }, 3000);</script>";
+        echo "<script>setTimeout(function(){ window.location.href = 'index.php'; }, 10000);</script>";
     }
     ?>
 
