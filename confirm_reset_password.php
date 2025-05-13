@@ -31,7 +31,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             header("Location: confirm_reset_password.php");
             exit; // Important to exit after redirect
         } else {
-            echo "Houve problemas em alterar a sua senha";
+            $_SESSION["confirm"] = "error";
+            header("Location: confirm_reset_password.php");
         }
     } else {
         $_SESSION["errors"] = $errors;
@@ -60,12 +61,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($confirm == "correct") {
         echo "<script>showToast('" . "Sua senha foi alterada com sucesso", "success" . "');</script>";
-        echo "A sua senha foi alterada com sucesso. Você será redirecionado para a página inicial em 3 segundos.";
-        echo "<script>setTimeout(function(){ window.location.href = 'index.php'; }, 3000);</script>";
+        echo "A sua senha foi alterada com sucesso. Você será redirecionado para a página inicial em 5 segundos.";
+        echo "<script>setTimeout(function(){ window.location.href = 'index.php'; }, 5000);</script>";
+    }else if ($confirm == "error") {
+        echo "<script>showToast('" . "Houve um erro ao alterar a sua senha", "error" . "');</script>";
+        echo "Houve um erro ao alterar a sua senha. Tente novamente mais tarde.";
     }else {
         echo "<script>showToast('" . "Houve um erro ao alterar a sua senha", "error" . "');</script>";
-        echo "Houve um erro ao alterar a sua senha. Você será redirecionado para a página inicial em 3 segundos.";
-        echo "<script>setTimeout(function(){ window.location.href = 'index.php'; }, 3000);</script>";
+        echo "Houve um erro ao alterar a sua senha. Tente novamente mais tarde.";
     }
     ?>
 </body>

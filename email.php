@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $resetCode = bin2hex(random_bytes(5)); // Generate a random code
 
         // Store the reset code in the database (with expiration)
-        $stmt = $conn->prepare("UPDATE llx_societe SET reset_code = ?, reset_expires_at = NOW() + INTERVAL 30 MINUTE WHERE rowid = ?");
+        $stmt = $conn->prepare("UPDATE llx_societe SET reset_code = ?, reset_expires_at = NOW() + INTERVAL 5 MINUTE WHERE rowid = ?");
         $stmt->bind_param("si", $resetCode, $user_id);
         $stmt->execute();
 
