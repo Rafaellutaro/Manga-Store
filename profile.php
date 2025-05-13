@@ -166,11 +166,13 @@
                                 $date_commande = $row["date_commande"];
                                 $fk_soc = $row["fk_soc"];
                                 $fk_statut = $row["fk_statut"];
+                                $fk_statut = setStatus($fk_statut);
                                 $delivery_address = $row["delivery_address"];
 
                                 $sql_product = "SELECT llx_commandedet.fk_product
                                 FROM llx_commandedet
-                                WHERE llx_commandedet.fk_commande = $commandeId";
+                                WHERE llx_commandedet.fk_commande = $commandeId
+                                LIMIT 1";
                                 $result_product = $conn->query($sql_product);
 
                                 while ($row_product = $result_product->fetch_assoc()) {
@@ -188,19 +190,21 @@
                                         $img = "https://" . $_SERVER['HTTP_HOST'] . "/img/" . $row_product_final["filepath"] . "/" . $row_product_final["filename"];
                                         $url = $row_product_final["url"];
 
-                                        echo "<div class='product-entry-container' onclick=\"window.location.href='#?id=$commandeId'\">";
+                                        echo " <form action='orderDetails.php' method='post' class='product-entry-container' onclick = 'this.submit()'>";
+                                        echo "<input type='hidden' name='commandeId' value='$commandeId'>";
+                                        echo "<input type='hidden' name='fk_statut' value='$fk_statut'>";
                                         echo "  <div class='product-entry'>";
-                                        echo "    <a href='sproduct.php?url=$url' onclick=\"event.stopPropagation();\">";
+                                        echo "    <a href='sproduct.php?url=$url'>";
                                         echo "      <img src='" . $img . "' alt='Product Image' class='product-image'>";
                                         echo "    </a>";
                                         echo "    <div class='product-details'>";
                                         echo "      <div>ID: $ref</div>";
-                                        echo "      <div>Status do pedido: " . setStatus($fk_statut) . "</div>";
+                                        echo "      <div>Status do pedido: $fk_statut</div>";
                                         echo "      <div>Dia da compra: $date_commande</div>";
                                         echo "      <div>Endereço de entrega: $delivery_address</div>";
                                         echo "    </div>";
                                         echo "  </div>";
-                                        echo "</div>";
+                                        echo "</form>";
                                     }
                                 }
                             }
