@@ -4,10 +4,11 @@ Trying to create a online book store with only mangas as products.
 
 ## TODO
 
-- [] Allow the user to add more addresses
-- [] Register the bought product in the database
+- [X] Make the website public
+- [X] Allow the user to add more addresses
+- [X] Register the bought product in the database
 - [] Function to refund products
-- [] page to show currently bought products
+- [X] page to show currently bought products
 - [] page to show desired products
 - [] create newsletter 
 - [] fix the hrefs in the bellow banner
