@@ -27,7 +27,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->execute();
 
         if ($stmt->affected_rows > 0) {
-            header("Location: confirm_reset_password.php?confirm=correct");
+            $_SESSION["confirm"] = "correct";
+            header("Location: confirm_reset_password.php");
             exit; // Important to exit after redirect
         } else {
             echo "Houve problemas em alterar a sua senha";
@@ -52,8 +53,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <body>
     <?php
-    if (isset($_GET["confirm"]) && $_GET["confirm"] === "correct") {
-        echo "<p>Sua senha foi alterada com sucesso</p>";
+    if (isset($SESSIONS['confirm'])) {
+        $confirm = $_SESSION['confirm'];
+        unset($_SESSION['confirm']);
+    }
+
+    if ($confirm == "correct") {
+        echo "<script>showToast('" . "Sua senha foi alterada com sucesso", "success" . "');</script>";
+        echo "A sua senha foi alterada com sucesso. Você será redirecionado para a página inicial em 3 segundos.";
+        echo "<script>setTimeout(function(){ window.location.href = 'index.php'; }, 3000);</script>";
+    }else {
+        echo "<script>showToast('" . "Houve um erro ao alterar a sua senha", "error" . "');</script>";
+        echo "Houve um erro ao alterar a sua senha. Você será redirecionado para a página inicial em 3 segundos.";
+        echo "<script>setTimeout(function(){ window.location.href = 'index.php'; }, 3000);</script>";
     }
     ?>
 </body>

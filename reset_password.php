@@ -19,11 +19,13 @@ if (isset($_GET["code"])) {
 
         if ($now < $expire_date) {
             $_SESSION["code"] = $code;
+            $_SESSION["verify"] = "correct";
             
-            header("Location: reset_password.php?verify=correct");
+            header("Location: reset_password.php");
             exit;
         }else{
-            header("Location: reset_password.php?verify=expired");
+            $_SESSION["verify"] = "expired";
+            header("Location: reset_password.php");
             exit;
         }
     }
@@ -47,14 +49,20 @@ if (isset($_GET["code"])) {
     <?php
     if(isset($_SESSION["code"])){
         $code = $_SESSION["code"];
+        unset($_SESSION["code"]);
     }
 
-    if (isset($_SESSION['errors'])) {
-        $errors = $_SESSION['errors'];
-        unset($_SESSION['errors']);
+    if (isset($_SESSION["errors"])) {
+        $errors = $_SESSION["errors"];
+        unset($_SESSION["errors"]);
     }
 
-    if (isset($_GET["verify"]) && $_GET["verify"] === "correct") {
+    if (isset($_SESSION["verify"])) {
+        $verify = $_SESSION["verify"];
+        unset($_SESSION["verify"]);
+    }
+
+    if ($verify == "correct") {
     ?>
         <section id="details">
             <form action="confirm_reset_password.php" method="POST">
@@ -77,10 +85,14 @@ if (isset($_GET["code"])) {
             </form>
         </section>
     <?php
-    } else if (isset($_GET["verify"]) && $_GET["verify"] === "expired"){
-        echo "Seu codigo expirou";
+    } else if ($verify == "expired"){
+         echo "<script>showToast('" . "Seu codigo expirou", "error" . "');</script>";
+         echo "Demorou demais, o código expirou. Você pode solicitar um novo código de troca de senha.";
+         echo "<script>setTimeout(function(){ window.location.href = 'index.php'; }, 3000);</script>";
     } else{
-        echo "Seu codigo é invalido";
+        echo "<script>showToast('" . "Seu código é invalido", "error" . "');</script>";
+        echo "Seu código é invalido. Você pode solicitar um novo código de troca de senha.";
+        echo "<script>setTimeout(function(){ window.location.href = 'index.php'; }, 3000);</script>";
     }
     ?>
 
