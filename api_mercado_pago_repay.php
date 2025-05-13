@@ -41,6 +41,14 @@ $result = $stmt->get_result();
 
 $items = [];
 while ($item = $result->fetch_assoc()) {
+    $stock = $item['stock'];
+
+    if ($stock <= 0) {
+        $_SESSION['error_message'] = "Produto {$item['label']} fora de estoque.";
+        header("Location: index.php");
+        exit;
+    }
+    
     $items[] = [
         "id" => $item['id'],
         "title" => $item['label'],

@@ -4,7 +4,7 @@ include_once 'header.php';
 include_once "product_box.php";
 
 if (isset($_SESSION['error_message'])) {
-    echo "<script>alert('" . $_SESSION['error_message'] . "');</script>";
+    echo "<script>showToast('" . $_SESSION['error_message'], "error" . "');</script>";
     unset($_SESSION['error_message']);
 }
 

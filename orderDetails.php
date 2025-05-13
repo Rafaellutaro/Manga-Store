@@ -44,8 +44,8 @@
                             $result_product_final = $conn->query($sql_product_final);
 
                             while ($row_product_final = $result_product_final->fetch_assoc()) {
-                                $img = "http://$dbhost/img/" . $row_product_final["filepath"] . "/" . $row_product_final["filename"];
-                                //$img = "https://" . $_SERVER['HTTP_HOST'] . "/img/" . $row_product_final["filepath"] . "/" . $row_product_final["filename"];
+                                //$img = "http://$dbhost/img/" . $row_product_final["filepath"] . "/" . $row_product_final["filename"];
+                                $img = "https://" . $_SERVER['HTTP_HOST'] . "/img/" . $row_product_final["filepath"] . "/" . $row_product_final["filename"];
                                 $url = $row_product_final["url"];
                                 $nome = $row_product["label"];
                                 $price = $row_product["subprice"];
