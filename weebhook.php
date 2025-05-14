@@ -29,7 +29,7 @@ if (isset($data['type']) && $data['type'] === 'payment' && isset($data['data']['
         file_put_contents('mp_webhook_log.txt', date('Y-m-d H:i:s') . " - PAYMENT ID $paymentId: " . json_encode($payment) . PHP_EOL, FILE_APPEND);
 
         if ($payment->status === 'approved') {
-            
+
             $externalReference = $payment->external_reference ?? null;
 
             if ($externalReference) {
@@ -70,6 +70,9 @@ if (isset($data['type']) && $data['type'] === 'payment' && isset($data['data']['
         }
     } catch (Exception $e) {
         file_put_contents('mp_webhook_log.txt', "Exception: " . $e->getMessage() . PHP_EOL, FILE_APPEND);
+
+        // Log full trace just in case
+        file_put_contents('mp_webhook_log.txt', "Trace: " . $e->getTraceAsString() . PHP_EOL, FILE_APPEND);
     }
 }
 
