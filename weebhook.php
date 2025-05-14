@@ -1,6 +1,8 @@
 <?php
+session_start();
 include_once 'connection.php';
 include_once 'order_utils.php';
+require_once 'vendor/autoload.php';
 
 use MercadoPago\MercadoPagoConfig;
 use MercadoPago\Client\Payment\PaymentClient;
@@ -8,8 +10,6 @@ use MercadoPago\Client\Payment\PaymentClient;
 
 // Set your Mercado Pago access token
 MercadoPagoConfig::setAccessToken("TEST-7044352387989428-022013-88e564687f1086f98eef38226c079b2a-1201195997");
-
-require_once 'vendor/autoload.php';
 
 $rawInput = file_get_contents('php://input');
 $data = json_decode($rawInput, true);
