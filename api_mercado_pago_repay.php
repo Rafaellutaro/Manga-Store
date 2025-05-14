@@ -29,7 +29,7 @@ $userData = $result->fetch_assoc();
 $stmt->close();
 
 // 3. Fetch line items for the order
-$sql = "SELECT p.rowid AS id, p.label, f.filepath, f.filename, cd.qty, cd.subprice
+$sql = "SELECT p.rowid AS id, p.label, p.stock, f.filepath, f.filename, cd.qty, cd.subprice
         FROM llx_commandedet cd
         JOIN llx_product p ON cd.fk_product = p.rowid
         JOIN llx_ecm_files f ON p.rowid = f.src_object_id
