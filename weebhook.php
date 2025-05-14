@@ -17,7 +17,7 @@ if (isset($data['type']) && $data['type'] === 'payment' && isset($data['data']['
     $paymentId = $data['data']['id'];
 
     // Set your Mercado Pago access token
-    MercadoPagoConfig::setAccessToken("TEST-7044352387989428-022013-88e564687f1086f98eef38226c079b2a-1201195997");
+    MercadoPagoConfig::setAccessToken("TEST-833496997971285-051417-d8bdcea6415385b019f549ad1e7d720b-1201195997");
 
     $paymentClient = new PaymentClient();
 
