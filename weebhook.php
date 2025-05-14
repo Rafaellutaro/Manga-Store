@@ -9,7 +9,7 @@ use MercadoPago\Client\Payment\PaymentClient;
 
 
 // Set your Mercado Pago access token
-MercadoPagoConfig::setAccessToken("TEST-7044352387989428-022013-88e564687f1086f98eef38226c079b2a-1201195997");
+MercadoPagoConfig::setAccessToken("TEST-5518846108519553-051415-51ceb522256d681a7fd0bd8b3bdfee2f-1201195997");
 
 $rawInput = file_get_contents('php://input');
 $data = json_decode($rawInput, true);
