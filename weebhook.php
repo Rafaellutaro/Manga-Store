@@ -21,8 +21,6 @@ if (isset($data['type']) && $data['type'] === 'payment' && isset($data['data']['
     $paymentClient = new PaymentClient();
 
     try {
-        // Get full payment info from Mercado Pago
-        file_put_contents('mp_webhook_log.txt', date('Y-m-d H:i:s') . " - PAYMENT Client $paymentClient: " . json_encode($paymentClient) . PHP_EOL, FILE_APPEND);
         $payment = $paymentClient->get($paymentId);
 
         // Log the payment info
