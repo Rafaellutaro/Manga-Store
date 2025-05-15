@@ -8,9 +8,6 @@ use MercadoPago\MercadoPagoConfig;
 use MercadoPago\Client\Payment\PaymentClient;
 
 
-// Set your Mercado Pago access token
-MercadoPagoConfig::setAccessToken("TEST-7044352387989428-022013-88e564687f1086f98eef38226c079b2a-1201195997");
-
 $rawInput = file_get_contents('php://input');
 $data = json_decode($rawInput, true);
 
@@ -19,6 +16,9 @@ file_put_contents('mp_webhook_log.txt', date('Y-m-d H:i:s') . " - RAW: " . $rawI
 
 if (isset($data['type']) && $data['type'] === 'payment' && isset($data['data']['id'])) {
     $paymentId = $data['data']['id'];
+
+    // Set your Mercado Pago access token
+    MercadoPagoConfig::setAccessToken("TEST-7044352387989428-022013-88e564687f1086f98eef38226c079b2a-1201195997");
 
     $paymentClient = new PaymentClient();
 
