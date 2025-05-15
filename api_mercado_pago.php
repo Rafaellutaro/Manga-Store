@@ -101,20 +101,20 @@ $preference = $client->create([
 ),
 "expires" => false,
 "items" => $items,
-"payer" => array(
-    "name" => $userData['nom'],
-    "email" => $userData['email'],
-    "phone" => array(
-        "number" => $userData['phone'],
-    ),
-    "identification" => array(
-        "type" => "CPF",
-        "number" => $userData['idprof4'],
-    ),
-    "address" => array(
-        "street_name" => $selected_address,
-    )
-),
+// "payer" => array(
+//     "name" => $userData['nom'],
+//     "email" => $userData['email'],
+//     "phone" => array(
+//         "number" => $userData['phone'],
+//     ),
+//     "identification" => array(
+//         "type" => "CPF",
+//         "number" => $userData['idprof4'],
+//     ),
+//     "address" => array(
+//         "street_name" => $selected_address,
+//     )
+// ),
     ]);
 
 //echo json_encode($preference, JSON_PRETTY_PRINT);

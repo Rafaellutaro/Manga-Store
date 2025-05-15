@@ -72,20 +72,20 @@ $preference = $client->create([
     "external_reference" => $orderId,
     "expires" => false,
     "items" => $items,
-    "payer" => [
-        "name" => $userData['nom'],
-        "email" => $userData['email'],
-        "phone" => [
-            "number" => $userData['phone']
-        ],
-        "identification" => [
-            "type" => "CPF",
-            "number" => $userData['idprof4']
-        ],
-        "address" => [
-            "street_name" => $userData['delivery_address']
-        ]
-    ]
+    // "payer" => [
+    //     "name" => $userData['nom'],
+    //     "email" => $userData['email'],
+    //     "phone" => [
+    //         "number" => $userData['phone']
+    //     ],
+    //     "identification" => [
+    //         "type" => "CPF",
+    //         "number" => $userData['idprof4']
+    //     ],
+    //     "address" => [
+    //         "street_name" => $userData['delivery_address']
+    //     ]
+    // ]
 ]);
 
 $initPoint = $preference->init_point;
