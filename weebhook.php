@@ -1,11 +1,10 @@
 <?php
-
 include_once 'connection.php';
-require_once 'vendor/autoload.php';
 
 use MercadoPago\MercadoPagoConfig;
 use MercadoPago\Client\Payment\PaymentClient;
 
+require_once 'vendor/autoload.php';
 
 $rawInput = file_get_contents('php://input');
 $data = json_decode($rawInput, true);
