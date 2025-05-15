@@ -8,12 +8,12 @@ use MercadoPago\MercadoPagoConfig;
 use MercadoPago\Client\Preference\PreferenceClient;
 
 
-MercadoPagoConfig::setAccessToken("TEST-5518846108519553-051415-51ceb522256d681a7fd0bd8b3bdfee2f-1201195997");
+MercadoPagoConfig::setAccessToken("TEST-7044352387989428-022013-88e564687f1086f98eef38226c079b2a-1201195997");
 
 // Get the selected address from the POST request
 $selected_address = $_POST['selected_address'] ?? null;
 
-if (!$selectedAddress) {
+if (!$selected_address) {
     error_log("Endereço não selecionado.");
 }
 

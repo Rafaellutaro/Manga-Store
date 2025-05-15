@@ -9,7 +9,7 @@ use MercadoPago\Client\Payment\PaymentClient;
 
 
 // Set your Mercado Pago access token
-MercadoPagoConfig::setAccessToken("TEST-5518846108519553-051415-51ceb522256d681a7fd0bd8b3bdfee2f-1201195997");
+MercadoPagoConfig::setAccessToken("TEST-7044352387989428-022013-88e564687f1086f98eef38226c079b2a-1201195997");
 
 $rawInput = file_get_contents('php://input');
 $data = json_decode($rawInput, true);
@@ -24,6 +24,7 @@ if (isset($data['type']) && $data['type'] === 'payment' && isset($data['data']['
 
     try {
         // Get full payment info from Mercado Pago
+        file_put_contents('mp_webhook_log.txt', date('Y-m-d H:i:s') . " - PAYMENT Client $paymentClient: " . json_encode($paymentClient) . PHP_EOL, FILE_APPEND);
         $payment = $paymentClient->get($paymentId);
 
         // Log the payment info
@@ -71,9 +72,6 @@ if (isset($data['type']) && $data['type'] === 'payment' && isset($data['data']['
         }
     } catch (Exception $e) {
         file_put_contents('mp_webhook_log.txt', "Exception: " . $e->getMessage() . PHP_EOL, FILE_APPEND);
-
-        // Log full trace just in case
-        file_put_contents('mp_webhook_log.txt', "Trace: " . $e->getTraceAsString() . PHP_EOL, FILE_APPEND);
     }
 }
 
