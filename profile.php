@@ -57,12 +57,10 @@
 
     <section id="user">
         <div class="user_box">
-            <span>Acompanhe aqui todas as informaçoes sobre seu perfil.</span>
-
             <div class="user_label" id="contalabel">
                 <a class="icon_u"><i class="fa-solid fa-user"></i></a>
                 <div class="text_container">
-                    <h3>Conta</h3>
+                    <h3> Minha Conta</h3>
                     <p>Suas informações cadastrais</p>
                 </div>
             </div>
@@ -108,7 +106,7 @@
             </div>
 
             <div class="user_label" id="sair_label">
-                <a class="icon_u"><i class="fa-solid fa-heart-crack"></i></a>
+                <a class="icon_u"><i class="fa-solid fa-right-from-bracket"></i></a>
                 <div class="text_container">
                     <h3>Sair</h3>
                     <p>Deslogue de sua conta</p>
@@ -119,41 +117,54 @@
 
         <div class="result" id="contadetails">
             <div class="result_container">
-
                 <a class="icon_y"><i class="fa-solid fa-user"></i></a>
                 <div class="text">
-                    <h4>Conta</h4>
-                    <h1>Nome</h1>
-                    <a class="item"><?php echo $user_data["nom"] ?></a>
+                    <h4>Minha Conta</h4>
+                    <hr>
 
-                    <h1>Telefone</h1>
-                    <a class="item"><?php echo $user_data["phone"] ?></a>
+                    <div class="info-grid">
+                        <div class="info-group">
+                            <h1>Nome</h1>
+                            <a class="item"><?php echo $user_data["nom"] ?></a>
+                        </div>
 
-                    <h1>CPF</h1>
-                    <a class="item"><?php echo $user_data["idprof4"] ?></a>
+                        <div class="info-group">
+                            <h1>Telefone</h1>
+                            <a class="item"><?php echo $user_data["phone"] ?></a>
+                        </div>
 
-                    <h1>Email</h1>
-                    <a class="item"><?php echo $user_data["email"] ?></a>
+                        <div class="info-group">
+                            <h1>CPF</h1>
+                            <a class="item"><?php echo $user_data["idprof4"] ?></a>
+                        </div>
 
-                    <h1>Data de nascimento</h5>
-                        <a class="item"><?php echo $user_data["idprof5"] ?></a>
+                        <div class="info-group">
+                            <h1>Email</h1>
+                            <a class="item"><?php echo $user_data["email"] ?></a>
+                        </div>
 
-                        <button type="submit" class="bt1">Alterar Dados</button>
+                        <div class="info-group">
+                            <h1>Data de nascimento</h1>
+                            <a class="item"><?php echo $user_data["idprof5"] ?></a>
+                        </div>
+                    </div>
 
-                        <form action="email.php" method="post">
-                            <button type="submit" class="bt2">Alterar Senha</button>
+                    <div class="button-group">
+                        <button type="submit" class="btn primary-btn">Alterar Dados</button>
+                        <form action="email.php" method="post" style="display: inline-flex;">
+                            <button type="submit" class="btn secondary-btn">Alterar Senha</button>
                         </form>
+                    </div>
                 </div>
             </div>
-
         </div>
 
         <div class="result" id="boughtProductsDetails">
             <div class="result_container">
-                <a class="icon_y"><i class="fa-solid fa-user"></i></a>
+                <a class="icon_y"><i class="fa-solid fa-box-open"></i></a>
                 <div class="sub_container">
                     <div class="text">
-                        <h4>Produtos Comprados</h4>
+                        <h4>Historico de compras</h4>
                         <div class="text_bought">
                             <?php
                             if ($boughtMangas->num_rows <= 0) {
@@ -186,7 +197,7 @@
                                     $result_product_final = $conn->query($sql_product_final);
 
                                     while ($row_product_final = $result_product_final->fetch_assoc()) {
-                                        //$img = "http://$dbhost/img/" . $row_product_final["filepath"] . "/" . $row_product_final["filename"];
+                                        // $img = "http://$dbhost/img/" . $row_product_final["filepath"] . "/" . $row_product_final["filename"];
                                         $img = "https://" . $_SERVER['HTTP_HOST'] . "/img/" . $row_product_final["filepath"] . "/" . $row_product_final["filename"];
                                         $url = $row_product_final["url"];
 
@@ -199,7 +210,7 @@
                                         echo "    </a>";
                                         echo "    <div class='product-details'>";
                                         echo "      <div>ID: $ref</div>";
-                                        echo "      <div>Status do pedido: $fk_statut</div>";
+                                        echo "      <b><div>Status do pedido: $fk_statut</div></b>";
                                         echo "      <div>Dia da compra: $date_commande</div>";
                                         echo "      <div>Endereço de entrega: $delivery_address</div>";
                                         echo "    </div>";
@@ -219,32 +230,41 @@
 
         <div class="result" id="enderecodetails">
             <div class="result_container">
-
                 <a class="icon_y"><i class="fa-solid fa-location-dot"></i></a>
                 <div class="text">
-                    <h4>Endereço</h4>
-                    <h1>Rua</h1>
-                    <a class="item"><?php echo $user_data["address"] ?></a>
+                    <h4>Endereços</h4>
+                    <hr>
+                    <div class="info-grid">
+                        <div class="info-group">
+                            <h1>Endereço</h1>
+                            <a class="item"><?php echo $user_data["address"] ?></a>
+                        </div>
 
-                    <h1>Cidade</h1>
-                    <a class="item"><?php echo $user_data["town"] ?> <?php echo $user_data["siren"] ?></a>
+                        <div class="info-group">
+                            <h1>Cidade</h1>
+                            <a class="item"><?php echo $user_data["town"] ?> <?php echo $user_data["siren"] ?></a>
+                        </div>
 
-                    <h1>Local</h1>
-                    <a class="item"><?php echo $user_data["fax"] ?></a>
+                        <div class="info-group">
+                            <h1>Complemento</h1>
+                            <a class="item"><?php echo $user_data["fax"] ?></a>
+                        </div>
 
-                    <h1>Cep</h5>
-                        <a class="item"><?php echo $user_data["zip"] ?></a>
+                        <div class="info-group">
+                            <h1>CEP</h1> <a class="item"><?php echo $user_data["zip"] ?></a>
+                        </div>
+                    </div>
 
+                    <div class="button-group">
                         <a href="change_address.php">
-                            <button type="submit" class="bt1">Alterar Endereço</button>
+                            <button type="button" class="btn primary-btn">Alterar Endereço</button>
                         </a>
-
                         <a href="add_new_address.php">
-                            <button type="submit" class="bt1">Adicionar Endereço</button>
+                            <button type="button" class="btn secondary-btn">Adicionar Endereço</button>
                         </a>
+                    </div>
                 </div>
             </div>
-
         </div>
     </section>
 
