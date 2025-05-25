@@ -13,7 +13,7 @@ MercadoPagoConfig::setAccessToken("TEST-833496997971285-051417-d8bdcea6415385b01
 // Get the selected address from the POST request
 $selected_address = $_POST['selected_address'] ?? null;
 
-if (!$selectedAddress) {
+if (!$selected_address) {
     error_log("Endereço não selecionado.");
 }
 

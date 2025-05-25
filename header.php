@@ -42,6 +42,10 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] === true) {
             </div>
 
             <a href="index.php"><img src="img/killua_logo.png" class="logo" alt="" height="100"></a>
+            <div class="header-titles">
+                <h2>Honkai</h2>
+                <h3>ほんかい書籍</h3>
+            </div>
 
             <div id="mobile-search-icon">
                 <span class="material-icons search-icon">search</span>
