@@ -48,12 +48,12 @@
 
                     <label for="nome">Nome:</label>
                     <label for="sobrenome">Sobrenome:</label>
-                    <input type="text" id="nome" name="nome" required maxlength="15" minlength="4" required
+                    <input type="text" id="nome" name="nome" required maxlength="15" minlength="3" required
                         <?php if (isset($errors['nome'])) {
                             echo 'class="error-unique" placeholder="' . $errors['nome'] . '"';
                         } ?>>
 
-                    <input type="text" id="sobrenome" name="sobrenome" required maxlength="40" minlength="7" required
+                    <input type="text" id="sobrenome" name="sobrenome" required maxlength="40" minlength="3" required
                         <?php if (isset($errors['sobrenome'])) {
                             echo 'class="error-unique" placeholder="' . $errors['sobrenome'] . '"';
                         } ?>>
@@ -114,7 +114,7 @@
                             <?php if (isset($errors['local'])) {
                                 echo 'class="error-unique" placeholder="' . $errors['local'] . '"';
                             } else {
-                                echo 'placeholder="Ex: Casa, Empresa..."';
+                                echo 'placeholder="Ex: Casa, Apartamento..."';
                             } ?>>
                     </div>
 

@@ -1,97 +1,72 @@
-document.addEventListener('DOMContentLoaded', function () {
-    // Function to toggle visibility of details container
-    function toggleSection(label, details) {
-        if (details.style.display === 'none' || details.style.display === '') {
-            details.style.animation = 'slideIn 0.3s ease-in-out';
-            details.style.display = 'block';
-            setTimeout(() => {
-                details.style.animation = '';
-            }, 300);
-        } else {
-            details.style.display = 'none';
-        }
+document.addEventListener("DOMContentLoaded", function () {
+  // Obter referências para os containers de detalhes
+  const contaDetails = document.getElementById("contadetails");
+  const enderecoDetails = document.getElementById("enderecodetails");
+  const boughtDetails = document.getElementById("boughtProductsDetails");
+
+  // Array de todas as seções de detalhes para fácil iteração
+  const allDetailSections = [contaDetails, enderecoDetails, boughtDetails];
+
+  // Obter referências para os rótulos da sidebar
+  const contaLabel = document.getElementById("contalabel");
+  const enderecoLabel = document.getElementById("enderecolabel");
+  const boughtLabel = document.getElementById("boughtProductsLabel");
+
+  // Array de todos os rótulos da sidebar
+  const allLabels = [contaLabel, enderecoLabel, boughtLabel];
+
+  // Função para mostrar uma seção específica e ocultar as outras
+  function showSection(targetDetailsElement, targetLabelElement) {
+    // 1. Ocultar todas as seções de detalhes e remover a classe 'active'
+    allDetailSections.forEach((section) => {
+      section.style.display = "none";
+    });
+    allLabels.forEach((label) => {
+      label.classList.remove("active"); // Remove a classe 'active' de todos os rótulos
+    });
+
+    // 2. Exibir a seção de detalhes alvo e adicionar a classe 'active'
+    if (targetDetailsElement) {
+      targetDetailsElement.style.animation = "slideIn 0.3s ease-in-out";
+      targetDetailsElement.style.display = "flex"; // Use 'flex' para corresponder ao seu CSS
+      setTimeout(() => {
+        targetDetailsElement.style.animation = "";
+      }, 300);
     }
 
-    function switchOff(details) {
-        switch (details) {
-            case 'contadetails':
-                enderecoDetails.style.display = 'none';
-                boughtDetails.style.display = 'none';
-                break;
-            case 'enderecodetails':
-                contaDetails.style.display = 'none';
-                boughtDetails.style.display = 'none';
-                break;
-            case 'boughtProductsDetails':
-                contaDetails.style.display = 'none';
-                enderecoDetails.style.display = 'none';
-                break;
-            default:
-                contaDetails.style.display = 'none';
-                enderecoDetails.style.display = 'none';
-                boughtDetails.style.display = 'none';
-        }
-
+    // 3. Adicionar a classe 'active' ao rótulo clicado
+    if (targetLabelElement) {
+      targetLabelElement.classList.add("active");
     }
+  }
 
-    // Get references to the labels and details containers
-    const contaLabel = document.getElementById('contalabel');
-    const contaDetails = document.getElementById('contadetails');
+  // Adicionar event listeners aos rótulos da sidebar
+  contaLabel.addEventListener("click", () => {
+    showSection(contaDetails, contaLabel);
+  });
 
-    const boughtLabel = document.getElementById('boughtProductsLabel');
-    const boughtDetails = document.getElementById('boughtProductsDetails');
+  enderecoLabel.addEventListener("click", () => {
+    showSection(enderecoDetails, enderecoLabel);
+  });
 
-    const enderecoLabel = document.getElementById('enderecolabel');
-    const enderecoDetails = document.getElementById('enderecodetails');
+  boughtLabel.addEventListener("click", () => {
+    showSection(boughtDetails, boughtLabel);
+  });
 
-    // Initially hide the details containers
-    contaDetails.style.display = 'true';
-    enderecoDetails.style.display = 'none';
-    boughtDetails.style.display = 'none';
-
-    // Add click event listeners to the labels
-    contaLabel.addEventListener('click', () => {
-        toggleSection(contaLabel, contaDetails);
-        // Hide other sections
-        switchOff('contadetails');
-    });
-
-    enderecoLabel.addEventListener('click', () => {
-        toggleSection(enderecoLabel, enderecoDetails);
-        // Hide other sections
-        switchOff('enderecodetails');
-    });
-
-    boughtLabel.addEventListener('click', () => {
-        toggleSection(boughtLabel, boughtDetails);
-        // Hide other sections
-        switchOff('boughtProductsDetails');
-    });
-
+  // Inicialmente, exibir a seção "Minha Conta" ao carregar a página
+  // e marcar o rótulo correspondente como ativo
+  showSection(contaDetails, contaLabel); // Inicia com "Minha Conta" aberta
 });
 
-// deslogar
+const logoutLabel = document.getElementById("sair_label");
 
-// Get reference to the logout label
-const logoutLabel = document.getElementById('sair_label');
-
-// Add a click event listener for logging out
-logoutLabel.addEventListener('click', () => {
-    // Send an AJAX request to a server-side script to perform logout
-    const xhr = new XMLHttpRequest();
-    xhr.open('GET', 'logout.php', true);
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-            // Redirect the user to a login page or a desired page after logout
-            window.location.href = 'user.php';
-        }
-    };
-    xhr.send();
+logoutLabel.addEventListener("click", () => {
+  const xhr = new XMLHttpRequest();
+  xhr.open("GET", "logout.php", true);
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState === 4 && xhr.status === 200) {
+      window.location.href = "user.php"; // Ou a página de login/home
+    }
+  };
+  xhr.send();
 });
-
-// deslogar
-
-
-
-
-
