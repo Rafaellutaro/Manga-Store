@@ -3,11 +3,6 @@ include_once 'connection.php';
 include_once 'header.php';
 include_once "product_box.php";
 
-if (isset($_SESSION['error_message'])) {
-    $error_message = $_SESSION['error_message'];
-    echo "<script>showToast('$error_message', 'error');</script>";
-    unset($_SESSION['error_message']);
-}
 
 $selectedMangaIDs = [3, 4, 5, 6, 7, 8, 9, 10, 11, 12]; // Example manga IDs
 $selectedMangaIDsString = implode(', ', $selectedMangaIDs);
@@ -106,13 +101,13 @@ $selectedMangas = $conn->query($sql);
     <script src="js/piscar.js"></script>
 
     <?php
-    include_once "bottom.php";
-
     if (isset($_SESSION['error_message'])) {
         $error_message = $_SESSION['error_message'];
         echo "<script>showToast('$error_message', 'error');</script>";
         unset($_SESSION['error_message']);
     }
+
+    include_once "bottom.php";
     ?>
 </body>
 

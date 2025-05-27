@@ -35,6 +35,16 @@ if ($search !== '') {
     $allproduct = $stmt->get_result();
     $stmt->close();
 
+    // Check if any products were found
+    if ($allproduct->num_rows < 1 && $totalProducts < 1) {
+        echo "<script>
+            alert('Nenhum produto encontrado para a pesquisa: " . htmlspecialchars($search, ENT_QUOTES) . "');
+            window.location.href = 'index.php';
+        </script>";
+        exit();
+    }
+
+
 } else {
     // No search: get total products count
     $totalProductsQuery = "SELECT COUNT(*) AS total FROM llx_product";
@@ -86,6 +96,7 @@ $productWidth = '250px'; // Set the desired width
     </section>
 
     <section id="manga" class="section-p1">
+        <span id="pao"></span>
 
         <div class="manga_box">
             <?php
