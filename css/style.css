@@ -2,6 +2,7 @@
 #lua {
   background: rgba(235, 238, 252, 0.4);
   background-image: url("../img/hisoka.png");
+  background-image: url("../img/banner04.jpg");
   background-size: cover;
   height: 60vh;
   width: 100%;
@@ -16,15 +17,26 @@
 
 #lua h4 {
   padding-bottom: 15px;
+  color: rgb(255, 255, 255);
+  text-shadow: 1px 1px 1px #088178;
 }
 
 #lua h1 {
   color: #088178;
-  text-shadow: 2px 2px 8px #e2e2e2;
+  /* -webkit-text-stroke: 0.4px #ccc; */
+  text-shadow: 1px 1px 3px #e2e2e2;
+}
+
+#lua p {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #fff;
+  text-shadow: 1px 1px 1px #088178;
 }
 
 #lua button {
   background-image: url("../img/button.png");
+  background-image: url("../img/green-brush.png");
   background-color: transparent;
   color: #088178;
   border: 0;
@@ -34,10 +46,15 @@
   font-weight: 700;
   font-size: 15px;
   transition: all 0.2s ease-in-out;
+  background-size: contain;
+  background-position: center;
+  background-size: 70%;
+  transform: scale(1.4);
+  filter: hue-rotate(70deg);
 }
 
 #lua button:hover {
-  transform: scale(1.1);
+  transform: scale(1.6);
 }
 
 #shop_lua {

@@ -42,7 +42,7 @@ $selectedMangas = $conn->query($sql);
 
     <section id="lua">
         <a href="shop.php" class="banner-to-shop">
-            <h4>Killua Adverte</h4>
+            <h4>Honkai Adverte</h4>
             <h1>Melhores Preços Nos</h1>
             <h1>Seus Mangás Favoritos</h1>
             <p>Venha comprar com a gente</p>
@@ -109,10 +109,10 @@ $selectedMangas = $conn->query($sql);
     include_once "bottom.php";
 
     if (isset($_SESSION['error_message'])) {
-    $error_message = $_SESSION['error_message'];
-    echo "<script>showToast('$error_message', 'error');</script>";
-    unset($_SESSION['error_message']);
-}
+        $error_message = $_SESSION['error_message'];
+        echo "<script>showToast('$error_message', 'error');</script>";
+        unset($_SESSION['error_message']);
+    }
     ?>
 </body>
 

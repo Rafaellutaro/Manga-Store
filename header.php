@@ -25,11 +25,13 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] === true) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <link rel="stylesheet" type="text/css" href="css/header.css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <script src="https://kit.fontawesome.com/2502834e47.js" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" />
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=person" />
-    <script src="https://kit.fontawesome.com/2502834e47.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <script type="text/javascript" src="js/toast.js"></script>
 </head>
@@ -41,18 +43,24 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] === true) {
                 <i class="fas fa-bars"></i>
             </div>
 
-            <a href="index.php"><img src="img/killua_logo.png" class="logo" alt="" height="100"></a>
-            <div class="header-titles">
-                <h2>Honkai</h2>
-                <h3>ほんかい書籍</h3>
-            </div>
+            <a href="index.php" class="header-link-block">
+                <div class="header-logo">
+                    <!-- <img src="img/killua_logo.png" class="logo" alt="" height="100"> -->
+
+                    <div class="header-titles">
+                        <h2>Honkai</h2>
+                        <h3>ほんかい書籍</h3>
+                    </div>
+                    <img src="img/logochibi2.png" alt="" srcset="">
+                </div>
+            </a>
 
             <div id="mobile-search-icon">
-                <span class="material-icons search-icon">search</span>
+                <span class="material-symbols-outlined search-icon">search</span>
             </div>
 
             <div class="search-wrapper">
-                <span class="material-icons search-icon">search</span>
+                <span class="material-symbols-outlined search-icon">search</span>
                 <input type="text" class="form-control" id="live-search" autocomplete="off" placeholder="Encontre seu mangá aqui!">
             </div>
 
@@ -79,7 +87,9 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] === true) {
                     <span class="material-symbols-outlined">person</span>
                     <span class="minha-conta">Minha conta</span></a>
             </li>
-            <li><a href="cart.php"><i class="fa-solid fa-cart-shopping"></i></a></li>
+            <li><a href="cart.php"><i class="fa-solid fa-cart-shopping"></i>
+                    <!-- <span class="minha-conta">Carrinho</span>--></a>
+            </li>
         </ul>
 
         <div id="mobile-menu" class="hidden">

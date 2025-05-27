@@ -53,7 +53,7 @@ $row = mysqli_fetch_assoc($result);
 
     <?php
     include_once "header.php";
-    //$img = "http://$dbhost/img/" . $row["filepath"] . "/" . $row["filename"];
+    // $img = "http://$dbhost/img/" . $row["filepath"] . "/" . $row["filename"];
     $img = "https://" . $_SERVER['HTTP_HOST'] . "/img/" . $row["filepath"] . "/" . $row["filename"];
     ?>
 
@@ -65,7 +65,7 @@ $row = mysqli_fetch_assoc($result);
         <div class="details">
             <h2><?php echo $row["label"] ?></h2>
             <p id="stockQuantity" estoque=<?php echo $row["stock"] ?>>Quantidade em estoque: <?php echo $row["stock"] ?></p>
-            <h2>R$<?php echo number_format($row["price"], 2, ',', '.'); ?></h2>
+            <h2>R$ <?php echo number_format($row["price"], 2, ',', '.'); ?></h2>
             <input id="productQuantity" type="number" value="1" min="1" oninput="validar_box(this)">
             <button id="addToCartButton" data-product-id="<?php echo $row['rowid']; ?>" onclick="addtocart_singlepage()">Comprar</button>
         </div>
@@ -93,7 +93,7 @@ $row = mysqli_fetch_assoc($result);
 
             while ($relatedRow = mysqli_fetch_assoc($relatedResult)) {
                 $relatedUrl = $relatedRow["url"];
-                //$relatedimg = "http://$dbhost/img/" . $relatedRow["filepath"] . "/" . $relatedRow["filename"];
+                // $relatedimg = "http://$dbhost/img/" . $relatedRow["filepath"] . "/" . $relatedRow["filename"];
                 $relatedimg = "https://" . $_SERVER['HTTP_HOST'] . "/img/" . $relatedRow["filepath"] . "/" . $relatedRow["filename"];
                 // Mostra produtos relacionados
 

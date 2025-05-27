@@ -61,7 +61,7 @@
                 <a class="icon_u"><i class="fa-solid fa-user"></i></a>
                 <div class="text_container">
                     <h3> Minha Conta</h3>
-                    <p>Suas informações cadastrais</p>
+                    <p>Suas informações</p>
                 </div>
             </div>
 
@@ -117,9 +117,14 @@
 
         <div class="result" id="contadetails">
             <div class="result_container">
-                <a class="icon_y"><i class="fa-solid fa-user"></i></a>
-                <div class="text">
+                <!-- <a class="icon_y"><i class="fa-solid fa-user"></i></a> -->
+                <div class="header-section">
+                    <a class="icon_y"><i class="fa-solid fa-user"></i></a>
                     <h4>Minha Conta</h4>
+                </div>
+
+                <div class="text">
+                    <!-- <h4>Minha Conta</h4> -->
                     <hr>
 
                     <div class="info-grid">
@@ -161,10 +166,17 @@
 
         <div class="result" id="boughtProductsDetails">
             <div class="result_container">
-                <a class="icon_y"><i class="fa-solid fa-box-open"></i></a>
+                <!-- <a class="icon_y"><i class="fa-solid fa-box-open"></i></a> -->
+                <div class="header-section">
+                    <a class="icon_y"><i class="fa-solid fa-box-open"></i></a>
+                    <h4>Histórico de compras</h4>
+                </div>
+
                 <div class="sub_container">
+                    <hr>
                     <div class="text">
-                        <h4>Historico de compras</h4>
+
+                        <!-- <h4>Historico de compras</h4> -->
                         <div class="text_bought">
                             <?php
                             if ($boughtMangas->num_rows <= 0) {
@@ -197,8 +209,8 @@
                                     $result_product_final = $conn->query($sql_product_final);
 
                                     while ($row_product_final = $result_product_final->fetch_assoc()) {
-                                        // $img = "http://$dbhost/img/" . $row_product_final["filepath"] . "/" . $row_product_final["filename"];
-                                        $img = "https://" . $_SERVER['HTTP_HOST'] . "/img/" . $row_product_final["filepath"] . "/" . $row_product_final["filename"];
+                                        $img = "http://$dbhost/img/" . $row_product_final["filepath"] . "/" . $row_product_final["filename"];
+                                        // $img = "https://" . $_SERVER['HTTP_HOST'] . "/img/" . $row_product_final["filepath"] . "/" . $row_product_final["filename"];
                                         $url = $row_product_final["url"];
 
                                         echo " <form action='orderDetails.php' method='post' class='product-entry-container' onclick = 'this.submit()'>";
@@ -211,7 +223,7 @@
                                         echo "    <div class='product-details'>";
                                         echo "      <div>ID: $ref</div>";
                                         echo "      <b><div>Status do pedido: $fk_statut</div></b>";
-                                        echo "      <div>Dia da compra: $date_commande</div>";
+                                        echo "      <div>Data: $date_commande</div>";
                                         echo "      <div>Endereço de entrega: $delivery_address</div>";
                                         echo "    </div>";
                                         echo "  </div>";
@@ -230,9 +242,14 @@
 
         <div class="result" id="enderecodetails">
             <div class="result_container">
-                <a class="icon_y"><i class="fa-solid fa-location-dot"></i></a>
-                <div class="text">
+                <!-- <a class="icon_y"><i class="fa-solid fa-location-dot"></i></a> -->
+                <div class="header-section">
+                    <a class="icon_y"><i class="fa-solid fa-location-dot"></i></a>
                     <h4>Endereços</h4>
+                </div>
+
+                <div class="text">
+                    <!-- <h4>Endereços</h4> -->
                     <hr>
                     <div class="info-grid">
                         <div class="info-group">

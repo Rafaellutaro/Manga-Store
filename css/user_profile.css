@@ -19,13 +19,52 @@
   justify-content: space-between;
   margin: 1rem;
   gap: 1rem;
-  /* align-items: center;  */
+}
+
+#user .user_box {
+  display: flex;
+  flex-wrap: wrap;
+  flex-shrink: 0;
+  align-items: center;
+  width: 300px;
+  max-width: 22%;
+  height: auto;
+  max-height: 620px;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+#user .user_label {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  border: 5px solid transparent;
+  border-radius: 15px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  margin-bottom: 5px;
+}
+
+#user .user_label:hover {
+  background-color: rgba(248, 248, 255, 0.3);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  transform: translateY(-2px); /* Pequeno levantamento para um efeito sutil */
+}
+
+#sair_label:hover {
+  color: red;
+}
+
+#user .user_label.active {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  color: #088178;
+  transform: scale(1.02);
 }
 
 #contadetails {
-  /* Existing styles */
   display: none;
-  transition: height 0.3s ease; /* Add a transition for the display property */
+  transition: height 0.3s ease;
 }
 
 #user .result {
@@ -34,27 +73,41 @@
   align-items: center;
   width: 100%;
   height: 78vh;
+  padding: 1rem;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
   border-radius: 10px;
 }
 
 #user .result_container {
   display: flex;
+  flex-direction: column;
   background-color: white;
   border: 1px solid transparent;
   border-radius: 15px;
-  margin-left: 20px;
-  /* margin-top: 20px; */
-  padding-top: 20px;
-  width: calc(100% - 40px);
+  padding: 20px;
+  padding-right: 40px;
+  width: 100%;
   height: 100%;
+}
+
+#boughtProductsDetails .result_container {
+  padding-right: 20px;
 }
 
 #user .text {
   display: flex;
   flex-direction: column;
-  width: 90%;
-  height: 100%;
+  width: 100%;
+  height: auto;
+  padding-left: 2.6rem;
+}
+
+#boughtProductsDetails hr {
+  margin-left: 3.4rem;
+}
+
+#user #boughtProductsDetails .text {
+  padding-left: 0rem;
 }
 
 #user .text h4 {
@@ -92,58 +145,17 @@
 
 #user .icon_y {
   font-size: 25px;
-  padding: 10px; /* Add padding for spacing */
-}
-
-#user .user_box {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  max-width: 22%;
-  height: 540px;
-  max-height: 100%;
   padding: 10px;
-  border-radius: 10px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-}
-
-#user .user_label {
-  display: flex;
-  align-items: center;
-  width: 100%;
-  border: 5px solid transparent;
-  border-radius: 15px;
-  /* padding: 10px; */
-  transition: all 0.3s ease;
-  cursor: pointer;
-  /* background-color: #fff; */
-  margin-bottom: 5px;
-}
-
-#user .user_label:hover {
-  background-color: rgba(248, 248, 255, 0.3);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-  transform: translateY(-2px); /* Pequeno levantamento para um efeito sutil */
-}
-
-#sair_label:hover {
-  color: red;
-}
-
-#user .user_label.active {
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  color: #088178;
-  transform: scale(1.02);
 }
 
 #user .icon_u {
   font-size: 15px;
-  padding: 10px; /* Add padding for spacing */
+  padding: 10px;
 }
 
 #user .text_container {
   flex-grow: 1; /* Allow the text container to expand and take remaining space */
-  padding: 10px; /* Add padding for spacing */
+  padding: 10px;
 }
 
 .info-grid {
@@ -154,9 +166,9 @@
   margin-bottom: 32px;
 }
 
-/* #enderecodetails .info-grid {
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-} */
+#enderecodetails .info-grid {
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+}
 
 .button-group {
   display: flex;
@@ -248,22 +260,15 @@
   display: flex;
   width: 100%;
   gap: 20px;
-  /* background-color: #ccc; */
   padding: 10px;
   border-radius: 10px;
-  /* border: #ccc solid 3px; */
   background-color: #fff;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
   transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .product-entry:hover {
-  background-color: rgba(
-    248,
-    248,
-    255,
-    0.8
-  ); /* Change background color on hover */
+  background-color: rgba(248, 248, 255, 0.8);
   cursor: pointer;
   transform: translateY(-2px);
 }
@@ -273,16 +278,18 @@
   flex-direction: column;
   gap: 10px;
   width: 100%;
-  height: 80%;
-  margin-top: 3%;
+  /* height: 80%; */
+  height: auto;
+  /* margin-top: 3%; */
   padding: 1rem;
-  margin-left: 1.5%;
+  /* margin-left: 1.5%; */
   overflow-y: auto;
 }
 
 #user .sub_container .text_bought a {
   display: block;
-  width: 10%; /* or whatever width you want for the image block */
+  width: auto; /* or whatever width you want for the image block */
+  max-width: 100px;
   margin-right: 20px;
 }
 
@@ -297,4 +304,99 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+}
+
+#user .header-section {
+  display: flex; /* Torna-o um contêiner flexível */
+  align-items: center; /* Centraliza verticalmente o ícone e o título */
+  width: 100%; /* Ocupa a largura total do result_container */
+  margin-bottom: 20px; /* Espaçamento entre o cabeçalho e os cards de produtos */
+  /* padding-left: 15px; */
+  box-sizing: border-box; /* Inclui padding na largura (boa prática) */
+}
+
+#user .header-section .icon_y {
+  font-size: 28px; /* Tamanho do ícone no cabeçalho */
+  margin-right: 15px; /* Espaçamento entre o ícone e o título */
+  flex-shrink: 0; /* Impede que o ícone encolha mais do que o necessário */
+  padding: 0; /* Garante que não há padding extra aqui, a margem já faz o espaçamento */
+}
+
+#user .header-section h4 {
+  margin: 0; /* Remove margem padrão do h4 para melhor controle */
+  font-size: 25px; /* Tamanho da fonte do título */
+  line-height: 1.2; /* Ajusta a altura da linha para melhor leitura */
+  flex-grow: 1; /* Permite que o título ocupe o espaço restante */
+}
+
+@media (max-width: 768px) {
+  #user .user_box {
+    width: 100%;
+    max-width: none;
+    height: auto;
+    margin-bottom: 1rem;
+  }
+  #user {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  #user .result {
+    height: auto;
+    align-items: start;
+  }
+
+  #user .result_container {
+    margin: 0;
+    align-items: flex-start;
+    margin-left: 0;
+    margin-top: 10px;
+    width: 100%;
+    height: auto;
+    padding: 15px;
+  }
+
+  #boughtProductsDetails .result_container {
+    padding: 10px;
+  }
+
+  #user .text {
+    width: 100%;
+    padding-left: 0;
+  }
+  #user .text h4 {
+    width: 100%;
+  }
+
+  #user .sub_container {
+    padding: 0;
+  }
+
+  #user .sub_container .text {
+    width: 100%;
+  }
+
+  #boughtProductsDetails hr {
+    margin-left: 0;
+  }
+
+  #user .sub_container .text_bought {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+    padding: 10px;
+    margin: 0;
+    overflow-y: visible;
+  }
+
+  #user .sub_container .text_bought a {
+    width: auto; /* Faz com que a imagem ocupe toda a largura do card */
+    margin-right: 0; /* Remove a margem direita para evitar espaçamento desnecessário */
+  }
+
+  #user .sub_container .text_bought .product-image {
+    width: 100px;
+    height: 140px;
+  }
 }
