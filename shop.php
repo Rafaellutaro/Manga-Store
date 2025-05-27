@@ -101,8 +101,8 @@ $productWidth = '250px'; // Set the desired width
             <?php
             while ($row = mysqli_fetch_assoc($allproduct)) {
                 $productUrl = $row["url"];
-                $img = "http://$dbhost/img/" . $row["filepath"] . "/" . $row["filename"];
-                //$img = "https://" . $_SERVER['HTTP_HOST'] . "/img/" . $row["filepath"] . "/" . $row["filename"];
+                //$img = "http://$dbhost/img/" . $row["filepath"] . "/" . $row["filename"];
+                $img = "https://" . $_SERVER['HTTP_HOST'] . "/img/" . $row["filepath"] . "/" . $row["filename"];
             ?>
 
                 <?php
