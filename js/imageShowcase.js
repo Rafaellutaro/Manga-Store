@@ -1,7 +1,7 @@
 const shopLua = document.getElementById('shop_lua');
 const images = [
-  "../img/posters/poster.jpg",
-  "../img/posters/poster-news.jpg",
+  "../img/posters/poster-discount1.jpg",
+  "../img/posters/poster-news1.jpg",
   "../img/banner01.jpg",
   "../img/banner02.jpg",
 ];
