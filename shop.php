@@ -89,21 +89,20 @@ $productWidth = '250px'; // Set the desired width
     ?>
 
     <section id="shop_lua">
-        <b>
+        <!-- <b>
             <h1>漫画の価値</h1><b>
                 <b>
-                    <p>O valor dos mangas</p><b>
+                    <p>O valor dos mangas</p><b> -->
     </section>
 
     <section id="manga" class="section-p1">
-        <span id="pao"></span>
 
         <div class="manga_box">
             <?php
             while ($row = mysqli_fetch_assoc($allproduct)) {
                 $productUrl = $row["url"];
-                //$img = "http://$dbhost/img/" . $row["filepath"] . "/" . $row["filename"];
-                $img = "https://" . $_SERVER['HTTP_HOST'] . "/img/" . $row["filepath"] . "/" . $row["filename"];
+                $img = "http://$dbhost/img/" . $row["filepath"] . "/" . $row["filename"];
+                //$img = "https://" . $_SERVER['HTTP_HOST'] . "/img/" . $row["filepath"] . "/" . $row["filename"];
             ?>
 
                 <?php
@@ -156,6 +155,7 @@ $productWidth = '250px'; // Set the desired width
 
     <script src="js/add_carrinho.js"></script>
     <script src="js/piscar.js"></script>
+    <script src="js/imageShowcase.js"></script>
 </body>
 
 </html>
