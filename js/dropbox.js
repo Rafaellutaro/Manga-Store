@@ -3,6 +3,18 @@ let debounceTimer;
 const input = document.getElementById('live-search');
 const suggestions = document.getElementById('search-suggestions');
 
+input.addEventListener('keydown', (e) => {
+  if (e.key === "Enter") {
+    e.preventDefault();  // prevent form submit if inside a form
+    const query = input.value.trim();
+
+    if (query.length > 0) {
+      // Redirect to shop.php with the search query as a GET param
+      window.location.href = `shop.php?search=${encodeURIComponent(query)}`;
+    }
+  }
+});
+
 input.addEventListener('input', function () {
     clearTimeout(debounceTimer);
     const query = this.value.trim();

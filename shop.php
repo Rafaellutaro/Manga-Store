@@ -2,28 +2,58 @@
 include_once 'connection.php';
 include_once "product_box.php";
 
-// Define the number of products per page and the current page number
+
 $productsPerPage = 5;
-$page = isset($_GET['page']) ? $_GET['page'] : 1;
+$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 $offset = ($page - 1) * $productsPerPage;
 
+// Get search query if any
+$search = $_GET['search'] ?? '';
+$search = trim($search);
 
+if ($search !== '') {
+    // Prepared statement with search filtering
+    $likeSearch = "%{$search}%";
 
-$sql = "SELECT llx_product.*, llx_ecm_files.filepath, llx_ecm_files.filename
-        FROM llx_product
-        JOIN llx_ecm_files ON llx_product.rowid = llx_ecm_files.src_object_id
-        LIMIT $offset, $productsPerPage";
-$allproduct = $conn->query($sql);
+    // Get total filtered products count
+    $countStmt = $conn->prepare("SELECT COUNT(*) AS total FROM llx_product WHERE label LIKE ?");
+    $countStmt->bind_param("s", $likeSearch);
+    $countStmt->execute();
+    $countResult = $countStmt->get_result();
+    $totalProductsData = $countResult->fetch_assoc();
+    $totalProducts = $totalProductsData['total'];
+    $countStmt->close();
 
-// Query to get the total number of products
-$totalProductsQuery = "SELECT COUNT(*) AS total FROM llx_product";
-$totalProductsResult = $conn->query($totalProductsQuery);
-$totalProductsData = $totalProductsResult->fetch_assoc();
-$totalProducts = $totalProductsData['total'];
+    // Get filtered products with join and pagination
+    $stmt = $conn->prepare("SELECT llx_product.*, llx_ecm_files.filepath, llx_ecm_files.filename
+                            FROM llx_product
+                            JOIN llx_ecm_files ON llx_product.rowid = llx_ecm_files.src_object_id
+                            WHERE llx_product.label LIKE ?
+                            LIMIT ?, ?");
+    $stmt->bind_param("sii", $likeSearch, $offset, $productsPerPage);
+    $stmt->execute();
+    $allproduct = $stmt->get_result();
+    $stmt->close();
+
+} else {
+    // No search: get total products count
+    $totalProductsQuery = "SELECT COUNT(*) AS total FROM llx_product";
+    $totalProductsResult = $conn->query($totalProductsQuery);
+    $totalProductsData = $totalProductsResult->fetch_assoc();
+    $totalProducts = $totalProductsData['total'];
+
+    // Get products without filtering
+    $sql = "SELECT llx_product.*, llx_ecm_files.filepath, llx_ecm_files.filename
+            FROM llx_product
+            JOIN llx_ecm_files ON llx_product.rowid = llx_ecm_files.src_object_id
+            LIMIT $offset, $productsPerPage";
+    $allproduct = $conn->query($sql);
+}
 
 $productWidth = '250px'; // Set the desired width
 
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
