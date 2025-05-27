@@ -49,7 +49,7 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] === true) {
 
                     <div class="header-titles">
                         <h2>Honkai</h2>
-                        <h3>ほんかい書籍</h3>
+                        <h3>本会書籍</h3>
                     </div>
                     <img src="img/logochibi2.png" alt="" srcset="">
                 </div>
@@ -62,6 +62,7 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] === true) {
             <div class="search-wrapper">
                 <span class="material-symbols-outlined search-icon">search</span>
                 <input type="text" class="form-control" id="live-search" autocomplete="off" placeholder="Encontre seu mangá aqui!">
+                <ul id="search-suggestions" class="suggestions-dropdown"></ul>
             </div>
 
 
@@ -104,6 +105,7 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] === true) {
 
 
     <script src="./js/header.js"></script>
+    <script src="./js/dropbox.js"></script>
 </body>
 
 </html>
