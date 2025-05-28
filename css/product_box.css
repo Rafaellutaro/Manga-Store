@@ -120,7 +120,7 @@
   }
 
   .shop-page#manga {
-    --product-width: 170px; /* Defina a variável AQUI para a shop-page */
+    --product-width: 160px; /* Defina a variável AQUI para a shop-page */
   }
 
   #manga h2 {
