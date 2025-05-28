@@ -136,7 +136,7 @@
   #manga .manga_box {
     grid-template-columns: repeat(3, 1fr);
     gap: 10px;
-    padding: 30px 10px;
+    padding: 30px 0px;
   }
   #manga .manga_img img {
     height: 200px;
