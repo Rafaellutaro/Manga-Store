@@ -139,7 +139,14 @@
     padding: 30px 10px;
   }
   #manga .manga_img img {
-    height: 180px;
+    height: 200px;
+  }
+  .manga_footer .star {
+    display: none;
+  }
+
+  .manga_footer h4 {
+    padding-top: 0.6rem;
   }
 }
 

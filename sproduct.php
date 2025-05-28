@@ -2,7 +2,7 @@
 include_once "connection.php";
 include_once "product_box.php";
 
-$productWidth = '250px';
+// $productWidth = '250px';
 
 // Extrai and limpa o produto ID do URL
 if (isset($_GET['url'])) {
@@ -41,11 +41,11 @@ $row = mysqli_fetch_assoc($result);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="css/product_box.css">
     <link rel="stylesheet" type="text/css" href="css/single_manga.css">
-    <style>
+    <!-- <style>
         :root {
             --product-width: <?php echo $productWidth; ?>;
         }
-    </style>
+    </style> -->
     <title>Produto</title>
 </head>
 
@@ -64,6 +64,14 @@ $row = mysqli_fetch_assoc($result);
 
         <div class="details">
             <h2><?php echo $row["label"] ?></h2>
+            <div class="star">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <span>(12)</span>
+            </div>
             <p id="stockQuantity" estoque=<?php echo $row["stock"] ?>>Quantidade em estoque: <?php echo $row["stock"] ?></p>
             <h2>R$ <?php echo number_format($row["price"], 2, ',', '.'); ?></h2>
             <input id="productQuantity" type="number" value="1" min="1" oninput="validar_box(this)">
