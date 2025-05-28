@@ -1,5 +1,4 @@
 :root {
-  --product-widths: 190px;
   --product-width: 300px;
 }
 
@@ -24,6 +23,15 @@
   padding: 20px;
   width: 100%;
   margin: 0 auto;
+}
+
+.shop-page#manga {
+  --product-width: 250px; /* Defina a variável AQUI para a shop-page */
+  /* Este é o ponto onde a variável para toda a seção #manga é alterada*/
+}
+
+.shop-page#manga .manga_box {
+  grid-template-columns: repeat(auto-fit, minmax(var(--product-width), 1fr));
 }
 
 #manga .manga_img {
@@ -108,7 +116,11 @@
 
 @media (max-width: 820px) {
   :root {
-    --product-widths: 180px;
+    --product-width: 180px;
+  }
+
+  .shop-page#manga {
+    --product-width: 180px; /* Defina a variável AQUI para a shop-page */
   }
 
   #manga h2 {
@@ -124,7 +136,10 @@
   #manga .manga_box {
     grid-template-columns: repeat(3, 1fr);
     gap: 10px;
-    padding: 20px 0;
+    padding: 30px 10px;
+  }
+  #manga .manga_img img {
+    height: 180px;
   }
 }
 
@@ -137,8 +152,5 @@
 @media (max-width: 410px) {
   #manga .manga_box {
     gap: 5px;
-  }
-  #manga .manga_img {
-    transform: scale(90%);
   }
 }

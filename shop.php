@@ -43,8 +43,6 @@ if ($search !== '') {
         </script>";
         exit();
     }
-
-
 } else {
     // No search: get total products count
     $totalProductsQuery = "SELECT COUNT(*) AS total FROM llx_product";
@@ -60,7 +58,7 @@ if ($search !== '') {
     $allproduct = $conn->query($sql);
 }
 
-$productWidth = '250px'; // Set the desired width
+// $productWidth = '250px'; // Set the desired width
 
 ?>
 
@@ -74,12 +72,12 @@ $productWidth = '250px'; // Set the desired width
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <link rel="stylesheet" type="text/css" href="css/product_box.css">
     <script src="https://kit.fontawesome.com/2502834e47.js"></script>
-    <style>
+    <!-- <style>
         /* Override the CSS variables with PHP values */
         :root {
             --product-width: <?php echo $productWidth; ?>;
         }
-    </style>
+    </style> -->
     <title>Loja de mangas</title>
 </head>
 
@@ -95,13 +93,13 @@ $productWidth = '250px'; // Set the desired width
                     <p>O valor dos mangas</p><b> -->
     </section>
 
-    <section id="manga" class="section-p1">
+    <section id="manga" class="section-p1 shop-page">
 
         <div class="manga_box">
             <?php
             while ($row = mysqli_fetch_assoc($allproduct)) {
                 $productUrl = $row["url"];
-                //$img = "http://$dbhost/img/" . $row["filepath"] . "/" . $row["filename"];
+                // $img = "http://$dbhost/img/" . $row["filepath"] . "/" . $row["filename"];
                 $img = "https://" . $_SERVER['HTTP_HOST'] . "/img/" . $row["filepath"] . "/" . $row["filename"];
             ?>
 

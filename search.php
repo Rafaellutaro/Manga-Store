@@ -36,8 +36,8 @@ if ($result->num_rows < 1) {
     ];
 } else {
     while ($row = $result->fetch_assoc()) {
-        //$img = "http://$dbhost/img/" . $row["filepath"] . "/" . $row["filename"];
-        $img = "https://" . $_SERVER['HTTP_HOST'] . "/img/" . $row["filepath"] . "/" . $row["filename"];
+        $img = "http://$dbhost/img/" . $row["filepath"] . "/" . $row["filename"];
+        // $img = "https://" . $_SERVER['HTTP_HOST'] . "/img/" . $row["filepath"] . "/" . $row["filename"];
         $results[] = [
             "id" => $row['rowid'],
             "url" => $row['url'],

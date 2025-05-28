@@ -238,35 +238,35 @@ p {
 }
 
 #search-suggestions {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    border: 1px solid #ccc;
-    background: #fff;
-    position: absolute;
-    z-index: 999;
-    max-height: 300px;
-    overflow-y: auto;
-    width: 100%;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  /* border: 1px solid #ccc; */
+  background: #fff;
+  position: absolute;
+  z-index: 999;
+  max-height: 300px;
+  overflow-y: auto;
+  width: 100%;
 }
 
 #search-suggestions li {
-    display: flex;
-    align-items: center;
-    padding: 5px;
-    cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  cursor: pointer;
 }
 
 #search-suggestions li:hover {
-    background: #f0f0f0;
+  background: #f0f0f0;
 }
 
 #search-suggestions img {
-    width: 100px;
-    height: auto;
-    margin-left: 10px;
-    margin-right: 10px;
-    border-radius: 4px;
+  width: 100px;
+  height: auto;
+  margin-left: 10px;
+  margin-right: 10px;
+  border-radius: 4px;
 }
 
 /* Responsividade */
@@ -352,5 +352,37 @@ p {
     font-size: 0.8rem;
     margin-top: 5px;
     margin-left: 4px;
+  }
+
+  .mobile-search-bar {
+    position: relative; /* Necessário para a sugestão ficar dentro */
+  }
+
+  #mobile-suggestions {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    /* border: 1px solid #ccc; */
+    background: #fff;
+    position: absolute;
+    z-index: 999;
+    max-height: 400px;
+    overflow-y: auto;
+    width: 100%;
+  }
+
+  #mobile-suggestions li {
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    cursor: pointer;
+  }
+
+  #mobile-suggestions img {
+    width: auto;
+    height: 100px;
+    object-fit: cover;
+    margin-right: 0px;
+    margin-left: 0;
   }
 }

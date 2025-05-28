@@ -2,6 +2,7 @@
 #lua {
   background: rgba(235, 238, 252, 0.4);
   background-image: url("../img/banner04.jpg");
+  /* background-image: url("../img/example_index_banner/stand1.png"); */
   background-size: cover;
   height: 75vh;
   width: 100%;
@@ -15,6 +16,7 @@
 }
 
 #lua h4 {
+  font-size: 1.4rem;
   padding-bottom: 15px;
   color: rgb(255, 255, 255);
   text-shadow: 1px 1px 1px #088178;
@@ -27,10 +29,10 @@
 }
 
 #lua p {
-  font-size: 1.1rem;
+  font-size: 1.5rem;
   font-weight: 600;
   color: #fff;
-  text-shadow: 1px 1px 1px #088178;
+  text-shadow: 1px 1px 2px #088178;
 }
 
 #lua button {
@@ -65,17 +67,20 @@
   flex-direction: column;
   padding: 14px;
   overflow: hidden;
+  position: relative;
 }
 
-#shop_lua::before, #shop_lua::after {
+#shop_lua::before,
+#shop_lua::after {
   content: "";
-  margin-top: 7%;
+  /* margin-top: 7%; */
   position: absolute;
-  top: 0; left: 0;
+  top: 0;
+  left: 0;
   width: 100%;
-  height: 65%;
+  height: 65vh;
   background-size: cover;
-  background-position:center;
+  background-position: center;
   background-repeat: no-repeat;
   opacity: 0;
   transition: opacity 1s ease-in-out;
@@ -195,17 +200,17 @@
   }
 
   #lua h1 {
-    font-size: 0.95rem;
+    font-size: 1.6rem;
     line-height: normal;
   }
 
   #lua h4 {
-    font-size: 0.9rem;
+    font-size: 1.2rem;
     line-height: normal;
   }
 
   #lua p {
-    font-size: 0.75rem;
+    font-size: 1rem;
     line-height: normal;
   }
 
@@ -214,8 +219,13 @@
   }
 
   #shop_lua {
-    padding: 15px;
-    padding-top: 26%;
+    padding: 0px;
+    /* padding-top: 26%; */
+    height: 24vh;
+  }
+  #shop_lua::before,
+  #shop_lua::after {
+    width: 100%;
     height: 24vh;
   }
 

@@ -40,7 +40,7 @@ $selectedMangas = $conn->query($sql);
             <h4>Honkai Adverte</h4>
             <h1>Melhores Preços Nos</h1>
             <h1>Seus Mangás Favoritos</h1>
-            <p>Venha comprar com a gente</p>
+            <p>Venha comprar com a gente!</p>
             <a href="shop.php" class="btn-shop">
                 <button>Compre</button>
             </a>
@@ -82,7 +82,7 @@ $selectedMangas = $conn->query($sql);
             <?php
             while ($row = $selectedMangas->fetch_assoc()) {
                 $productUrl = $row["url"];
-                //$img = "http://$dbhost/img/" . $row["filepath"] . "/" . $row["filename"];
+                // $img = "http://$dbhost/img/" . $row["filepath"] . "/" . $row["filename"];
                 $img = "https://" . $_SERVER['HTTP_HOST'] . "/img/" . $row["filepath"] . "/" . $row["filename"];
             ?>
 

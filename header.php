@@ -79,7 +79,8 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] === true) {
 
         <div class="mobile-search-bar">
             <!-- <span class="material-icons search-icon">search</span> -->
-            <input type="text" class="form-control" placeholder="Encontre seu mangá aqui!">
+            <input type="text" class="form-control" id="mobile-search" placeholder="Encontre seu mangá aqui!">
+            <ul id="mobile-suggestions" class="suggestions-dropdown"></ul>
         </div>
 
         <!-- Navbar fixa abaixo da search -->
