@@ -65,7 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         echo "<script>showToast('A sua senha foi atualizada com sucesso', 'success');</script>";
         echo "A sua senha foi alterada com sucesso. Você será redirecionado para a página inicial em 5 segundos.";
-        echo '<meta http-equiv="refresh" content="5;url=profile.php">';
+        echo '<meta http-equiv="refresh" content="5;url=user.php">';
         exit();
     }else if ($confirm == "error") {
         echo "<script>showToast('Problemas de atualização', 'error');</script>";

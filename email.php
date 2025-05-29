@@ -53,7 +53,7 @@ function sendPasswordResetEmail($userEmail, $resetCode)
         $mail->Port = 587; // The SMTP port
 
         // Set email details
-        $mail->setFrom('rafaelzinhodostuto12@gmail.com', '本屋くん'); // Sender info
+        $mail->setFrom('rafaelzinhodostuto12@gmail.com', 'Honkai'); // Sender info
         $mail->addAddress($userEmail); // Recipient
 
         // Email content
@@ -66,7 +66,7 @@ function sendPasswordResetEmail($userEmail, $resetCode)
                         <p><a href="https://' . $_SERVER['HTTP_HOST'] . '/reset_password.php?code=' . $resetCode . '">Trocar senha</a></p>
                         <p>Caso você não tenha feito essa solicitação, você pode ignorá-la. Caso ache que a sua conta esteja em perigo, entre em contato com o <a href="https://' . $_SERVER['HTTP_HOST'] . '/contact.php">Suporte ao Cliente</a>.</p>
                         <p>Atenciosamente,</p>
-                        <p>本屋くん</p>
+                        <p>Honkai</p>
                     ';
 
         $mail->send(); // Send the email--++-
