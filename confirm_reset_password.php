@@ -33,7 +33,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } else {
             $_SESSION["confirm"] = "error";
             header("Location: confirm_reset_password.php");
-            exit();
         }
     } else {
         $_SESSION["errors"] = $errors;
@@ -64,8 +63,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         include_once "logout.php";
 
         echo "<script>showToast('A sua senha foi atualizada com sucesso', 'success');</script>";
-        echo "A sua senha foi alterada com sucesso. Você será redirecionado para a página inicial em 5 segundos.";
-        echo "<script>setTimeout(function(){ window.location.href = 'index.php'; }, 5000);</script>";
+        echo "A sua senha foi alterada com sucesso. Você será redirecionado em 5 segundos.";
+        echo "<script>setTimeout(function(){ window.location.href = 'user.php'; }, 5000);</script>";
     }else if ($confirm == "error") {
         echo "<script>showToast('Problemas de atualização', 'error');</script>";
         echo "Houve um erro ao alterar a sua senha. Tente novamente mais tarde.";
