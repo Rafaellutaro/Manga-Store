@@ -83,7 +83,7 @@ $selectedMangas = $conn->query($sql);
             while ($row = $selectedMangas->fetch_assoc()) {
                 $productUrl = $row["url"];
                 // $img = "http://$dbhost/img/" . $row["filepath"] . "/" . $row["filename"];
-                $img = "https://" . $_SERVER['HTTP_HOST'] . "/img/" . $row["filepath"] . "/" . $row["filename"];
+                $img = "https://" . $_SERVER['HTTP_HOST'] . "/imgs/" . $row["filepath"] . "/" . $row["filename"];
             ?>
 
                 <?php

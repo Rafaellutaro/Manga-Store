@@ -9,7 +9,6 @@ Trying to create a online book store with only mangas as products.
 - [X] Register the bought product in the database
 - [X] Create a page to show bought products
 - [] Function to refund products
-- [X] page to show currently bought products
 - [] page to show desired products
 - [] create newsletter 
 - [] fix the hrefs in the bellow banner
