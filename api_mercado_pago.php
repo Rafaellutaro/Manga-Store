@@ -53,7 +53,7 @@ foreach ($cart as $item) {
     $item = [
         "id" => $item['id'],
         "title" => $item['label'],
-        "picture_url" => "https://" . $_SERVER['HTTP_HOST'] . "/img/" . $item["filepath"] . "/" . $item["filename"],
+        "picture_url" => "https://" . $_SERVER['HTTP_HOST'] . "/imgs/" . $item["filepath"] . "/" . $item["filename"],
         "quantity" => $item['quantity'],
         "currency_id" => "BRL",
         "unit_price" => $item['price']
@@ -90,11 +90,11 @@ $client = new PreferenceClient();
 
 $preference = $client->create([
 "back_urls"=>array(
-    "success" => "https://" . $_SERVER['HTTP_HOST'] . "/manga/success_register.php",
+    "success" => "https://" . $_SERVER['HTTP_HOST'] . "/success_register.php",
     "failure" => "https://test.com/failure",
     "pending" => "https://test.com/pending"
 ),
-"notification_url" => "https://" . $_SERVER['HTTP_HOST'] . "/manga/weebhook.php", // ✅ Webhook goes here
+"notification_url" => "https://" . $_SERVER['HTTP_HOST'] . "/weebhook.php", // ✅ Webhook goes here
 "external_reference" => $orderId,
 "differential_pricing" => array(
     "id" => 1,

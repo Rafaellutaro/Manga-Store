@@ -52,7 +52,7 @@ while ($item = $result->fetch_assoc()) {
     $items[] = [
         "id" => $item['id'],
         "title" => $item['label'],
-        "picture_url" => "https://" . $_SERVER['HTTP_HOST'] . "/img/{$item['filepath']}/{$item['filename']}",
+        "picture_url" => "https://" . $_SERVER['HTTP_HOST'] . "/imgs/{$item['filepath']}/{$item['filename']}",
         "quantity" => $item['qty'],
         "currency_id" => "BRL",
         "unit_price" => $item['subprice']
@@ -64,11 +64,11 @@ $stmt->close();
 $client = new PreferenceClient();
 $preference = $client->create([
     "back_urls" => [
-        "success" => "https://" . $_SERVER['HTTP_HOST'] . "/manga/success_register.php",
+        "success" => "https://" . $_SERVER['HTTP_HOST'] . "/success_register.php",
         "failure" => "https://test.com/failure",
         "pending" => "https://test.com/pending"
     ],
-    "notification_url" => "https://" . $_SERVER['HTTP_HOST'] . "/manga/weebhook.php",
+    "notification_url" => "https://" . $_SERVER['HTTP_HOST'] . "/weebhook.php",
     "external_reference" => $orderId,
     "expires" => false,
     "items" => $items,
