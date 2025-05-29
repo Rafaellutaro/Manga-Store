@@ -107,6 +107,12 @@ $selectedMangas = $conn->query($sql);
         unset($_SESSION['error_message']);
     }
 
+    if (isset($_SESSION['sucess_message'])) {
+        $error_message = $_SESSION['sucess_message'];
+        echo "<script>showToast('$error_message', 'success');</script>";
+        unset($_SESSION['sucess_message']);
+    }
+
     include_once "bottom.php";
     ?>
 </body>

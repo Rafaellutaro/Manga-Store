@@ -63,8 +63,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($confirm == "correct") {
         include_once "logout.php";
 
-        $_SESSION['errorLogin'] = "A sua senha foi alterada com sucesso. Você será redirecionado para a página inicial em 5 segundos.";
-        header("Location: user.php");
+        $_SESSION['sucess_message'] = "A sua senha foi alterada com sucesso.";
+        header("Location: index.php");
         exit();
     }else if ($confirm == "error") {
         echo "<script>showToast('Problemas de atualização', 'error');</script>";
