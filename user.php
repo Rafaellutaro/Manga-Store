@@ -12,6 +12,11 @@
 <body>
     <?php
     include_once 'header.php';
+    if (isset($_SESSION['errorLogin'])) {
+        $error_message = $_SESSION['errorLogin'];
+        echo "<script>showToast('$error_message', 'error');</script>";
+        unset($_SESSION['errorLogin']);
+    }
     ?>
 
 

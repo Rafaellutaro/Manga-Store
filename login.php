@@ -29,11 +29,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             exit();
         } else {
             // Incorrect password
-            echo "<script>showToast('Senha incorreta', 'error');</script>";
+            $_SESSION['errorLogin'] = "Senha incorreta";
+            header('Location: user.php');
+            exit();
         }
     } else {
         // User not found
-        echo "<script>showToast('Usuario não existe', 'error');</script>";
+        $_SESSION['errorLogin'] = "Usuário não encontrado";
+        header('Location: user.php');
+        exit();
     }
 
     // Close the statement and the database connection
