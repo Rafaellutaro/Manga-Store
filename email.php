@@ -12,6 +12,63 @@ require 'vendor/autoload.php'; // Include PHPMailer
 
 include_once "header.php";
 
+function PasswordConfirmation($email)
+{
+    $mail = new PHPMailer(true);
+
+    try {
+        // Set up the SMTP server
+        $mail->isSMTP();
+        $mail->Host = 'smtp.gmail.com'; // Your SMTP server
+        $mail->SMTPAuth = true;
+        $mail->Username = 'rafaelzinhodostuto12@gmail.com'; // Your email address
+        $mail->Password = 'egfovsmmyecnbchk'; // Your email password, it must be the app password
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS; // Use TLS encryption
+        $mail->Port = 587; // The SMTP port
+
+        // Set email details
+        $mail->setFrom('rafaelzinhodostuto12@gmail.com', 'Honkai'); // Sender info
+        $mail->addAddress($email); // Recipient
+
+        // Email content
+        $mail->isHTML(true);
+        $mail->CharSet = 'UTF-8';
+        $mail->Subject = 'A sua senha foi alterada';
+        $mail->Body = '
+    <p>Olá,</p>
+    <p>Gostaríamos de informar que a senha associada à sua conta foi alterada recentemente.</p>
+    <p>Se suspeitar de qualquer atividade não autorizada ou se precisar de assistência, entre em contato com o <a href="https://' . $_SERVER['HTTP_HOST'] . '/contact.php">Suporte ao Cliente</a>.</p>
+    <p>Estamos à disposição para ajudar com quaisquer dúvidas ou problemas.</p>
+    <p>Atenciosamente,</p>
+    <p>Equipe Honkai<br>
+';
+
+        $mail->send();
+    } catch (Exception $e) {
+        return;
+    }
+}
+
+if (isset($_SESSION['resetPassword'])) {
+    include_once "connection.php";
+
+    $user_id = $_SESSION['user_id'];
+
+    $stmt = $conn->prepare("SELECT email FROM llx_societe WHERE rowid = ?");
+    $stmt->bind_param("i", $user_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $user_data = $result->fetch_assoc();
+
+    if ($user_data) {
+        $userEmail = $user_data['email'];
+
+        PasswordConfirmation($userEmail);
+        unset($_SESSION['resetPassword']);
+        include_once "logout.php";
+    }
+}
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     include_once "connection.php"; // Connect to your database
 
@@ -66,7 +123,7 @@ function sendPasswordResetEmail($userEmail, $resetCode)
                         <p><a href="https://' . $_SERVER['HTTP_HOST'] . '/reset_password.php?code=' . $resetCode . '">Trocar senha</a></p>
                         <p>Caso você não tenha feito essa solicitação, você pode ignorá-la. Caso ache que a sua conta esteja em perigo, entre em contato com o <a href="https://' . $_SERVER['HTTP_HOST'] . '/contact.php">Suporte ao Cliente</a>.</p>
                         <p>Atenciosamente,</p>
-                        <p>Honkai</p>
+                        <p>Equipe Honkai</p>
                     ';
 
         $mail->send(); // Send the email--++-
