@@ -19,6 +19,21 @@ if (!$selected_address) {
 
 $order_ref = 'WEBORDER-' . date('Ymd-His') . '-' . uniqid();
 $userid = $_SESSION['user_id'] ?? null;
+$cart = $_SESSION['cart'];
+$items = [];
+
+foreach ($cart as $item) {
+    $item = [
+        "id" => $item['id'],
+        "title" => $item['label'],
+        "picture_url" => "https://" . $_SERVER['HTTP_HOST'] . "/imgs/" . $item["filepath"] . "/" . $item["filename"],
+        "quantity" => $item['quantity'],
+        "currency_id" => "BRL",
+        "unit_price" => $item['price']
+    ];
+    $items[] = $item;
+    $total += $item['unit_price'] * $item['quantity'];
+}
 
 // SQL query to get the user data
 $sqlUser = "SELECT * FROM llx_societe WHERE rowid = ?";
@@ -38,28 +53,13 @@ $sqlOrder = "INSERT INTO llx_commande (ref, fk_soc, date_creation, date_commande
         $userid,
         1,
         0,
-        0,
+        $total,
         1,
         $selected_address
     ]);
 
 $orderId = $stmt->insert_id;
 $stmt->close();
-
-$cart = $_SESSION['cart'];    
-$items = [];
-
-foreach ($cart as $item) {
-    $item = [
-        "id" => $item['id'],
-        "title" => $item['label'],
-        "picture_url" => "https://" . $_SERVER['HTTP_HOST'] . "/imgs/" . $item["filepath"] . "/" . $item["filename"],
-        "quantity" => $item['quantity'],
-        "currency_id" => "BRL",
-        "unit_price" => $item['price']
-    ];
-    $items[] = $item;
-}
 
 $_SESSION['boughtCard'] = $items;
 $boughtCard = $_SESSION['boughtCard'];
