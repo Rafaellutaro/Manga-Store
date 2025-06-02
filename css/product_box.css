@@ -117,7 +117,7 @@
 
 @media (min-width: 1580px) {
   :root {
-    --product-width: 260px; /* Aumenta o tamanho do card para telas maiores */
+    --product-width: 300px; /* Aumenta o tamanho do card para telas maiores */
   }
 }
 
