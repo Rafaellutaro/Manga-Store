@@ -1,5 +1,6 @@
 :root {
-  --product-width: 300px;
+  /* --product-width: 300px; */
+  --product-width: 260px;
 }
 
 .truncate-2-lines {
@@ -112,6 +113,12 @@
 
 .addToCart.clicked {
   background-color: lightgreen;
+}
+
+@media (min-width: 1580px) {
+  :root {
+    --product-width: 260px; /* Aumenta o tamanho do card para telas maiores */
+  }
 }
 
 @media (max-width: 820px) {
