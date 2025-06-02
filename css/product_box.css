@@ -115,7 +115,7 @@
   background-color: lightgreen;
 }
 
-@media (min-width: 1580px) {
+@media (min-width: 1601px) {
   :root {
     --product-width: 300px; /* Aumenta o tamanho do card para telas maiores */
   }
