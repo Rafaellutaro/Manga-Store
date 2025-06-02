@@ -200,7 +200,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'remove' && isset($_GET['id']))
                         }
                         ?>
                     </select>
-                    <p class="vendido-entrege">Vendido e entregue por Manga Store</p>
+                    <p class="vendido-entrege">Vendido e entregue por Honkai</p>
                     <hr>
                     <p>Frete: R$ 0,00</p>
 
