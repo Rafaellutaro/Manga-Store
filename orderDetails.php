@@ -21,7 +21,7 @@
         <div class="container">
             <div class="sub_container">
                 <div class="text">
-                    <h2>Detalhes da compra</h2>
+                    <h2>Detalhes do pedido</h2>
                     <p>Pedido: <?php echo $commandeId; ?></p>
                     <div class="text_container">
                         <?php
@@ -44,7 +44,7 @@
                             $result_product_final = $conn->query($sql_product_final);
 
                             while ($row_product_final = $result_product_final->fetch_assoc()) {
-                                //$img = "http://$dbhost/img/" . $row_product_final["filepath"] . "/" . $row_product_final["filename"];
+                                // $img = "http://$dbhost/imgs/" . $row_product_final["filepath"] . "/" . $row_product_final["filename"];
                                 $img = "https://" . $_SERVER['HTTP_HOST'] . "/imgs/" . $row_product_final["filepath"] . "/" . $row_product_final["filename"];
                                 $url = $row_product_final["url"];
                                 $nome = $row_product["label"];
@@ -66,7 +66,6 @@
                                 echo "    </div>";
                                 echo "  </div>";
                                 echo "</div>";
-                                
                             }
                         }
                         $total = array_sum($amount_price);
@@ -76,11 +75,11 @@
                     <hr>
                     <span>Total: <?= $total ?></span>
                     <?php
-                        if ($fk_statut == "Pagamento Pendente"){
-                            echo "<a href=api_mercado_pago_repay.php>";
-                            echo    "<button>Pagar</button>";
-                            echo "</a>";
-                        }
+                    if ($fk_statut == "Pagamento Pendente") {
+                        echo "<a href=api_mercado_pago_repay.php>";
+                        echo    "<button>Pagar</button>";
+                        echo "</a>";
+                    }
                     ?>
                 </div>
             </div>
