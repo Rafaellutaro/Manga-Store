@@ -25,7 +25,6 @@ $selectedMangas = $conn->query($sql);
 <head>
     <title>Honkai Livraria</title>
     <meta charset="UTF-8">
-    <link rel="shortcut icon" href="img/favico.png" type="image/png">
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <link rel="stylesheet" type="text/css" href="css/product_box.css">
     <script src="https://kit.fontawesome.com/2502834e47.js"></script>
