@@ -1,9 +1,9 @@
 <?php
 include_once 'connection.php';
-include_once 'order_utils.php';
 
 use MercadoPago\MercadoPagoConfig;
 use MercadoPago\Client\Payment\PaymentClient;
+use GuzzleHttp\Client;
 
 require_once 'vendor/autoload.php';
 
@@ -29,7 +29,7 @@ if (isset($data['type']) && $data['type'] === 'payment' && isset($data['data']['
         file_put_contents('mp_webhook_log.txt', date('Y-m-d H:i:s') . " - PAYMENT ID $paymentId: " . json_encode($payment) . PHP_EOL, FILE_APPEND);
 
         if ($payment->status === 'approved') {
-            
+
             $externalReference = $payment->external_reference ?? null;
 
             if ($externalReference) {
@@ -55,11 +55,39 @@ if (isset($data['type']) && $data['type'] === 'payment' && isset($data['data']['
                         // Update product stock
                         file_put_contents('mp_webhook_log.txt', "Updating stock for product $productId - qty $quantityOrdered" . PHP_EOL, FILE_APPEND);
 
-                        $sqlUpdateStock = "UPDATE llx_product SET stock = stock - ? WHERE rowid = ?";
-                        $stmtUpdate = $conn->prepare($sqlUpdateStock);
-                        $stmtUpdate->bind_param("ii", $quantityOrdered, $productId);
-                        $stmtUpdate->execute();
-                        $stmtUpdate->close();
+                        // $sqlUpdateStock = "UPDATE llx_product SET stock = stock - ? WHERE rowid = ?";
+                        // $stmtUpdate = $conn->prepare($sqlUpdateStock);
+                        // $stmtUpdate->bind_param("ii", $quantityOrdered, $productId);
+                        // $stmtUpdate->execute();
+                        // $stmtUpdate->close();
+
+                        $client = new Client([
+                            'base_uri' => 'https://' . $_SERVER['HTTP_HOST'] . '/dolibarr/api/index.php/',
+                            'headers' => [
+                                'DOLAPIKEY' => 'tkNPRZGG75amObI2h84PG88xYp1gf95r',
+                                'Content-Type' => 'application/json'
+                            ],
+                            'verify' => true  // Use false to skip SSL verification (not recommended)
+                        ]);
+
+                        try {
+                            $response = $client->post('stockmovements', [
+                                'json' => [
+                                    'fk_product' => $productId,
+                                    'fk_entrepot' => 1,
+                                    'qty' => -$quantityOrdered,
+                                    'label' => 'Venda de manga'
+                                ]
+                            ]);
+
+                            $statusCode = $response->getStatusCode();
+                            $body = $response->getBody()->getContents();
+
+                            file_put_contents('mp_webhook_log.txt', "dolibarr API status: $statusCode" . PHP_EOL, FILE_APPEND);
+                            file_put_contents('mp_webhook_log.txt', "dolibarr body: $body" . PHP_EOL, FILE_APPEND);
+                        } catch (\GuzzleHttp\Exception\RequestException $e) {
+                            file_put_contents('mp_webhook_log.txt', "dolibarr error:" . $e->getMessage() . PHP_EOL, FILE_APPEND);
+                        }
                     }
                 }
 
