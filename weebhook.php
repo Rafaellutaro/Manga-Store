@@ -73,7 +73,7 @@ if (isset($data['type']) && $data['type'] === 'payment' && isset($data['data']['
                         try {
                             $response = $client->post('stockmovements', [
                                 'json' => [
-                                    'fk_product' => $productId,
+                                    'product_id' => $productId,
                                     'fk_entrepot' => 1,
                                     'qty' => -$quantityOrdered,
                                     'label' => 'Venda de manga'
