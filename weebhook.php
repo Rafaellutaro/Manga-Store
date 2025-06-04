@@ -41,7 +41,7 @@ if (isset($data['type']) && $data['type'] === 'payment' && isset($data['data']['
                 $stmt->close();
 
                 // Fetch order details to update stock
-                $sqlDetails = "SELECT fk_product, qty FROM llx_commandedet WHERE fk_commande = ?";
+                $sqlDetails = "SELECT fk_product, qty, label FROM llx_commandedet WHERE fk_commande = ?";
                 $stmtDetails = $conn->prepare($sqlDetails);
                 $stmtDetails->bind_param("i", $externalReference);
                 $stmtDetails->execute();
@@ -50,6 +50,7 @@ if (isset($data['type']) && $data['type'] === 'payment' && isset($data['data']['
                 while ($row = $result->fetch_assoc()) {
                     $productId = $row['fk_product'];
                     $quantityOrdered = $row['qty'];
+                    $title = $row['label'];
 
                     if ($productId) {
                         // Update product stock
@@ -66,7 +67,7 @@ if (isset($data['type']) && $data['type'] === 'payment' && isset($data['data']['
                         try{
                         $conn->begin_transaction();
                         $inventoryCode = date('Ymd') . sprintf('%06d', mt_rand(0, 999999));
-                        $label = "Da correção para o produto " . $row["title"];
+                        $label1 = "Da correção para o produto " . $title;
                         // 1. Insert into stock_mouvement
                         $sqlInsertMovement = "INSERT INTO llx_stock_mouvement 
                         (tms, datem, fk_product, fk_entrepot, value, inventorycode, fk_user_author, label, type_mouvement, fk_origin, fk_project) 
