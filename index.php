@@ -23,7 +23,7 @@ $selectedMangas = $conn->query($sql);
 <html>
 
 <head>
-    <title>Livraria de Manga</title>
+    <title>Honkai Livraria</title>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <link rel="stylesheet" type="text/css" href="css/product_box.css">
@@ -105,12 +105,6 @@ $selectedMangas = $conn->query($sql);
         $error_message = $_SESSION['error_message'];
         echo "<script>showToast('$error_message', 'error');</script>";
         unset($_SESSION['error_message']);
-    }
-
-    if (isset($_SESSION['sucess_message'])) {
-        $error_message = $_SESSION['sucess_message'];
-        echo "<script>showToast('$error_message', 'success');</script>";
-        unset($_SESSION['sucess_message']);
     }
 
     include_once "bottom.php";

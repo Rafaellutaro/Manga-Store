@@ -34,6 +34,7 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] === true) {
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <script type="text/javascript" src="js/toast.js"></script>
+    <link rel="shortcut icon" href="img/favico.png" type="image/x-icon">
 </head>
 
 <body>

@@ -55,11 +55,15 @@ if (isset($_GET["code"])) {
     if (isset($_SESSION["errors"])) {
         $errors = $_SESSION["errors"];
         unset($_SESSION["errors"]);
+    }else{
+        $errors = '';
     }
 
     if (isset($_SESSION["verify"])) {
         $verify = $_SESSION["verify"];
         unset($_SESSION["verify"]);
+    } else{
+        $verify = '';
     }
 
     if ($verify == "correct") {

@@ -27,6 +27,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->execute();
 
         if ($stmt->affected_rows > 0) {
+            $deleteCode = ("UPDATE llx_societe SET reset_expires_at = NULL, reset_code = NULL WHERE reset_code = ?");
+            $update_code = $conn->prepare($deleteCode);
+            $update_code->bind_param("s", $code);
+            $update_code->execute();
+
             $_SESSION["confirm"] = "correct";
             header("Location: confirm_reset_password.php");
             exit(); // Important to exit after redirect
@@ -61,17 +66,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     if ($confirm == "correct") {
-        include_once "logout.php";
-
         echo "<script>showToast('A sua senha foi atualizada com sucesso', 'success');</script>";
-        echo "A sua senha foi alterada com sucesso. Você será redirecionado para a página inicial em 5 segundos.";
-        echo "<script>setTimeout(function(){ window.location.href = 'index.php'; }, 5000);</script>";
+        echo "A sua senha foi alterada com sucesso. Você será redirecionado em 5 segundos.";
+        echo "<script>setTimeout(function(){ window.location.href = 'user.php'; }, 5000);</script>";
+        $_SESSION['resetPassword'] = 'correct';
+        include_once "email.php"; 
     }else if ($confirm == "error") {
         echo "<script>showToast('Problemas de atualização', 'error');</script>";
         echo "Houve um erro ao alterar a sua senha. Tente novamente mais tarde.";
     }else {
         echo "<script>showToast('Houve um erro em alterar a sua senha', 'error');</script>";
-        echo "Houve um erro ao alterar a sua senha. Tente novamente mais tarde.";
+        echo "Houve um erro ao alterar a sua senha.";
     }
     ?>
 </body>
