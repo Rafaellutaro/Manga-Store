@@ -29,7 +29,7 @@ if (isset($data['type']) && $data['type'] === 'payment' && isset($data['data']['
         file_put_contents('mp_webhook_log.txt', date('Y-m-d H:i:s') . " - PAYMENT ID $paymentId: " . json_encode($payment) . PHP_EOL, FILE_APPEND);
 
         if ($payment->status === 'approved') {
-            
+
             $externalReference = $payment->external_reference ?? null;
 
             if ($externalReference) {
@@ -55,11 +55,52 @@ if (isset($data['type']) && $data['type'] === 'payment' && isset($data['data']['
                         // Update product stock
                         file_put_contents('mp_webhook_log.txt', "Updating stock for product $productId - qty $quantityOrdered" . PHP_EOL, FILE_APPEND);
 
-                        $sqlUpdateStock = "UPDATE llx_product SET stock = stock - ? WHERE rowid = ?";
-                        $stmtUpdate = $conn->prepare($sqlUpdateStock);
-                        $stmtUpdate->bind_param("ii", $quantityOrdered, $productId);
-                        $stmtUpdate->execute();
-                        $stmtUpdate->close();
+                        // $sqlUpdateStock = "UPDATE llx_product SET stock = stock - ? WHERE rowid = ?";
+                        // $stmtUpdate = $conn->prepare($sqlUpdateStock);
+                        // $stmtUpdate->bind_param("ii", $quantityOrdered, $productId);
+                        // $stmtUpdate->execute();
+                        // $stmtUpdate->close();
+
+                        // New insert
+
+                        
+                        try{
+                        $conn->begin_transaction();
+                        $inventoryCode = date('Ymd') . sprintf('%06d', mt_rand(0, 999999));
+                        $label = "Da correção para o produto " . $row["title"];
+                        // 1. Insert into stock_mouvement
+                        $sqlInsertMovement = "INSERT INTO llx_stock_mouvement 
+                        (datestamp, datem, fk_product, fk_entrepot, value, inventorycode, fk_user_author, label) 
+                        VALUES (NOW(), NOW(), ?, ?, ?, ?, ?, ?)";
+                        $stmtMovement = $conn->prepare($sqlInsertMovement);
+                        $negativeQuantity = -$quantityOrdered;
+                        $stmtMovement->bind_param("iiisis", $productId, 1, $negativeQuantity, $inventoryCode , 1, $label);
+                        $stmtMovement->execute();
+                        $stmtMovement->close();
+
+                        // 2. Update warehouse stock
+                        $sqlUpdateWarehouse = "UPDATE llx_product_stock SET reel = reel - ? WHERE fk_product = ? AND fk_entrepot = ?";
+                        $stmtWarehouse = $conn->prepare($sqlUpdateWarehouse);
+                        $stmtWarehouse->bind_param("iii", $quantityOrdered, $productId, 1);
+                        $stmtWarehouse->execute();
+                        $stmtWarehouse->close();
+
+                        // 3. Update global product stock
+                        $sqlUpdateGlobal = "UPDATE llx_product SET stock = (SELECT IFNULL(SUM(reel), 0) FROM llx_product_stock WHERE fk_product = ?) WHERE rowid = ?";
+                        $stmtGlobal = $conn->prepare($sqlUpdateGlobal);
+                        $stmtGlobal->bind_param("ii", $productId, $productId);
+                        $stmtGlobal->execute();
+                        $stmtGlobal->close();
+
+                        $conn->commit();
+
+                        file_put_contents('mp_webhook_log.txt', "query Complete" . PHP_EOL, FILE_APPEND);
+                        }catch (Exception $e) {
+                            file_put_contents('mp_webhook_log.txt', "query error: ". $e->getMessage() . PHP_EOL, FILE_APPEND);
+                        }
+                        
+
+                        
                     }
                 }
 
