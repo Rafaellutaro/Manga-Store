@@ -54,8 +54,7 @@ if (isset($data['type']) && $data['type'] === 'payment' && isset($data['data']['
                     $title = $row['label'];
 
                     if ($productId) {
-                        // Update product stock
-                        file_put_contents('mp_webhook_log.txt', "Updating stock for product $productId - qty $quantityOrdered" . PHP_EOL, FILE_APPEND);
+
 
                         // $sqlUpdateStock = "UPDATE llx_product SET stock = stock - ? WHERE rowid = ?";
                         // $stmtUpdate = $conn->prepare($sqlUpdateStock);
@@ -69,16 +68,21 @@ if (isset($data['type']) && $data['type'] === 'payment' && isset($data['data']['
                         // $conn->begin_transaction();
                         $inventoryCode = date('Ymd') . sprintf('%06d', mt_rand(0, 999999));
                         $label = "Da correção para o produto $title";
+                        
+                        $fk_entrepot = 1;
+                        $fk_user_author = 1;
+
                         // 1. Insert into stock_mouvement
                         $sqlInsertMovement = "INSERT INTO llx_stock_mouvement 
                         (tms, datem, fk_product, fk_entrepot, value, inventorycode, fk_user_author, label, type_mouvement, fk_origin, fk_projet) 
                         VALUES (NOW(), NOW(), ?, ?, ?, ?, ?, ?, 0, 0, 0)";
                         $stmtMovement = $conn->prepare($sqlInsertMovement);
                         $negativeQuantity = -$quantityOrdered;
-                        $stmtMovement->bind_param("iiisis", $productId, 1, $negativeQuantity, "produto SQL" , 1, $label);
+                        file_put_contents('mp_webhook_log.txt', "Attempting stock movement insert for product ID: $productId, quantity: $negativeQuantity, inventoryCode: $inventoryCode, label: $label, fk_entrepot: $fk_entrepot, fk_user_author: $fk_user_author" . PHP_EOL, FILE_APPEND);
+                        $stmtMovement->bind_param("iiisis", $productId, $fk_entrepot, $negativeQuantity, $inventoryCode , $fk_user_author, $label);
                         $stmtMovement->execute();
                         if ($stmtMovement->affected_rows <= 0){
-                            file_put_contents('mp_webhook_log.txt', "No rows affected in movement insert." . PHP_EOL, FILE_APPEND);
+                            file_put_contents('mp_webhook_log.txt', "ERROR: " . $stmtMovement->error . PHP_EOL, FILE_APPEND);
                         }
                         $stmtMovement->close();
 
