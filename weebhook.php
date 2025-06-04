@@ -65,7 +65,7 @@ if (isset($data['type']) && $data['type'] === 'payment' && isset($data['data']['
                         // New insert
 
                         try{
-                        // $conn->begin_transaction();
+                        $conn->begin_transaction();
                         $inventoryCode = date('Ymd') . sprintf('%06d', mt_rand(0, 999999));
                         $label = "Da correção para o produto $title";
                         
@@ -86,21 +86,21 @@ if (isset($data['type']) && $data['type'] === 'payment' && isset($data['data']['
                         }
                         $stmtMovement->close();
 
-                        // // 2. Update warehouse stoc
-                        // $sqlUpdateWarehouse = "UPDATE llx_product_stock SET reel = reel - ? WHERE fk_product = ? AND fk_entrepot = ?";
-                        // $stmtWarehouse = $conn->prepare($sqlUpdateWarehouse);
-                        // $stmtWarehouse->bind_param("iii", $quantityOrdered, $productId, 1);
-                        // $stmtWarehouse->execute();
-                        // $stmtWarehouse->close();
+                        // 2. Update warehouse stoc
+                        $sqlUpdateWarehouse = "UPDATE llx_product_stock SET reel = reel - ? WHERE fk_product = ? AND fk_entrepot = ?";
+                        $stmtWarehouse = $conn->prepare($sqlUpdateWarehouse);
+                        $stmtWarehouse->bind_param("iii", $quantityOrdered, $productId, $fk_entrepot);
+                        $stmtWarehouse->execute();
+                        $stmtWarehouse->close();
 
-                        // // 3. Update global product stock
-                        // $sqlUpdateGlobal = "UPDATE llx_product SET stock = (SELECT IFNULL(SUM(reel), 0) FROM llx_product_stock WHERE fk_product = ?) WHERE rowid = ?";
-                        // $stmtGlobal = $conn->prepare($sqlUpdateGlobal);
-                        // $stmtGlobal->bind_param("ii", $productId, $productId);
-                        // $stmtGlobal->execute();
-                        // $stmtGlobal->close();
+                        // 3. Update global product stock
+                        $sqlUpdateGlobal = "UPDATE llx_product SET stock = (SELECT IFNULL(SUM(reel), 0) FROM llx_product_stock WHERE fk_product = ?) WHERE rowid = ?";
+                        $stmtGlobal = $conn->prepare($sqlUpdateGlobal);
+                        $stmtGlobal->bind_param("ii", $productId, $productId);
+                        $stmtGlobal->execute();
+                        $stmtGlobal->close();
 
-                        // $conn->commit();
+                        $conn->commit();
 
                         file_put_contents('mp_webhook_log.txt', "query Complete" . PHP_EOL, FILE_APPEND);
                         }catch (Exception $e) {
@@ -114,6 +114,7 @@ if (isset($data['type']) && $data['type'] === 'payment' && isset($data['data']['
                 }
 
                 $stmtDetails->close();
+                http_response_code(200);
             } else {
                 file_put_contents('mp_webhook_log.txt', "Missing externalReference or address." . PHP_EOL, FILE_APPEND);
             }
@@ -122,6 +123,3 @@ if (isset($data['type']) && $data['type'] === 'payment' && isset($data['data']['
         file_put_contents('mp_webhook_log.txt', "Exception: " . $e->getMessage() . PHP_EOL, FILE_APPEND);
     }
 }
-
-http_response_code(200);
-echo "OK";
