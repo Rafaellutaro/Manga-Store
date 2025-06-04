@@ -75,7 +75,7 @@ if (isset($data['type']) && $data['type'] === 'payment' && isset($data['data']['
 
                     if ($productId && $quantityOrdered > 0) {
                         $inventoryCode = date('Ymd') . sprintf('%06d', mt_rand(0, 999999));
-                        $label = "Stock correction for product $title";
+                        $label = "Da correção para o produto $title";
 
                         // Insert stock movement (negative quantity)
                         $sqlInsertMovement = "INSERT INTO llx_stock_mouvement 
