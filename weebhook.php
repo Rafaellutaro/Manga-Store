@@ -63,15 +63,14 @@ if (isset($data['type']) && $data['type'] === 'payment' && isset($data['data']['
 
                         // New insert
 
-                        
                         try{
                         $conn->begin_transaction();
                         $inventoryCode = date('Ymd') . sprintf('%06d', mt_rand(0, 999999));
                         $label = "Da correção para o produto " . $row["title"];
                         // 1. Insert into stock_mouvement
                         $sqlInsertMovement = "INSERT INTO llx_stock_mouvement 
-                        (datestamp, datem, fk_product, fk_entrepot, value, inventorycode, fk_user_author, label) 
-                        VALUES (NOW(), NOW(), ?, ?, ?, ?, ?, ?)";
+                        (tms, datem, fk_product, fk_entrepot, value, inventorycode, fk_user_author, label, type_mouvement, fk_origin, fk_project) 
+                        VALUES (NOW(), NOW(), ?, ?, ?, ?, ?, ?, 0, 0, 0)";
                         $stmtMovement = $conn->prepare($sqlInsertMovement);
                         $negativeQuantity = -$quantityOrdered;
                         $stmtMovement->bind_param("iiisis", $productId, 1, $negativeQuantity, $inventoryCode , 1, $label);
