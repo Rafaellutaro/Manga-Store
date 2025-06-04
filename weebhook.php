@@ -1,6 +1,7 @@
 <?php
 include_once 'connection.php';
-include_once 'order_utils.php';
+
+mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 
 use MercadoPago\MercadoPagoConfig;
 use MercadoPago\Client\Payment\PaymentClient;
@@ -65,37 +66,41 @@ if (isset($data['type']) && $data['type'] === 'payment' && isset($data['data']['
                         // New insert
 
                         try{
-                        $conn->begin_transaction();
+                        // $conn->begin_transaction();
                         $inventoryCode = date('Ymd') . sprintf('%06d', mt_rand(0, 999999));
-                        $label1 = "Da correção para o produto " . $title;
+                        $label = "Da correção para o produto $title";
                         // 1. Insert into stock_mouvement
                         $sqlInsertMovement = "INSERT INTO llx_stock_mouvement 
-                        (tms, datem, fk_product, fk_entrepot, value, inventorycode, fk_user_author, label, type_mouvement, fk_origin, fk_project) 
+                        (tms, datem, fk_product, fk_entrepot, value, inventorycode, fk_user_author, label, type_mouvement, fk_origin, fk_projet) 
                         VALUES (NOW(), NOW(), ?, ?, ?, ?, ?, ?, 0, 0, 0)";
                         $stmtMovement = $conn->prepare($sqlInsertMovement);
                         $negativeQuantity = -$quantityOrdered;
-                        $stmtMovement->bind_param("iiisis", $productId, 1, $negativeQuantity, $inventoryCode , 1, $label);
+                        $stmtMovement->bind_param("iiisis", $productId, 1, $negativeQuantity, "produto SQL" , 1, $label);
                         $stmtMovement->execute();
+                        if ($stmtMovement->affected_rows <= 0){
+                            file_put_contents('mp_webhook_log.txt', "No rows affected in movement insert." . PHP_EOL, FILE_APPEND);
+                        }
                         $stmtMovement->close();
 
-                        // 2. Update warehouse stock
-                        $sqlUpdateWarehouse = "UPDATE llx_product_stock SET reel = reel - ? WHERE fk_product = ? AND fk_entrepot = ?";
-                        $stmtWarehouse = $conn->prepare($sqlUpdateWarehouse);
-                        $stmtWarehouse->bind_param("iii", $quantityOrdered, $productId, 1);
-                        $stmtWarehouse->execute();
-                        $stmtWarehouse->close();
+                        // // 2. Update warehouse stoc
+                        // $sqlUpdateWarehouse = "UPDATE llx_product_stock SET reel = reel - ? WHERE fk_product = ? AND fk_entrepot = ?";
+                        // $stmtWarehouse = $conn->prepare($sqlUpdateWarehouse);
+                        // $stmtWarehouse->bind_param("iii", $quantityOrdered, $productId, 1);
+                        // $stmtWarehouse->execute();
+                        // $stmtWarehouse->close();
 
-                        // 3. Update global product stock
-                        $sqlUpdateGlobal = "UPDATE llx_product SET stock = (SELECT IFNULL(SUM(reel), 0) FROM llx_product_stock WHERE fk_product = ?) WHERE rowid = ?";
-                        $stmtGlobal = $conn->prepare($sqlUpdateGlobal);
-                        $stmtGlobal->bind_param("ii", $productId, $productId);
-                        $stmtGlobal->execute();
-                        $stmtGlobal->close();
+                        // // 3. Update global product stock
+                        // $sqlUpdateGlobal = "UPDATE llx_product SET stock = (SELECT IFNULL(SUM(reel), 0) FROM llx_product_stock WHERE fk_product = ?) WHERE rowid = ?";
+                        // $stmtGlobal = $conn->prepare($sqlUpdateGlobal);
+                        // $stmtGlobal->bind_param("ii", $productId, $productId);
+                        // $stmtGlobal->execute();
+                        // $stmtGlobal->close();
 
-                        $conn->commit();
+                        // $conn->commit();
 
                         file_put_contents('mp_webhook_log.txt', "query Complete" . PHP_EOL, FILE_APPEND);
                         }catch (Exception $e) {
+                            $conn->rollback();
                             file_put_contents('mp_webhook_log.txt', "query error: ". $e->getMessage() . PHP_EOL, FILE_APPEND);
                         }
                         
