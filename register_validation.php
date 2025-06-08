@@ -55,13 +55,7 @@ $stmt->bind_result($celularCount);
 $stmt->fetch();
 $stmt->close();
 
-$data_atual = date("Y-m-d H:i:s");
 $fk_user = 1;
-
-$sql = "INSERT INTO llx_societe (nom, idprof4, idprof5, email, idprof6, phone, client, datec, fk_user_creat, fk_user_modif, code_client) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-
-// sql statement
-$stmt = $conn->prepare($sql);
 
 $errors = array();
 
@@ -133,44 +127,28 @@ if ($result && $row = $result->fetch_assoc()) {
 
 // Check for any errors
 if (count($errors) === 0) {
-    // If there are no validation errors, proceed with inserting data into the database
+    $_SESSION['userData'] = [
+        'nome_completo' => $nome_completo,
+        'cpf' => $cpf,
+        'nascimento' => $formatted_nascimento,
+        'email' => $email,
+        'senha' => $hashedPassword,
+        'celular' => $celular,
+        'cep' => $cep,
+        'rua' => $rua,
+        'bairro' => $bairro,
+        'cidade' => $cidade,
+        'estado' => $estado,
+        'local' => $local,
+        'numero_casa' => $numero_casa,
+        'newUserCode' => $newUserCode
+    ];
 
-    if (!$stmt) {
-        die("Error: " . $conn->error);
-    }
+    include_once "email.php";
 
-    $client = 1;
-    // bind os parametros e executa
-    $stmt->bind_param("ssssssisiis", $nome_completo, $cpf, $formatted_nascimento, $email, $hashedPassword, $celular, $client, $data_atual, $fk_user, $fk_user, $newUserCode);
-
-    if ($stmt->execute()) {
-        // Get the ID of the newly inserted row
-        $user_id = $stmt->insert_id;
-
-        // Prepare the complete address
-        $endereco_completo = $rua . ", " . $numero_casa . " - " . $bairro;
-
-        // Update the same user with the address and other information
-        $endereco_query = "UPDATE llx_societe SET address = ?, zip = ?, town = ?, siren = ?, fax = ? WHERE rowid = ?";
-        $stmt_endereco = $conn->prepare($endereco_query);
-        $stmt_endereco->bind_param("sssssi", $endereco_completo, $cep, $cidade, $estado, $local, $user_id);
-
-        if ($stmt_endereco->execute()) {
-            header("location: success_register.php");
-        } else {
-            echo "Erro ao inserir o endereço: " . $stmt_endereco->error;
-        }
-
-        $stmt_endereco->close();
-
-        $stmt->close();
-        $conn->close();
-    } else {
-        echo "Error: " . $stmt->error;
-    }
+    SendVerificationCode($email);
 }else{
     $_SESSION['errors'] = $errors; 
     header("Location: user_register.php"); 
     exit();
 }
-?>

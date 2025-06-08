@@ -12,6 +12,48 @@ require 'vendor/autoload.php'; // Include PHPMailer
 
 include_once "header.php";
 
+function SendVerificationCode($email)
+{
+    $registerCode = bin2hex(random_bytes(5));
+
+    $_SESSION['registerCode'] = $registerCode;
+
+    $mail = new PHPMailer(true);
+
+    try {
+        // Set up the SMTP server
+        $mail->isSMTP();
+        $mail->Host = 'smtp.gmail.com'; // Your SMTP server
+        $mail->SMTPAuth = true;
+        $mail->Username = 'rafaelzinhodostuto12@gmail.com'; // Your email address
+        $mail->Password = 'egfovsmmyecnbchk'; // Your email password, it must be the app password
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS; // Use TLS encryption
+        $mail->Port = 587; // The SMTP port
+
+        // Set email details
+        $mail->setFrom('rafaelzinhodostuto12@gmail.com', 'Honkai'); // Sender info
+        $mail->addAddress($email); // Recipient
+
+        // Email content
+        $mail->isHTML(true);
+        $mail->CharSet = 'UTF-8';
+        $mail->Subject = 'Código de Registro';
+        $mail->Body = '
+    <p>Olá,</p>
+    <p>Você solicitou um código de registro em nosso site.</p>
+    <p>' . $registerCode . '</p>
+    <p>Atenciosamente,</p>
+    <p>Equipe Honkai<br>';
+
+        $mail->send();
+
+        header("Location: registerCodeValidation.php");
+        exit();
+    } catch (Exception $e) {
+        return;
+    }
+}
+
 function PasswordConfirmation($email)
 {
     $mail = new PHPMailer(true);
@@ -127,39 +169,9 @@ function sendPasswordResetEmail($userEmail, $resetCode)
                     ';
 
         $mail->send(); // Send the email--++-
-        header("Location: email.php?status=success&useremail=" . $userEmail);
+        header("Location: passwordResetLinkSuccess.php?status=success&useremail=" . $userEmail);
     } catch (Exception $e) {
-        header("Location: email.php?status=error");
+        return;
     }
 }
 ?>
-
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Confirmar Email</title>
-</head>
-
-<body>
-
-    <?php
-    if (isset($_GET['useremail'])) {
-        $useremail = $_GET['useremail'];
-    }
-
-    if ($_GET['status'] === 'success') {
-        echo "<p>Um email foi enviado para $useremail. Por favor verifique o seu inbox.</p>";
-    } else {
-        echo "<p>Houve um erro tentanto mandar o email. Tente novamente.</p>";
-    }
-
-    ?>
-
-    <a href="profile.php">Volta para o seu perfil</a>
-
-</body>
-
-</html>
