@@ -3,7 +3,7 @@ include_once 'connection.php';
 include_once "product_box.php";
 
 
-$productsPerPage = 5;
+$productsPerPage = 12;
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 $offset = ($page - 1) * $productsPerPage;
 
@@ -124,7 +124,7 @@ if ($search !== '') {
         }
 
         // Generate pagination links for a limited number of pages
-        $maxPagesToShow = 2; // Adjust this number as needed
+        $maxPagesToShow = 3; // Adjust this number as needed
         $startPage = max(1, $page - floor($maxPagesToShow / 2));
         $endPage = min($totalPages, $startPage + $maxPagesToShow - 1);
 

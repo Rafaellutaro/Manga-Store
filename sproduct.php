@@ -95,7 +95,7 @@ $row = mysqli_fetch_assoc($result);
             FROM llx_product
             JOIN llx_ecm_files ON llx_product.rowid = llx_ecm_files.src_object_id
             WHERE llx_product.rowid != {$row['rowid']}
-            LIMIT 12";
+            LIMIT 10";
 
             $relatedResult = $conn->query($relatedSql);
 

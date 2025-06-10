@@ -1,7 +1,7 @@
 <?php
-$dbhost = '192.168.1.89';  
-$dbuser = 'dolibarruser1';     
-$dbpass = 'dolibarr';     
+$dbhost = 'localhost';  
+$dbuser = 'SuperMan';     
+$dbpass = 'Dolibarr!@399';     
 $dbname = 'dolibarr';     
 
 $conn = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
